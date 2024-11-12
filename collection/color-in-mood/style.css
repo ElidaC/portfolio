@@ -1,0 +1,159 @@
+html {
+    background-color: #000;
+    background-image: url("bg.png");
+    overflow: hidden;
+    background-attachment:fixed;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+}
+
+
+
+h1{
+    color: #000;
+    font-weight: 500;
+    font-style: normal;
+}
+
+
+/* Container Settings */
+.container {
+    position: absolute;
+    font-family: "Montserrat Alternates", sans-serif;
+  font-weight: 700;
+  font-style: normal;
+    color: #000;
+    top: -4%; /* 调整顶部偏移，将其移到页面上方 */
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    perspective: 900px;
+    visibility: visible;
+}
+
+
+/* 3D Text Style */
+.hi {
+    font-size: 120px;
+    font-stretch: 400%;
+    text-transform: uppercase;
+    text-align: center;
+    transform-style: preserve-3d;
+}
+
+.hi__cuboid {
+    position: relative;
+    width: 500px;
+    height: 90px;
+    transform-style: preserve-3d;
+    animation: rotate 40s infinite linear; /* Apply a rotating animation */
+}
+
+.hi__cuboid .face {
+    position: absolute;
+    left: 0;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Faces of the cuboid */
+.face--front { transform: translateZ(35px); }
+.face--back { transform: translateZ(-35px) rotateY(180deg); }
+.face--left { width: 70px; height: 70px; transform: translateX(-35px) rotateY(-90deg); }
+.face--right { width: 70px; height: 70px; transform: translateX(465px) rotateY(90deg); }
+.face--top { transform: translateY(40px) rotateX(90deg); }
+.face--bottom { transform: translateY(45px) translateZ(-85px) rotateX(-90deg); }
+
+/* Base and Location */
+.hi__base {
+    position: absolute;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 752px;
+    height: 250px;
+}
+.hi__base-plate {
+    width: 100%;
+    height: 100%;
+    background: black;
+    border: 1px solid var(--grey);
+}
+.hi__location {
+    position: absolute;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+/* Rotation Animation */
+@keyframes rotate {
+    0% { transform: rotateY(0deg); }
+    100% { transform: rotateY(360deg); }
+}
+
+
+.inner-container {
+    transform-style: preserve-3d;
+    transition: transform 0.1s ease;
+}
+
+
+
+
+.circle, .ellipse, .small-circle, .large-ellipse {
+    position: absolute;
+    border: 1px solid #000; /* 边框颜色 */
+    border-radius: 50%;
+    opacity: 0.6;
+    background-color: transparent;
+}
+
+/* 各种形状的位置和大小 */
+.circle {
+    width: 200px;
+    height:200px;
+    top: 81%;
+    left: 17%;
+    border: 3px solid #000; 
+    transform: translate(-50%, -50%);
+}
+
+.large-ellipse {
+    width: 850px;
+    height: 880px;
+    top: 70%;
+    left:50%;
+    transform: translate(-50%, -50%);
+}
+
+.small-circle {
+    width: 360px;
+    height:3060px;
+    top: 75%;
+    left: 27%;
+    border: 0.5px solid #000; 
+    transform: translate(-50%, -50%);
+}
+
+.ellipse {
+    width: 300px;
+    height: 80px;
+    top: 105%;
+    left: 10%;
+    rotate: 40deg;
+    border: 2px solid #000; 
+    transform: translate(-50%, -50%);
+}
+
+/* PNG 图片样式 */
+.png-image {
+    position: absolute;
+    width: 10%;
+    height: auto;
+    opacity: 0;
+    transition: opacity 0.8s ease, transform 5s ease;
+    z-index: -1;
+}
