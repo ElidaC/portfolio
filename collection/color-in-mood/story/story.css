@@ -1,0 +1,171 @@
+h2{
+    font-family: "Montserrat Alternates", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 19px;
+    background-color: none;
+}
+
+h1{
+    font-family: "Montserrat Alternates", sans-serif;
+    font-weight: 700;
+    font-style: normal;
+    color: #fff;
+    font-size: 80px;
+    background-color: transparent;
+}
+
+.title{
+    position: fixed;
+    bottom: 0;
+    left: 4%;
+    background-color: transparent;
+}
+
+.bar{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    height: 50px;
+    background-color: #000;
+    z-index: 2;
+}
+
+.navigation{
+    position: fixed;
+    right:4%;
+    top: 5%;
+    gap: 60px;
+    background-color: none;
+}
+
+.nav {
+    position: fixed;
+    right: 5%;
+    bottom: -3%;
+    background-color: transparent;
+}
+
+.menu-item {
+    position: relative;
+    background-color: transparent;
+}
+
+
+.menu-item > a {
+    display: block;
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    text-align: center;
+    border-radius: 5px;
+    background-color: transparent;
+}
+
+.sub-menu {
+    position: absolute;
+    width: 120px;
+    bottom: 50%; 
+    right: 4%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+    transform: translateY(10px); 
+    background-color: transparent;
+}
+
+
+.sub-menu li {
+    list-style: none;
+}
+
+.sub-menu a {
+    display: block;
+    color: black;
+    text-decoration: none;
+    transition: 0.5s padding, 0.5s background;
+    font-family: "Cormorant", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: large;
+    background-color: transparent;
+}
+
+.sub-menu a:hover {
+    background-color: rgba(219, 219, 219, 0.4); 
+    padding: 5px; 
+    transition: background-color 0.3s ease, padding 0.3s ease; 
+}
+
+
+#dark a{
+    display: block;
+    color: #EBE8E8;
+    text-decoration: none;
+    transition: 0.5s padding, 0.5s background;
+    font-family: "Cormorant", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: large;
+}
+
+
+.menu-item:hover > .sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0); 
+}
+
+
+a {
+    text-decoration: none;
+    background-color: transparent;
+    color: #000;
+    background-color: transparent;
+  }
+
+svg{
+    width: 40px;
+    position: fixed;
+    top: 5%;
+    right: 3%;
+    z-index: 1;
+}
+
+
+.right {
+    position: fixed;
+    right: 0;
+    top: 0; 
+    width: 15px; 
+    height: 100vh;
+}
+
+.right:hover {
+    width: 20px; 
+    cursor: pointer;
+}
+
+
+#one{
+background-color: #EBE8E8;
+}
+
+#two{
+    background-color: #FFBB00; 
+}
+
+#three{
+    background-color: #0205c9;
+}
+
+#four{
+    background-color: #01BEA5;
+}
+
+#five{
+    background-color: #FF00C8;
+}

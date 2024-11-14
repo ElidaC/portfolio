@@ -1,4 +1,4 @@
-*{
+html{
     background-color: black;
 }
 
@@ -8,6 +8,7 @@ h1{
     font-style: normal;
     color: #fff;
     font-size: 80px;
+    background-color: transparent;
 }
 
 h2{
@@ -15,19 +16,29 @@ h2{
     font-weight: 500;
     font-style: normal;
     font-size: 19px;
-    background-color: none;
+    background-color: transparent;
+}
+
+p{
+  font-family: "Cormorant", serif;
+  font-optical-sizing: auto;
+  font-weight: 500;
+  font-style: normal;
+  font-size: 21px;
+  line-height: 30px;
 }
 
 .title{
     position: fixed;
-    top: -5.5%;
+    top: -7%;
     left: 3%;
+    background-color: transparent;
 }
 
 .navigation{
     position: fixed;
     right:4%;
-    top: 5%;
+    top: 4%;
     gap: 60px;
     background-color: none;
 }
@@ -38,12 +49,15 @@ a {
     background-color: transparent;
     color: #000;
   }
+
+  a:hover {
+    cursor: pointer;
+  }
   
   .menu {
     position: fixed;
     display: block;
     position: relative;
-    cursor: pointer;
   }
   
   .menu-title {
@@ -165,8 +179,9 @@ a {
     background: #EBE8E8;
     z-index: 100;
     transition: 0.5s padding, 0.5s background;
-    font-family: "feneon-single", sans-serif;
-    font-weight: 400;
+    font-family: "Cormorant", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
     font-style: normal;
     font-size: large;
   }
@@ -224,7 +239,7 @@ a {
 
   .hList{
     position: fixed;
-    top: 1%;
+    top: -1%;
     left: 32%;
     display: flex;
     gap: 15px;
@@ -241,7 +256,7 @@ a {
 
 
   #rectangle {
-    width: 100%; 
+    width: 100vw; 
     height: 120px; 
     background-color: #000;
     position: fixed;
@@ -257,7 +272,7 @@ a {
     flex-wrap: wrap;
     gap: 0;
     top: 20%;
-    left: 9%;
+    left: 5%;
     z-index: -2;
     padding: 0 0 50px 0;
 }
@@ -272,4 +287,86 @@ a {
     margin-top: -20px; 
     font-size:large;
     color: #fff;
+}
+
+.scroll-container {
+  position: absolute;    
+  top: 25%;            
+  left: 14%;           
+  right: 14%;                
+  height: auto;
+  overflow-x: auto;
+  white-space: nowrap;
+  display: flex;
+  gap: 20px; 
+  background-color: transparent;
+  z-index: -5;
+}
+
+.scroll-container img {
+  min-width: 100px;
+}
+
+.arrow{
+  color: #EBE8E8;
+  position: absolute;
+  top: 55%;
+  right: 5%;
+}
+
+.info{
+  width: 100vw;
+  position: absolute;
+  top: 85%;
+  left: 0;
+  right: 0;
+  background-color: #EBE8E8;
+}
+
+.info h1{
+  color: #000;
+  margin: 50px;
+  font-style: italic;
+  line-height: 80px;
+}
+
+.para{
+  display: flex;
+  background-color: transparent;
+}
+
+#one{
+  width: 50%;
+  margin: 0 50px;
+}
+
+#two{
+  width: 50%;
+  margin: 0 50px;
+}
+
+#zuo{
+  width: 10px;
+  height: 80px;
+  background-color: #000;
+}
+
+
+
+
+
+.artwork {
+  position: absolute;
+  top: 20%;           
+  left: 50%;     
+  transform: translate(-50%, 0); 
+  z-index: -5;
+}
+
+.floorplan{
+  position: absolute;
+  top: 20%;           
+  left: 45%;     
+  transform: translate(-50%, 0); 
+  z-index: -5;
 }
