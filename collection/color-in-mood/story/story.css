@@ -20,6 +20,7 @@ h1{
     bottom: 0;
     left: 4%;
     background-color: transparent;
+    z-index: 20;
 }
 
 .bar{
@@ -29,15 +30,16 @@ h1{
     width: 100vw;
     height: 50px;
     background-color: #000;
-    z-index: 2;
+    z-index: 10;
 }
 
 .navigation{
     position: fixed;
-    right:4%;
+    right:2%;
     top: 5%;
     gap: 60px;
     background-color: none;
+    z-index: 2;
 }
 
 .nav {
@@ -169,3 +171,409 @@ background-color: #EBE8E8;
 #five{
     background-color: #FF00C8;
 }
+
+
+
+
+
+/* 通用样式：圆点 */
+.ichi, .ni, .san, .yon, .go {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: #000;
+    position: relative; /* 为图片定位提供参考 */
+}
+
+/* 隐藏默认的图片 */
+.ichi img, .ni img, .san img, .yon img, .go img {
+    display: none; /* 初始隐藏 */
+    position: absolute; /* 相对于父元素定位 */
+    top: -20px;
+    left: -10px;
+    width: 40px; /* 图片大小 */
+    height: auto; /* 保持宽高比 */
+    border-radius: 5px; /* 可选：圆角效果 */
+    z-index: 10; /* 确保图片在顶部 */
+    background-color: transparent;
+}
+
+/* 鼠标悬停时显示图片 */
+.ichi:hover img, .ni:hover img, .san:hover img, .yon:hover img, .go:hover img {
+    display: block; /* 悬停时显示图片 */
+}
+
+
+
+.timeline {
+    position: fixed;
+    right: 3%;
+    bottom: 10%;
+    z-index: 2;
+}
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 1px;
+    height: 90%;
+    background-color: #000;
+}
+.timeline a {
+    text-decoration: none;
+    color: black;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+
+
+
+
+/*memory*/
+
+.fade.active {
+    opacity: 1;
+}
+
+
+.image-container{
+    width: 60%;
+    margin-left: 60px;
+}
+
+
+#one{
+    margin-top: 0;
+}
+
+.fade {
+    opacity: 0; /* 初始透明 */
+    transform: translateY(50px); /* 初始位置稍向下 */
+    transition: opacity 3s ease, transform 1s ease; /* 平滑过渡 */
+    background-color: transparent;
+    display: flex;
+    margin: 200px 0;
+}
+
+.fade.active {
+    opacity: 1; /* 淡入显示 */
+    transform: translateY(0); /* 位置归位 */
+}
+
+
+/* text-container 的动态移动效果 */
+.text-container {
+    transition: transform 0.2s ease; /* 滚动时平滑移动 */
+    margin: 200px 0;
+}
+
+
+
+.phone {
+    overflow-y: scroll;
+    height: 400px; /* 设定足够高度来触发滚动 */
+    position: relative;
+    
+}
+
+
+
+
+
+
+
+/*cognition*/
+
+.before-4{
+    width: 40%;
+    position: fixed;
+    top: 10%;
+    right: 20%;
+    background-color: transparent;
+}
+
+.item-4{
+    width: 40%;
+    position: fixed;
+    top: 11%;
+    right: 20%;
+    opacity: 0;
+    background-color: transparent;
+}
+
+.item-4:hover{
+    opacity: 1;
+}
+
+
+
+
+
+
+
+
+/*language*/
+
+.door img{
+    position: absolute;
+
+}
+
+.door-1{
+    width: 50%;
+    top: -10%;
+    left: 25%;
+    z-index: 1;
+}
+
+.door-11 {
+    width: 50%;
+    top: -10%;
+    left: 25%; /* 起始位置 */
+    z-index: 1;
+    position: absolute; /* 确保定位 */
+    animation: slideToLeft 2s ease-in-out forwards; /* 动画效果 */
+}
+
+/* 定义动画 */
+@keyframes slideToLeft {
+    0% {
+        left: 25%; /* 起始点 */
+    }
+    100% {
+        left: 0; /* 终点 */
+    }
+}
+
+.door-9{
+    width: 23%;
+    top: 37%;
+    left: 57%;
+}
+
+.door-19{
+    width: 23%;
+    top: 37%;
+    left: 57%;
+    position: absolute; /* 确保定位 */
+    animation: slideToRight 2s ease-in-out forwards; /* 动画效果 */
+}
+
+/* 定义动画 */
+@keyframes slideToRight {
+    0% {
+        left: 25%; /* 起始点 */
+    }
+    100% {
+        left: 78%; /* 终点 */
+    }
+}
+
+.door-6{
+    width: 22%;
+    rotate: 270deg;
+    top: 50%;
+    left: 26.5%;
+    z-index: 2;
+}
+
+.door-16{
+    width: 22%;
+    rotate: 270deg;
+    top: 50%;
+    left: 26.5%;
+    z-index: 2;
+    position: absolute; /* 确保定位 */
+    animation: slideToLeft 2s ease-in-out forwards; /* 动画效果 */
+}
+
+.door-7{
+    width: 15%;
+    left: 60%;
+    top: 36%;
+    z-index: 3;
+}
+
+.door-17{
+    width: 15%;
+    left: 60%;
+    top: 36%;
+    z-index: 3;
+    position: absolute; /* 确保定位 */
+    animation: slideToRight1 2s ease-in-out forwards; /* 动画效果 */
+}
+
+@keyframes slideToRight1 {
+    0% {
+        left: 25%; /* 起始点 */
+    }
+    100% {
+        left: 85%; /* 终点 */
+        top: 25%;
+    }
+}
+
+.door-8{
+    width: 22%;
+    left: 45%;
+    top: 33%;
+    z-index: -5;
+}
+
+.door-18{
+    width: 22%;
+    left: 45%;
+    top: 33%;
+    z-index: -5;
+    position: absolute; /* 确保定位 */
+    animation: slideToRight2 2s ease-in-out forwards; /* 动画效果 */
+}
+
+@keyframes slideToRight2 {
+    0% {
+        left: 25%; /* 起始点 */
+    }
+    100% {
+        left: 76%; /* 终点 */
+    }
+}
+
+.door-2{
+    width: 12%;
+    top: 65%;
+    left: 62%;
+    z-index: 5;
+}
+
+.door-12{
+    width: 12%;
+    top: 65%;
+    left: 62%;
+    z-index: 5;
+    position: absolute; /* 确保定位 */
+    animation: slideToRight2 2s ease-in-out forwards; /* 动画效果 */
+}
+
+@keyframes slideToRight2 {
+    0% {
+        left: 25%; /* 起始点 */
+    }
+    100% {
+        left: 76%; /* 终点 */
+    }
+}
+
+.door-3{
+    width: 20%;
+    top: 20%;
+    left: 25%;
+    z-index: 3;
+}
+
+.door-13{
+    width: 20%;
+    top: 20%;
+    left: 25%;
+    z-index: 3;
+    position: absolute; /* 确保定位 */
+    animation: slideToLeft 2s ease-in-out forwards; /* 动画效果 */
+}
+
+.door-4{
+    width: 20.5%;
+    top: 14%;
+    left: 35%;
+}
+
+.door-14{
+    width: 20.5%;
+    top: 14%;
+    left: 35%;
+    position: absolute; /* 确保定位 */
+    animation: slideToLeft2 2s ease-in-out forwards; /* 动画效果 */
+}
+
+@keyframes slideToLeft2 {
+    0% {
+        left: 25%; /* 起始点 */
+    }
+    100% {
+        left: 10%; /* 终点 */
+    }
+}
+
+.door-5{
+    width: 10%;
+    top: 42%;
+    left: 46%;
+}
+
+.door-15{
+    width: 10%;
+    top: 42%;
+    left: 46%;
+    position: absolute; /* 确保定位 */
+    animation: slideToRight3 2s ease-in-out forwards; /* 动画效果 */
+}
+
+@keyframes slideToRight3 {
+    0% {
+        left: 25%; /* 起始点 */
+    }
+    100% {
+        left: 77%; /* 终点 */
+    }
+}
+
+
+.eye{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: #FFBB00;
+    position: absolute;
+    top: 29%;
+    left: 48%;
+    z-index: 10;
+    opacity: 0;
+}
+
+.eye:hover{
+    opacity: 0.5;cursor: pointer;
+}
+
+.rec{
+    width: 40%;
+    height: 100vh;
+    background-color: #0015ff;
+    position: absolute;
+    left: 30%;
+    z-index: 3;
+    top: 0;
+    animation: colorChange 3s ease-in-out forwards;
+}
+
+@keyframes colorChange {
+    0% {
+        opacity: 0; 
+        filter: blur(40px);
+    }
+    100% {
+        opacity: 1; 
+        filter: blur(0);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+/*culture*/
