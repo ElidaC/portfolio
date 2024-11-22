@@ -12,55 +12,86 @@
 </head>
 <body>
     <style>
-        *{
+        html{
             background-color: black;
         }
         h1{
             color: #FF00C8;
         }
+        .title {
+        background: linear-gradient(to bottom, rgb(0, 0, 0) 55%, rgba(235, 232, 232, 0) 100%);
+        }
+
+        .go{
+        height: 50px;
+        }
     </style>
 
-<div class="bar" id="five"></div>
-
 <div class="title">
-    <h1>Palette of Emotion</h1>
-</div>
-    
-    
-<div class="nav">
-    <div class="menu-item">
-        <a href="#"><h1>-</h1></a>
-        <ul class="sub-menu" id="dark">
-            <li><a href="../content.html">Content</a></li>
-            <br>
-            <li><a href="../content/photoGallery.html">Art Gallery</a></li>
-            <br>
-            <li><a href="../content/exhibition.html">Exhibition</a></li>
-            <br>
-            <li><a href="../content/colorP.html">Color Palette</a></li>
-            <br>
-            <li><a href="../content/colorGame.html">Color Game</a></li>
-            <br>
-            <li><a href="memory.html">Memory</a></li>
-            <br>
-            <li><a href="cognition.html">Cognition</a></li>
-            <br>
-            <li><a href="language.html">Language</a></li>
-            <br>
-            <li><a href="culture.html">Culture</a></li>
-            
-        </ul>
-    </div>
+    <h1>I Feel...</h1>
+    <br>
+    <br>
+    <br>
+    <br>
 </div>
 
-<a class="navigation" href="colorInMood.html">
-    <img src="../content/icon.png" width="50px">
-</a>
+<div class="navigation">
+    <a href="../colorInMood.html">
+        <img src="../content/icon.png" width="50px">
+    </a>
+
+  <div class="popup">
+    <a href="#srocll-container">
+        <h2>stories</h2>
+    </a>
+    <a href="#info">
+        <h2>about</h2>
+    </a>
+    <a href="#interpretation">
+        <h2>interpretation</h2>
+    </a>
+    <a href="#gallery">
+        <h2>gallery</h2>
+    </a>
+    <a href="#exhibition">
+        <h2>exhibition</h2>
+    </a>
 
 
-<a href="../content/colorGame.html">
-    <div class="right" id="one"></div>
-</a>
+  </div>
+</div>
+
+<div class="timeline">
+    <a href="memory.html">
+        <div class="ichi" style="background-color: #FF00C8;">
+            <img src="memory/1-1.png" >
+        </div>
+    </a>
+    <br>
+    <a href="cognition.html">
+        <div class="ni" style="background-color: #FF00C8;">
+            <img src="cognition/2-7.png" style=" top: -30px; width: 60px; left: -20px;">
+        </div>
+    </a>
+    <br>
+    <a href="language.html">
+        <div class="san" style="background-color: #FF00C8;">
+            <img src="language/3-7.png" style="left: -20px; ">
+        </div>
+    </a>
+    <br>
+    <a href="culture.html">
+        <div class="yon" style="background-color: #FF00C8;">
+            <img src="culture/4-6.png" style="width: 50px; left: -20px;">
+        </div>
+    </a>
+    <br>
+    <a href="emotion.html">
+        <div class="go" style="background-color: #FF00C8;">
+            <img src="emotion/5-5.png" style="display: block; width: 60px; left: -20px; top: -20px;">
+        </div>
+    </a>
+</div>
 
 <script href="story.js"></script>
 </body>

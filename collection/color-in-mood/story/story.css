@@ -13,113 +13,52 @@ h1{
     color: #fff;
     font-size: 80px;
     background-color: transparent;
+    margin: 70px;
 }
 
 .title{
     position: fixed;
-    bottom: 0;
-    left: 4%;
+    top: -7%;
+    left: 0%;
     background-color: transparent;
-    z-index: 20;
-}
-
-.bar{
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100vw;
-    height: 50px;
-    background-color: #000;
-    z-index: 10;
-}
-
-.navigation{
-    position: fixed;
-    right:2%;
-    top: 5%;
-    gap: 60px;
-    background-color: none;
-    z-index: 2;
-}
-
-.nav {
-    position: fixed;
-    right: 5%;
-    bottom: -3%;
-    background-color: transparent;
-}
-
-.menu-item {
-    position: relative;
-    background-color: transparent;
+    z-index: 5;
 }
 
 
-.menu-item > a {
-    display: block;
-    text-decoration: none;
-    color: black;
-    font-size: 18px;
-    text-align: center;
-    border-radius: 5px;
-    background-color: transparent;
-}
 
-.sub-menu {
+.navigation {
+    position: fixed; 
+    top: 20px; 
+    right: 20px;
+    z-index: 100; 
+    background-color: transparent; 
+  }
+  
+  
+  
+  .popup {
+    display: none; 
     position: absolute;
-    width: 120px;
-    bottom: 50%; 
-    right: 4%;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-    transform: translateY(10px); 
-    background-color: transparent;
-}
-
-
-.sub-menu li {
-    list-style: none;
-}
-
-.sub-menu a {
-    display: block;
+    top: 60%; 
+    right: 5%; 
+    background-color: rgba(255, 255, 255, 0.8); 
     color: black;
-    text-decoration: none;
-    transition: 0.5s padding, 0.5s background;
-    font-family: "Cormorant", serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    font-style: normal;
-    font-size: large;
-    background-color: transparent;
-}
+    padding: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    opacity: 0.9; 
+    border-radius: 8px;
+    text-align: left;
+    width: 180px; 
+  }
 
-.sub-menu a:hover {
-    background-color: rgba(219, 219, 219, 0.4); 
-    padding: 5px; 
-    transition: background-color 0.3s ease, padding 0.3s ease; 
-}
+  .popup h2:hover{
+    font-size: 23px;
+  }
 
-
-#dark a{
-    display: block;
-    color: #EBE8E8;
-    text-decoration: none;
-    transition: 0.5s padding, 0.5s background;
-    font-family: "Cormorant", serif;
-    font-optical-sizing: auto;
-    font-weight: 500;
-    font-style: normal;
-    font-size: large;
-}
-
-
-.menu-item:hover > .sub-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0); 
-}
+  .navigation:hover .popup {
+    display: block; 
+  }
 
 
 a {
@@ -176,50 +115,46 @@ background-color: #EBE8E8;
 
 
 
-/* 通用样式：圆点 */
+
 .ichi, .ni, .san, .yon, .go {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
+    width: 50px;
+    height: 30px;
     background-color: #000;
-    position: relative; /* 为图片定位提供参考 */
+    position: relative; 
 }
 
-/* 隐藏默认的图片 */
+
 .ichi img, .ni img, .san img, .yon img, .go img {
-    display: none; /* 初始隐藏 */
-    position: absolute; /* 相对于父元素定位 */
-    top: -20px;
+    display: none; 
+    position: absolute; 
+    top: -30px;
     left: -10px;
-    width: 40px; /* 图片大小 */
-    height: auto; /* 保持宽高比 */
-    border-radius: 5px; /* 可选：圆角效果 */
-    z-index: 10; /* 确保图片在顶部 */
+    width: 40px;
+    height: auto; 
+    border-radius: 5px;
+    z-index: 10;
     background-color: transparent;
 }
 
-/* 鼠标悬停时显示图片 */
+
 .ichi:hover img, .ni:hover img, .san:hover img, .yon:hover img, .go:hover img {
-    display: block; /* 悬停时显示图片 */
+    display: block; 
 }
 
 
 
 .timeline {
-    position: fixed;
-    right: 3%;
-    bottom: 10%;
-    z-index: 2;
+    display: flex; 
+    justify-content: center; 
+    gap: 100px; 
+    position: fixed; 
+    bottom: -3%; 
+    left: 50%;
+    transform: translateX(-50%); 
+    z-index: 10; 
+    align-items: flex-end;
 }
-.timeline::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 5px;
-    width: 1px;
-    height: 90%;
-    background-color: #000;
-}
+
 .timeline a {
     text-decoration: none;
     color: black;
@@ -350,13 +285,13 @@ background-color: #EBE8E8;
 
 .door-9{
     width: 23%;
-    top: 37%;
+    bottom: 0;
     left: 57%;
 }
 
 .door-19{
     width: 23%;
-    top: 37%;
+    bottom: 0;
     left: 57%;
     position: absolute; /* 确保定位 */
     animation: slideToRight 2s ease-in-out forwards; /* 动画效果 */
@@ -375,15 +310,15 @@ background-color: #EBE8E8;
 .door-6{
     width: 22%;
     rotate: 270deg;
-    top: 50%;
+    bottom: -3%;
     left: 26.5%;
-    z-index: 2;
+    z-index: -1;
 }
 
 .door-16{
     width: 22%;
     rotate: 270deg;
-    top: 50%;
+    bottom: -3%;
     left: 26.5%;
     z-index: 2;
     position: absolute; /* 确保定位 */

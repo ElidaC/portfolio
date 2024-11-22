@@ -1,18 +1,57 @@
-const stories = document.getElementById('s');
-const dropdown = document.getElementById('s-dropdown');
+const saturationRange = document.getElementById('saturation-range');
 
-// 切换菜单显示状态
-stories.addEventListener('click', () => {
-    const isDropdownVisible = dropdown.style.display === 'block';
-    dropdown.style.display = isDropdownVisible ? 'none' : 'block';
-});
+    saturationRange.addEventListener('input', (event) => {
+      const saturationValue = event.target.value; 
+      document.body.style.filter = `saturate(${saturationValue})`; 
+    });
 
-// 如果点击页面其他地方，关闭菜单
-document.addEventListener('click', (event) => {
-    if (!stories.contains(event.target) && !dropdown.contains(event.target)) {
-        dropdown.style.display = 'none';
-    }
-});
+
+
+    
+const photos = [
+    'gallery/ba.jpg',
+    'gallery/er.jpg',
+    'gallery/erba.png',
+    'gallery/erer.jpg',
+    'gallery/erliu.png',
+    'gallery/erqi.jpg',
+    'gallery/ersan.jpg',
+    'gallery/ershi.jpg',
+    'gallery/ersi.JPG',
+    'gallery/erwu.jpg',
+    'gallery/eryi.png',
+    'gallery/jiu.JPG',
+    'gallery/liu.JPG',
+    'gallery/qi.JPG',
+    'gallery/san.JPG',
+    'gallery/shi.JPG',
+    'gallery/shiba.jpg',
+    'gallery/shier.jpg',
+    'gallery/shijiu.jpg',
+    'gallery/shiliu.JPG',
+    'gallery/shiqi.jpg',
+    'gallery/shisan.JPG',
+    'gallery/shisi.jpg',
+    'gallery/shiwu.jpg',
+    'gallery/shisan.JPG',
+    'gallery/shiyi.jpg',
+    'gallery/si.png',
+    'gallery/wu.JPG',
+    'gallery/yi.png'
+  ];
+  
+  const photoDiv = document.querySelector('.photo');
+  
+  function setRandomPhoto() {
+    const randomIndex = Math.floor(Math.random() * photos.length);
+    const randomPhoto = photos[randomIndex];
+    photoDiv.style.backgroundImage = `url(${randomPhoto})`;
+  }
+  
+  setRandomPhoto();
+  
+  setInterval(setRandomPhoto, 1000);
+  
 
 
 

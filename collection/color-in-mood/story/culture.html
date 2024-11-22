@@ -12,54 +12,93 @@
 </head>
 <body>
     <style>
-        *{
+        html{
             background-color: #EBE8E8;
+            overflow: hidden;
         }
         h1{
             color: black;
         }
+        .title {
+        background: linear-gradient(to bottom, rgba(235, 232, 232, 1) 55%, rgba(235, 232, 232, 0) 100%);
+        }
+
+        .yon{
+        height: 50px;
+        }
     </style>
 
-<div class="bar"></div>
-
 <div class="title">
-    <h1>Tints Across Culture</h1>
+    <h1>I Choose...</h1>
+    <br>
+    <br>
+    <br>
+    <br>
 </div>
 
-    
-<div class="nav">
-    <div class="menu-item">
-        <a href="#"><h1>-</h1></a>
-        <ul class="sub-menu">
-            <li><a href="../content.html">Content</a></li>
-            <br>
-            <li><a href="../content/photoGallery.html">Art Gallery</a></li>
-            <br>
-            <li><a href="../content/exhibition.html">Exhibition</a></li>
-            <br>
-            <li><a href="../content/colorP.html">Color Palette</a></li>
-            <br>
-            <li><a href="../content/colorGame.html">Color Game</a></li>
-            <br>
-            <li><a href="memory.html">Memory</a></li>
-            <br>
-            <li><a href="cognition.html">Culture</a></li>
-            <br>
-            <li><a href="language.html">Language</a></li>
-            <br>
-            <li><a href="emotion.html">Emotion</a></li>
-        </ul>
-    </div>
+<div class="navigation">
+    <a href="../colorInMood.html">
+        <img src="../content/icon.png" width="50px">
+    </a>
+
+  <div class="popup">
+    <a href="#srocll-container">
+        <h2>stories</h2>
+    </a>
+    <a href="#info">
+        <h2>about</h2>
+    </a>
+    <a href="#interpretation">
+        <h2>interpretation</h2>
+    </a>
+    <a href="#gallery">
+        <h2>gallery</h2>
+    </a>
+    <a href="#exhibition">
+        <h2>exhibition</h2>
+    </a>
+
+
+  </div>
 </div>
 
-<a class="navigation" href="colorInMood.html">
-    <img src="../content/icon.png" width="50px">
-</a>
 
+<div class="timeline">
+    <a href="memory.html">
+        <div class="ichi">
+            <img src="memory/1-1.png" >
+        </div>
+    </a>
+    <br>
+    <a href="cognition.html">
+        <div class="ni">
+            <img src="cognition/2-7.png" style="top: -20px; width: 50px; left: -20px;">
+        </div>
+    </a>
+    <br>
+    <a href="language.html">
+        <div class="san">
+            <img src="language/3-7.png" style="left: -20px; ">
+        </div>
+    </a>
+    <br>
+    <a href="culture.html">
+        <div class="yon">
+            <img src="culture/4-6.png" style="display: block; width: 50px; left: -20px;">
+        </div>
+    </a>
+    <br>
+    <a href="emotion.html">
+        <div class="go">
+            <img src="emotion/5-5.png" style="width: 60px; left: -20px; top: -20px;">
+        </div>
+    </a>
+</div>
 
-<a href="emotion.html">
-    <div class="right" id="five"></div>
-</a>
+<div class="image-container-culture">
+    <img src="culture/4-13.png" width="45%" style=" position: absolute; right: -35px; top: -25px;">
+</div>
+
 
 <script href="story.js"></script>
 </body>
