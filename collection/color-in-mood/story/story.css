@@ -16,8 +16,18 @@ h1{
     margin: 70px;
 }
 
+p{
+    font-family: "Cormorant", serif;
+    font-optical-sizing: auto;
+    font-weight: 500;
+    font-style: normal;
+    font-size: 20px;
+    line-height: 25px;
+  }
+
 .title{
     position: fixed;
+    width: 100vw;
     top: -7%;
     left: 0%;
     background-color: transparent;
@@ -30,7 +40,7 @@ h1{
     position: fixed; 
     top: 20px; 
     right: 20px;
-    z-index: 100; 
+    z-index: 150; 
     background-color: transparent; 
   }
   
@@ -41,7 +51,7 @@ h1{
     position: absolute;
     top: 60%; 
     right: 5%; 
-    background-color: rgba(255, 255, 255, 0.8); 
+    background-color: rgba(255, 255, 255, 0.9); 
     color: black;
     padding: 20px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -151,7 +161,7 @@ background-color: #EBE8E8;
     bottom: -3%; 
     left: 50%;
     transform: translateX(-50%); 
-    z-index: 10; 
+    z-index: 200; 
     align-items: flex-end;
 }
 
@@ -169,51 +179,44 @@ background-color: #EBE8E8;
 
 /*memory*/
 
-.fade.active {
-    opacity: 1;
-}
 
-
-.image-container{
-    width: 60%;
-    margin-left: 60px;
-}
-
-
-#one{
-    margin-top: 0;
-}
-
-.fade {
-    opacity: 0; /* 初始透明 */
-    transform: translateY(50px); /* 初始位置稍向下 */
-    transition: opacity 3s ease, transform 1s ease; /* 平滑过渡 */
-    background-color: transparent;
-    display: flex;
-    margin: 200px 0;
-}
-
-.fade.active {
-    opacity: 1; /* 淡入显示 */
-    transform: translateY(0); /* 位置归位 */
-}
-
-
-/* text-container 的动态移动效果 */
-.text-container {
-    transition: transform 0.2s ease; /* 滚动时平滑移动 */
-    margin: 200px 0;
-}
-
-
-
-.phone {
-    overflow-y: scroll;
-    height: 400px; /* 设定足够高度来触发滚动 */
+.memory-container {
     position: relative;
-    
+    width: 100%; 
+    height: auto; 
+    z-index: -10;
 }
 
+.memory-img {
+    position: absolute;
+    top: 0;
+    left: 12%;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.memory-img.active {
+    opacity: 1;
+    z-index: 10;
+}
+
+.memory-text {
+    position: absolute;
+    width: 37%; /* 文本框宽度 */
+    margin: 20px 0;
+    right: 5%;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+.cover{
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 50%;
+        height: 100px;
+        background: linear-gradient(to top, rgba(235, 232, 232, 1) 25%, rgba(235, 232, 232, 0) 100%);
+}
 
 
 
@@ -223,25 +226,137 @@ background-color: #EBE8E8;
 /*cognition*/
 
 .before-4{
-    width: 40%;
+    width: 30%;
     position: fixed;
-    top: 10%;
-    right: 20%;
+    bottom: 10%;
+    right: 0;
     background-color: transparent;
+    z-index: 1;
 }
 
 .item-4{
-    width: 40%;
+    width: 30%;
     position: fixed;
-    top: 11%;
-    right: 20%;
+    bottom: 9%;
+    right: 0;
     opacity: 0;
+    background-color: #FFBB00;
     background-color: transparent;
+    z-index: 2;
 }
 
 .item-4:hover{
     opacity: 1;
 }
+
+.before-1{
+    width: 8%;
+    position: fixed;
+    top: 30%;
+    left: 6%;
+    background-color: transparent;
+    z-index: 10;
+}
+
+.item-1{
+    width: 8%;
+    position: fixed;
+    top: 30%;
+    left: 6.5%;
+    opacity: 0;
+    background-color: transparent;
+    z-index: 15;
+}
+
+.item-1:hover{
+    opacity: 1;
+}
+
+.before-2{
+    width: 22%;
+    position: fixed;
+    top: 20%;
+    left: 18%;
+    background-color: transparent;
+}
+
+.item-2{
+    width: 24%;
+    position: fixed;
+    top: 15%;
+    left: 19%;
+    opacity: 0;
+    background-color: transparent;
+}
+
+.item-2:hover{
+    opacity: 1;
+}
+
+.before-3{
+    width: 21%;
+    position: fixed;
+    top: 50%;
+    left: 0;
+    background-color: transparent;
+    z-index: 13;
+    rotate: -20deg;
+}
+
+.item-3{
+    width: 22%;
+    position: fixed;
+    top: 51%;
+    left: 2%;
+    opacity: 0;
+    rotate: -20deg;
+    background-color: transparent;
+    z-index: 15;
+}
+
+.item-3:hover{
+    opacity: 1;
+}
+
+.before-5{
+    width: 20%;
+    position: fixed;
+    top: 20%;
+    left: 26%;
+    background-color: transparent;
+    z-index: 10;
+}
+
+.item-5{
+    width: 30%;
+    position: fixed;
+    top: 22%;
+    left: 25%;
+    opacity: 0;
+    background-color: transparent;
+    z-index: 11;
+}
+
+.item-5:hover{
+    opacity: 1;
+}
+
+
+.cognition-text {
+    position: absolute;
+    width: 37%; 
+    margin: 50px 0; 
+    right: 15%;
+    overflow-y: auto;
+    height: 100vh;
+    margin-top: 220px;
+}
+
+
+
+
+
+
 
 
 
@@ -481,11 +596,11 @@ background-color: #EBE8E8;
 }
 
 .rec{
-    width: 40%;
+    width: 37%;
     height: 100vh;
     background-color: #0015ff;
     position: absolute;
-    left: 30%;
+    left: 35%;
     z-index: 3;
     top: 0;
     animation: colorChange 3s ease-in-out forwards;
@@ -502,7 +617,14 @@ background-color: #EBE8E8;
     }
 }
 
-
+.language-text {
+    position: absolute;
+    margin: 50px 0; 
+    right: 15%;
+    overflow-y: auto;
+    height: 100vh;
+    margin-top: 220px;
+}
 
 
 
@@ -512,3 +634,174 @@ background-color: #EBE8E8;
 
 
 /*culture*/
+.culture-text{
+    position: absolute;
+    width: 37%;
+    left: 5%;
+    margin: 100px 0;
+    margin-top: 270px;
+}
+
+.bottom{
+    position: fixed;
+    bottom: 0;
+    width: 50%;
+    height: 100px;
+    background: linear-gradient(to top, rgba(235, 232, 232, 1) 25%, rgba(235, 232, 232, 0) 100%);
+}
+
+.image-container-culture img{
+    z-index: 100;
+}
+
+
+
+
+/*emotion*/
+.emotion-image{
+    position: absolute;
+    top: 17%;
+    left: 5%;
+}
+
+.floating-img {
+    position: absolute; 
+    top: 0; 
+    left: 35%; 
+    transform: translateX(-50%); 
+    width: 70%; 
+    animation: floatRandom 70s infinite ease-in-out; 
+    margin-bottom: 200px;
+}
+
+@keyframes floatRandom {
+    0% {
+        transform: translateX(-90%) translateY(100px) ;
+    }
+    5% {
+        transform: translateX(-85%) translateY(-100px) ; /* 随机位移 */
+    }
+    10% {
+        transform: translateX(-75%) translateY(-250px) ; /* 随机位移 */
+    }
+    15% {
+        transform: translateX(-80%) translateY(-400px); /* 随机位移 */
+    }
+    20% {
+        transform: translateX(-75%) translateY(-550px) ; /* 回到初始状态 */
+    }
+    25% {
+        transform: translateX(-65%) translateY(-700px) ; /* 回到初始状态 */
+    }
+    30% {
+        transform: translateX(-55%) translateY(-850px) ; /* 回到初始状态 */
+    }
+    33% {
+        transform: translateX(-50%) translateY(-1000px) ; /* 回到初始状态 */
+    }
+    36% {
+        transform: translateX(-50%) translateY(-1150px) ; /* 回到初始状态 */
+    }
+    39% {
+        transform: translateX(-49%) translateY(-1350px) ; /* 回到初始状态 */
+    }
+    42% {
+        transform: translateX(-46%) translateY(-1550px) ; /* 回到初始状态 */
+    }
+    45% {
+        transform: translateX(-43%) translateY(-1750px) ; /* 回到初始状态 */
+    }
+    50% {
+        transform: translateX(-40%) translateY(-1950px) ; /* 回到初始状态 */
+    }
+    55% {
+        transform: translateX(-43%) translateY(-1750px) ; /* 回到初始状态 */
+    }
+    58% {
+        transform: translateX(-46%) translateY(-1550px) ; /* 回到初始状态 */
+    }
+    62% {
+        transform: translateX(-49%) translateY(-1350px) ; /* 回
+        到初始状态 */
+    }
+    65% {
+        transform: translateX(-50%) translateY(-1150px); /* 回到初始状态 */
+    }
+    68% {
+        transform: translateX(-50%) translateY(-1000px) ; /* 回到初始状态 */
+    }
+    70% {
+        transform: translateX(-55%) translateY(-950px) ; /* 回到初始状态 */
+    }
+    75% {
+        transform: translateX(-65%) translateY(-800px) ; /* 回到初始状态 */
+    }
+    80% {
+        transform: translateX(-75%) translateY(-650px); /* 回到初始状态 */
+    }
+    85% {
+        transform: translateX(-80%) translateY(-400px) ; /* 随机位移 */
+    }
+    90% {
+        transform: translateX(-75%) translateY(-250px) ; /* 随机位移 */
+    }
+    95% {
+        transform: translateX(-85%) translateY(-100px) ; /* 随机位移 */
+    }
+    100% {
+        transform: translateX(-90%) translateY(100px) ;
+    }
+}
+
+
+.emotion-text{
+    position: absolute;
+    width: 37%;
+    right: 5%;
+    margin: 100px 0;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+
+
+
+
+
+
+
+
+/* Overlay container */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.8); /* Semi-transparent black */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    visibility: hidden; /* Hidden by default */
+    opacity: 0;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+  }
+  
+  /* Overlay content */
+  .overlay-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    max-width: 400px;
+    width: 80%;
+  }
+  
+  /* Overlay active class */
+  .overlay.active {
+    visibility: visible;
+    opacity: 1;
+  }
+  

@@ -1,59 +1,37 @@
-const saturationRange = document.getElementById('saturation-range');
+document.addEventListener("DOMContentLoaded", () => {
+  const images = document.querySelectorAll(".photo img"); // 获取所有图片元素
+  let currentIndex = 0; // 当前显示的图片索引
 
-    saturationRange.addEventListener('input', (event) => {
-      const saturationValue = event.target.value; 
-      document.body.style.filter = `saturate(${saturationValue})`; 
-    });
+  // 隐藏所有图片
+  const hideAllImages = () => {
+      images.forEach(img => {
+          img.classList.remove("visible");
+          img.classList.add("hidden");
+      });
+  };
 
+  // 显示随机一张图片
+  const showRandomImage = () => {
+      hideAllImages();
+      currentIndex = Math.floor(Math.random() * images.length); // 随机索引
+      images[currentIndex].classList.remove("hidden");
+      images[currentIndex].classList.add("visible");
+  };
 
+  // 初始显示第一张图片
+  showRandomImage();
 
-    
-const photos = [
-    'gallery/ba.jpg',
-    'gallery/er.jpg',
-    'gallery/erba.png',
-    'gallery/erer.jpg',
-    'gallery/erliu.png',
-    'gallery/erqi.jpg',
-    'gallery/ersan.jpg',
-    'gallery/ershi.jpg',
-    'gallery/ersi.JPG',
-    'gallery/erwu.jpg',
-    'gallery/eryi.png',
-    'gallery/jiu.JPG',
-    'gallery/liu.JPG',
-    'gallery/qi.JPG',
-    'gallery/san.JPG',
-    'gallery/shi.JPG',
-    'gallery/shiba.jpg',
-    'gallery/shier.jpg',
-    'gallery/shijiu.jpg',
-    'gallery/shiliu.JPG',
-    'gallery/shiqi.jpg',
-    'gallery/shisan.JPG',
-    'gallery/shisi.jpg',
-    'gallery/shiwu.jpg',
-    'gallery/shisan.JPG',
-    'gallery/shiyi.jpg',
-    'gallery/si.png',
-    'gallery/wu.JPG',
-    'gallery/yi.png'
-  ];
-  
-  const photoDiv = document.querySelector('.photo');
-  
-  function setRandomPhoto() {
-    const randomIndex = Math.floor(Math.random() * photos.length);
-    const randomPhoto = photos[randomIndex];
-    photoDiv.style.backgroundImage = `url(${randomPhoto})`;
-  }
-  
-  setRandomPhoto();
-  
-  setInterval(setRandomPhoto, 1000);
-  
+  // 每5秒切换一次图片
+  setInterval(showRandomImage, 5000);
+});
 
 
+
+
+document.addEventListener("DOMContentLoaded", () => {
+  const video = document.querySelector(".slow-video");
+  video.playbackRate = 0.5; // 设置播放速度为原速的一半
+});
 
 
 
