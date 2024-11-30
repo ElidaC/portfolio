@@ -23,7 +23,6 @@ const pngImages = [
     'png/2-6.png',
     'png/2-13.png',
     'png/3-2.png',
-    'png/3-2.png',
     'png/3-4.png',
     'png/3-8.png',
     'png/4-1.png',
