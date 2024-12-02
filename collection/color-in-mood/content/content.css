@@ -36,8 +36,15 @@ p{
     background-color: transparent;
 }
 
-.content{
+.title2{
+  position: fixed;
+  top: -7%;
+  left: 5%;
+  background-color: transparent;
+  z-index: 5;
+}
 
+.content{
   padding: 5px;
 }
 
@@ -256,13 +263,9 @@ a {
   text-align: center;
   width: 100%; 
   height: 100%; 
-  opacity: 0; 
   transition: opacity 0.3s ease; 
 }
 
-.block-1:hover .block-name2 {
-  opacity: 1; 
-}
 
 
 .block-2{
@@ -286,13 +289,9 @@ a {
   text-align: center;
   width: 100%; 
   height: 100%; 
-  opacity: 0; 
   transition: opacity 0.3s ease; 
 }
 
-.block-2:hover .block-name3 {
-  opacity: 1; 
-}
 
 .block{
   display: flex;
@@ -320,13 +319,9 @@ a {
   text-align: center;
   width: 100%; 
   height: 100%; 
-  opacity: 0; 
   transition: opacity 0.3s ease; 
 }
 
-.block-3:hover .block-name4 {
-  opacity: 1; 
-}
 
 .block-4{
   position: relative;
@@ -349,13 +344,9 @@ a {
   text-align: center;
   width: 100%; 
   height: 100%; 
-  opacity: 0; 
   transition: opacity 0.3s ease; 
 }
 
-.block-4:hover .block-name5 {
-  opacity: 1; 
-}
 
 .block-5{
   position: relative;
@@ -378,13 +369,9 @@ a {
   text-align: center;
   width: 100%; 
   height: 100%; 
-  opacity: 0; 
   transition: opacity 0.3s ease; 
 }
 
-.block-5:hover .block-name {
-  opacity: 1; 
-}
 
 
 .words{
@@ -451,7 +438,7 @@ gap: 80px;
 }
 
 .rendering{
-  width: 500px;
+  width: 400px;
   height: 270px;
   background-color: #b5b5b5;
 }
@@ -467,6 +454,7 @@ gap: 80px;
   width: 100%; 
   height: 100%; 
   object-fit: cover; 
+  pointer-events: none;
 }
 
 
@@ -484,17 +472,52 @@ gap: 80px;
   display: none;
 }
 
-.floorplan{
+.floorplan {
   position: absolute;
-  top: 20%;           
-  left: 45%;     
+  top: 20%;
+  left: 50%; 
   transform: translate(-50%, 0); 
-  z-index: -5;
+  z-index: -5; 
+  color: #EBE8E8;
+  width: 80%;
 }
 
 
+.circulation{  
+  display: flex;
+  gap: 80px;
+}
+
+.rooms p{
+  margin-top: -10px;
+}
+
+.elevation img{
+  max-height: 200px;
+  width: auto;
+  overflow-x: auto;
+}
 
 
+.play{
+  width: 100%; 
+  height: auto; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  text-align: center; 
+  margin: 0 auto; 
+  z-index: -10;
+}
+
+.cover{
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 150px;
+  background: linear-gradient(to bottom, rgb(0, 0, 0) 45%, rgba(235, 232, 232, 0) 100%);
+}
 
 
 
@@ -603,5 +626,71 @@ gap: 80px;
   height: 150px;
   background: linear-gradient(to bottom, rgb(0, 0, 0) 45%, rgba(235, 232, 232, 0) 100%);
 }
+
+.title{
+position: fixed;
+}
+
+.floorplan{
+top: 15%;
+width: 86%;
+}
+
+.circulation{
+  display: block;
+}
+
+.circulation img{
+  width: 100%;
+  margin-top: 20px;
+}
+
+.circulation h2{
+margin-top: -15px;
+}
+
+.circulation p{
+  margin-top: -15px;
+  }
+
+#purpose{
+  margin-top: -100px;
+}
+
+
+
+
+.elevation {
+  overflow-x: auto; 
+  white-space: nowrap; 
+  display: block; 
+}
+
+.elevation img {
+  max-height: 200px; 
+  width: auto; 
+  display: inline-block; 
+}
+
+.play {
+  position: absolute; /* 使容器在屏幕上居中 */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(90deg); /* 旋转90度并居中 */
+  width: 100vh; /* 宽度等于视口高度 */
+  height: 100vw; /* 高度等于视口宽度 */
+  overflow: hidden; /* 避免视频溢出 */
+}
+
+.play video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* 视频居中 */
+  min-width: 100vh; /* 视频的最小宽度适应旋转后的容器 */
+  min-height: 100vw; /* 视频的最小高度适应旋转后的容器 */
+  object-fit: cover; /* 保持视频比例且覆盖整个屏幕 */
+}
+
 
 }
