@@ -40,7 +40,6 @@ setButton.onclick = function () {
   if (job && choice && quote) {
     ref.push({ job, choice, quote });
     inputField.value = ""; // Clear input field
-    alert("Data submitted!");
   } else {
     alert("Please fill all fields before submitting.");
   }
