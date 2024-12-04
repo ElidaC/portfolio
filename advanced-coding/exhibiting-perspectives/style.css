@@ -1,97 +1,186 @@
-html{
-    background-color: black;
+html {
+    background-color: rgb(35, 35, 35);
     font-family: "Poltawski Nowy", serif;
     font-optical-sizing: auto;
     font-style: normal;
     color: rgb(255, 0, 200);
+    overflow: hidden;
+}
+
+#image{
+    position: absolute;
+    width: 20%;
+    right: 2%;
+    top: 2%;
 }
 
 body {
-  padding: 20px;
+    padding: 20px;
 }
 
-h1{
+h1 {
     font-weight: 700;
 }
 
-h2{
+h2 {
     font-weight: 500;
-    font-size: 25px;
+    font-size: 20px;
 }
 
-p{
+p {
     font-weight: 300;
 }
 
-.container{
+.container {
     position: absolute;
-    bottom: 6%;
+    top: 3%;
     display: flex;
     width: 90%;
-    gap: 10px;
     height: 32px;
-    justify-content: center;
-    align-items: center; 
 }
 
 .dropdown {
     display: flex;
     justify-content: center;
     align-items: center;    
-    gap: 10px;             
+    gap: 5px;  
+    position: absolute;
+    left: 2%;         
 }
 
-
-  .dropdown select {
+.dropdown select {
     padding: 5px;
-    margin-right: 50px;
-    border-radius: 30px;
-  }
+    margin-right: 20px;
+    border-radius: 5px;
+}
 
-  input {
-    padding: 5px;
-    margin-left: 30px;
-    border-radius: 30px;
-  }
-
-  button {
-    padding: 5px 7.5px;
-    border-radius: 30px;
-    border: 2px solid rgb(255, 0, 200);
+select, input, button {
     background-color: transparent;
-    color: rgb(255, 0, 200);
-  }
+    border: 1px solid rgb(255, 0, 200);      
+    color: white;               
+    font-size: 15px;              
+    padding: 5px;               
+    border-radius: 5px;  
+    font-family: "Poltawski Nowy", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-weight: 100;        
+}
 
-  a{
-    text-decoration: none;
-    color: rgb(255, 0, 200);
-    margin-left: 70px;
-  }
-  .circle {
-    display: inline-block;
-    width: 20px;
-    height: 20px;
+input {
+    height: 22px;
+}
+
+button {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: rgb(255, 0, 200);
+    color: black;
+}
+
+.line {
+    width: 95%;
+    height: 1px;
+    background-color: rgb(255, 0, 200);
+    margin-bottom: 10px;
+}
+
+/* List Section */
+.list {
+    position: absolute;
+    bottom: 3%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    width: 100%;
+    height: 80vh;
+    gap: 10px; /* Add spacing between elements */
+}
+
+.circle-list {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-end;
+    width: 90%;
+    flex-wrap: nowrap; /* Prevent wrapping */
+}
+
+.circle-list .job-container {
+    position: relative;
+    width: 100px;
+    height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px; /* Spacing between circles */
+}
+
+/* Titles Section */
+.titles {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-end;
+    width: 92%;
+    color: white;
+}
+
+.titles .job-container {
+    width: 100px;
+    text-align: center;
+}
+
+.titles p {
+    margin: 0;
+    font-weight: bold;
+    font-size: 14px;
+    color: gray;
+}
+
+/* Circle Styles */
+.circle {
+    width: 15px;
+    height: 15px;
     border-radius: 50%;
     margin: 5px;
-    text-align: center;
-    line-height: 30px;
-    font-weight: bold;
     cursor: pointer;
-  }
-  .pros {
+}
+
+.pros {
     background-color: rgb(255, 0, 200);
     border: 1px solid rgb(255, 0, 200);
     color: white;
-  }
-  .cons {
+    z-index: 50;
+}
+
+.cons {
     border: 1.5px solid gray;
     color: gray;
     background-color: transparent;
-  }
-  .quote-display {
-    font-size: xxx-large;
+    z-index: 50;
+}
+
+.quote-display {
+    position: absolute;
+    font-size: small;
+    width: 15%;
     font-style: italic;
-    margin-top: 20px;
+    margin-top: 5px; /* Adjust as needed */
     padding: 10px;
     display: none;
-  }
+    color: white;
+    background-color: rgba(0, 0, 0, 0.8); /* For better visibility */
+    border-radius: 10px;
+    border: 0.2px solid rgb(255, 0, 200);
+    z-index: 1000; /* Ensure it appears above other elements */
+    pointer-events: none; /* Prevent mouse interaction */
+    transition: opacity 0.2s ease-in-out; /* Smooth appearance */
+}
+

@@ -10,15 +10,24 @@
     <title>AI & Creative Professionals</title>
 </head>
 <body>
+
+    <img src="title.png" id="image">
     
     <div class="container">
     <div class="dropdown">
         <label for="jobs"><h2>Jobs: &nbsp</h2></label>
         <select id="jobs">
           <option value="">Select a job</option>
-          <option value="Visual Design">Visual Design</option>
-          <option value="Web Development">Web Development</option>
-          <option value="Project Management">Project Management</option>
+          <option value="Graphic and Visual Design">Graphic and Visual Design</option>
+          <option value="Product and Industrial Design">Product and Industrial Design</option>
+          <option value="Fine Arts">Fine Arts</option>
+          <option value="Digital and Multimedia Arts">Digital and Multimedia Arts</option>
+          <option value="Creative Coding and Robotic">Creative Coding and Robotic</option>
+          <option value="Photography and Videography">Photography and Videography</option>
+          <option value="Architecture and Interior Design">Architecture and Interior Design</option>
+          <option value="Creative Direction and Strategy">Creative Direction and Strategy</option>
+          <option value="Miscellaneous Roles">Miscellaneous Roles</option>
+          <option value="Industries Employing Artists and Designers">Industries Employing Artists and Designers</option>
         </select>
 
         <label for="choice"><h2>Choice: &nbsp</h2></label>
@@ -27,23 +36,77 @@
           <option value="Pros">Pros</option>
           <option value="Cons">Cons</option>
         </select>
-      </div>
-    
-      <input type="text" id="text-input" placeholder="&nbsp Why?">
-      <button id="set-button">⏏︎</button>
 
-      <a href="chart.html"><h2>Datamap</h2></a>
+        <input type="text" id="text-input" placeholder="&nbsp Why?">
+        <button id="set-button">⏏︎</button>
       </div>
-    
-      <div id="circles-container"></div>
-      <div id="quote-display" class="quote-display"></div>
+
+      </div>
+
+      <div class="list">
+        <!-- 圆圈区域 -->
+        <div class="circle-list">
+          <div class="job-container" id="Graphic and Visual Design"></div>
+          <div class="job-container" id="Product and Industrial Design"></div>
+          <div class="job-container" id="Fine Arts"></div>
+          <div class="job-container" id="Digital and Multimedia Arts"></div>
+          <div class="job-container" id="Creative Coding and Robotic"></div>
+          <div class="job-container" id="Photography and Videography"></div>
+          <div class="job-container" id="Architecture and Interior Design"></div>
+          <div class="job-container" id="Creative Direction and Strategy"></div>
+          <div class="job-container" id="Miscellaneous Roles"></div>
+          <div class="job-container" id="Industries Employing Artists and Designers"></div>
+        </div>
+      
+        <div class="line"></div>
+
+        <!-- 标题文字 -->
+        <div class="titles">
+          <div class="job-container">
+            <p>Graphic and Visual Design</p>
+          </div>
+          <div class="job-container">
+            <p>Product and Industrial Design</p>
+          </div>
+          <div class="job-container">
+            <p>Fine Arts</p>
+          </div>
+          <div class="job-container">
+            <p>Digital and Multimedia Arts</p>
+          </div>
+          <div class="job-container">
+            <p>Creative Coding and Robotic</p>
+          </div>
+          <div class="job-container">
+            <p>Photography and Videography</p>
+          </div>
+          <div class="job-container">
+            <p>Architecture and Interior Design</p>
+          </div>
+          <div class="job-container">
+            <p>Creative Direction and Strategy</p>
+          </div>
+          <div class="job-container">
+            <p>Miscellaneous Roles</p>
+          </div>
+          <div class="job-container">
+            <p>Industries Employing Artists and Designers</p>
+          </div>
+        </div>
+      </div>
+      
+      
+
+<div id="circles-container"></div>
+  <div id="quote-display" class="quote-display"></div>
 
 
       
 
 
 
-
+      <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+      <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
 <script src="script.js"></script>
 
 </body>
