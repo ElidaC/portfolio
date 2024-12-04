@@ -178,7 +178,6 @@ button:hover {
     color: white;
     background-color: rgba(0, 0, 0, 0.8); 
     border-radius: 10px;
-    border: 0.2px solid rgb(255, 0, 200);
     z-index: 1000; 
     pointer-events: none; 
     transition: opacity 0.2s ease-in-out; 
