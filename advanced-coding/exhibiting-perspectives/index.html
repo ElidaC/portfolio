@@ -4,17 +4,47 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300..700;1,300..700&family=Matemasie&family=Montserrat+Alternates:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Poltawski+Nowy:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
     <title>AI & Creative Professionals</title>
 </head>
 <body>
     
-    <div class="input-container">
-        <input type="text" id="userInput" placeholder="Write something here..." />
-    </div>
-    <button class="send-button" onclick="sendText()">⍙
-    </button>
+    <div class="container">
+    <div class="dropdown">
+        <label for="jobs"><h2>Jobs: &nbsp</h2></label>
+        <select id="jobs">
+          <option value="">Select a job</option>
+          <option value="Visual Design">Visual Design</option>
+          <option value="Web Development">Web Development</option>
+          <option value="Project Management">Project Management</option>
+        </select>
+
+        <label for="choice"><h2>Choice: &nbsp</h2></label>
+        <select id="choice">
+          <option value="">Select a choice</option>
+          <option value="Pros">Pros</option>
+          <option value="Cons">Cons</option>
+        </select>
+      </div>
+    
+      <input type="text" id="text-input" placeholder="&nbsp Why?">
+      <button id="set-button">⏏︎</button>
+
+      <a href="chart.html"><h2>Datamap</h2></a>
+      </div>
+    
+      <div id="circles-container"></div>
+      <div id="quote-display" class="quote-display"></div>
 
 
-    <script src="script.js"></script>
+      
+
+
+
+
+<script src="script.js"></script>
+
 </body>
 </html>

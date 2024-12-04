@@ -1,0 +1,46 @@
+body {
+    font-family: "Poltawski Nowy", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 20px;
+  }
+  .job-container {
+    width: 200px;
+    min-height: 150px;
+    border: 1px solid #ccc;
+    padding: 10px;
+    border-radius: 5px;
+  }
+  .circle {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: inline-block;
+    margin: 5px;
+    cursor: pointer;
+    text-align: center;
+    line-height: 30px;
+    font-size: 12px;
+    font-weight: bold;
+  }
+  .circle.pros {
+    background-color: pink;
+    color: white;
+  }
+  .circle.cons {
+    border: 2px solid gray;
+    color: gray;
+    background-color: white;
+  }
+  .quote-display {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }

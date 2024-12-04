@@ -1,54 +1,97 @@
 html{
     background-color: black;
+    font-family: "Poltawski Nowy", serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    color: rgb(255, 0, 200);
 }
 
 body {
-    font-family: Georgia, 'Times New Roman', Times, serif;
+  padding: 20px;
+}
+
+h1{
+    font-weight: 700;
+}
+
+h2{
+    font-weight: 500;
+    font-size: 25px;
+}
+
+p{
+    font-weight: 300;
+}
+
+.container{
+    position: absolute;
+    bottom: 6%;
+    display: flex;
+    width: 90%;
+    gap: 10px;
+    height: 32px;
+    justify-content: center;
+    align-items: center; 
+}
+
+.dropdown {
     display: flex;
     justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
+    align-items: center;    
+    gap: 10px;             
 }
 
-.input-container {
-    display: flex;
-    align-items: center;
-    background: rgba(255, 255, 255, 0.8);
-    border: 1px solid #ccc;
-    border-radius: 25px;
-    padding: 10px 15px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-}
 
-.input-container input {
-    border: none;
-    outline: none;
-    background: transparent;
-    flex: 1;
-    font-size: 16px;
-    color: #333;
-}
+  .dropdown select {
+    padding: 5px;
+    margin-right: 50px;
+    border-radius: 30px;
+  }
 
-.input-container input::placeholder {
-    color: #999;
-}
+  input {
+    padding: 5px;
+    margin-left: 30px;
+    border-radius: 30px;
+  }
 
-.send-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #ff00e1;
+  button {
+    padding: 5px 7.5px;
+    border-radius: 30px;
+    border: 2px solid rgb(255, 0, 200);
+    background-color: transparent;
+    color: rgb(255, 0, 200);
+  }
+
+  a{
+    text-decoration: none;
+    color: rgb(255, 0, 200);
+    margin-left: 70px;
+  }
+  .circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
     border-radius: 50%;
-    width: 40px;
-    border: none;
-    height: 40px;
-    margin-left: 10px;
+    margin: 5px;
+    text-align: center;
+    line-height: 30px;
+    font-weight: bold;
     cursor: pointer;
-    box-shadow:2px 1px 10px rgba(255, 255, 255, 0.1);
-    transition: background 0.3s;
-}
-
-.send-button:hover {
-    box-shadow:2px 1px 10px rgba(255, 255, 255, 0.7);
-}
+  }
+  .pros {
+    background-color: rgb(255, 0, 200);
+    border: 1px solid rgb(255, 0, 200);
+    color: white;
+  }
+  .cons {
+    border: 1.5px solid gray;
+    color: gray;
+    background-color: transparent;
+  }
+  .quote-display {
+    font-size: xxx-large;
+    font-style: italic;
+    margin-top: 20px;
+    padding: 10px;
+    display: none;
+  }
