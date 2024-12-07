@@ -801,6 +801,12 @@ background-color: #EBE8E8;
     opacity: 0;
 }
 
+.space{
+    width: 20px;
+    height: 200px;
+    background-color: #FFBB00;
+    display: none;
+}
 
 
 
@@ -809,6 +815,14 @@ background-color: #EBE8E8;
     html{
         overflow: hidden;
     }
+
+    .space{
+        width: 20px;
+        height: 200px;
+        background-color: #FFBB00;
+        display: block;
+    }
+
     .color{
         position: absolute;
         top: 0;
