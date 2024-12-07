@@ -250,7 +250,6 @@ a {
   width: 20%;
   height:100px;
   transition: all 0.3s ease; 
-  box-shadow: inset -15px -15px 15px rgba(0, 0, 0, 0.5);
 }
 
 .block-1:hover {
@@ -276,7 +275,6 @@ a {
   width: 20%;
   height:100px;
   transition: all 0.3s ease; 
-  box-shadow: inset -15px -15px 15px rgba(0, 0, 0, 0.5);
 }
 
 .block-2:hover {
@@ -306,7 +304,6 @@ a {
   width: 20%;
   height:100px;
   transition: all 0.3s ease; 
-  box-shadow: inset -15px -15px 15px rgba(0, 0, 0, 0.5);
 }
 
 .block-3:hover {
@@ -331,7 +328,6 @@ a {
   width: 20%;
   height:100px;
   transition: all 0.3s ease; 
-  box-shadow: inset -15px -15px 15px rgba(0, 0, 0, 0.5);
 }
 
 .block-4:hover {
@@ -356,7 +352,6 @@ a {
   width: 20%;
   height:100px;
   transition: all 0.3s ease; 
-  box-shadow: inset -15px -15px 15px rgba(0, 0, 0, 0.5);
 }
 
 .block-5:hover {

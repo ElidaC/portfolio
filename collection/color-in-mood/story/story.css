@@ -40,6 +40,22 @@ p{
 
 }
 
+.question{
+    position: absolute;
+    top: 15%;
+    left: 10%;
+    width: 80%;
+}
+
+.next{
+    position: absolute;
+    top: 75%;
+    right: 10%;
+}
+
+.next h2:hover{
+    font-size: 23px;
+}
 
 
 .navigation {
@@ -191,6 +207,11 @@ background-color: #EBE8E8;
     width: 100%; 
     height: auto; 
     z-index: -10;
+    background-color: transparent;
+}
+
+#emotion{
+    margin-top: 80px;
 }
 
 .memory-img {
@@ -391,10 +412,9 @@ background-color: #EBE8E8;
 .door-11 {
     width: 50%;
     top: -10%;
-    left: 25%; /* 起始位置 */
+    left: 0; /* 起始位置 */
     z-index: 1;
     position: absolute; /* 确保定位 */
-    animation: slideToLeft 2s ease-in-out forwards; /* 动画效果 */
 }
 
 /* 定义动画 */
@@ -416,9 +436,8 @@ background-color: #EBE8E8;
 .door-19{
     width: 23%;
     bottom: 0;
-    left: 57%;
+    left: 78%;
     position: absolute; /* 确保定位 */
-    animation: slideToRight 2s ease-in-out forwards; /* 动画效果 */
 }
 
 /* 定义动画 */
@@ -443,10 +462,9 @@ background-color: #EBE8E8;
     width: 22%;
     rotate: 270deg;
     bottom: -3%;
-    left: 26.5%;
+    left: 0;
     z-index: 2;
     position: absolute; /* 确保定位 */
-    animation: slideToLeft 2s ease-in-out forwards; /* 动画效果 */
 }
 
 .door-7{
@@ -458,11 +476,10 @@ background-color: #EBE8E8;
 
 .door-17{
     width: 15%;
-    left: 60%;
-    top: 36%;
+    left: 85%;
+    top: 25%;
     z-index: 3;
     position: absolute; /* 确保定位 */
-    animation: slideToRight1 2s ease-in-out forwards; /* 动画效果 */
 }
 
 @keyframes slideToRight1 {
@@ -484,11 +501,10 @@ background-color: #EBE8E8;
 
 .door-18{
     width: 22%;
-    left: 45%;
+    left: 76%;
     top: 33%;
     z-index: -5;
     position: absolute; /* 确保定位 */
-    animation: slideToRight2 2s ease-in-out forwards; /* 动画效果 */
 }
 
 @keyframes slideToRight2 {
@@ -510,10 +526,9 @@ background-color: #EBE8E8;
 .door-12{
     width: 12%;
     top: 65%;
-    left: 62%;
+    left: 76%;
     z-index: 5;
     position: absolute; /* 确保定位 */
-    animation: slideToRight2 2s ease-in-out forwards; /* 动画效果 */
 }
 
 @keyframes slideToRight2 {
@@ -535,10 +550,9 @@ background-color: #EBE8E8;
 .door-13{
     width: 20%;
     top: 20%;
-    left: 25%;
+    left: 0;
     z-index: 3;
     position: absolute; /* 确保定位 */
-    animation: slideToLeft 2s ease-in-out forwards; /* 动画效果 */
 }
 
 .door-4{
@@ -550,9 +564,8 @@ background-color: #EBE8E8;
 .door-14{
     width: 20.5%;
     top: 14%;
-    left: 35%;
+    left: 10%;
     position: absolute; /* 确保定位 */
-    animation: slideToLeft2 2s ease-in-out forwards; /* 动画效果 */
 }
 
 @keyframes slideToLeft2 {
@@ -573,9 +586,8 @@ background-color: #EBE8E8;
 .door-15{
     width: 10%;
     top: 42%;
-    left: 46%;
+    left: 77%;
     position: absolute; /* 确保定位 */
-    animation: slideToRight3 2s ease-in-out forwards; /* 动画效果 */
 }
 
 @keyframes slideToRight3 {
@@ -612,18 +624,6 @@ background-color: #EBE8E8;
     left: 35%;
     z-index: 3;
     top: 0;
-    animation: colorChange 3s ease-in-out forwards;
-}
-
-@keyframes colorChange {
-    0% {
-        opacity: 0; 
-        filter: blur(40px);
-    }
-    100% {
-        opacity: 1; 
-        filter: blur(0);
-    }
 }
 
 .language-text {
@@ -727,86 +727,10 @@ background-color: #EBE8E8;
     width: 70%; 
     animation: floatRandom 70s infinite ease-in-out; 
     margin-bottom: 200px;
+    overflow-y: auto;
 }
 
-@keyframes floatRandom {
-    0% {
-        transform: translateX(-90%) translateY(100px) ;
-    }
-    5% {
-        transform: translateX(-85%) translateY(-100px) ; /* 随机位移 */
-    }
-    10% {
-        transform: translateX(-75%) translateY(-250px) ; /* 随机位移 */
-    }
-    15% {
-        transform: translateX(-80%) translateY(-400px); /* 随机位移 */
-    }
-    20% {
-        transform: translateX(-75%) translateY(-550px) ; /* 回到初始状态 */
-    }
-    25% {
-        transform: translateX(-65%) translateY(-700px) ; /* 回到初始状态 */
-    }
-    30% {
-        transform: translateX(-55%) translateY(-850px) ; /* 回到初始状态 */
-    }
-    33% {
-        transform: translateX(-50%) translateY(-1000px) ; /* 回到初始状态 */
-    }
-    36% {
-        transform: translateX(-50%) translateY(-1150px) ; /* 回到初始状态 */
-    }
-    39% {
-        transform: translateX(-49%) translateY(-1350px) ; /* 回到初始状态 */
-    }
-    42% {
-        transform: translateX(-46%) translateY(-1550px) ; /* 回到初始状态 */
-    }
-    45% {
-        transform: translateX(-43%) translateY(-1750px) ; /* 回到初始状态 */
-    }
-    50% {
-        transform: translateX(-40%) translateY(-1950px) ; /* 回到初始状态 */
-    }
-    55% {
-        transform: translateX(-43%) translateY(-1750px) ; /* 回到初始状态 */
-    }
-    58% {
-        transform: translateX(-46%) translateY(-1550px) ; /* 回到初始状态 */
-    }
-    62% {
-        transform: translateX(-49%) translateY(-1350px) ; /* 回
-        到初始状态 */
-    }
-    65% {
-        transform: translateX(-50%) translateY(-1150px); /* 回到初始状态 */
-    }
-    68% {
-        transform: translateX(-50%) translateY(-1000px) ; /* 回到初始状态 */
-    }
-    70% {
-        transform: translateX(-55%) translateY(-950px) ; /* 回到初始状态 */
-    }
-    75% {
-        transform: translateX(-65%) translateY(-800px) ; /* 回到初始状态 */
-    }
-    80% {
-        transform: translateX(-75%) translateY(-650px); /* 回到初始状态 */
-    }
-    85% {
-        transform: translateX(-80%) translateY(-400px) ; /* 随机位移 */
-    }
-    90% {
-        transform: translateX(-75%) translateY(-250px) ; /* 随机位移 */
-    }
-    95% {
-        transform: translateX(-85%) translateY(-100px) ; /* 随机位移 */
-    }
-    100% {
-        transform: translateX(-90%) translateY(100px) ;
-    }
-}
+
 
 
 .emotion-text{
@@ -867,7 +791,15 @@ background-color: #EBE8E8;
 
 
 
-
+.color{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 600px;
+    background-color: #000;
+    opacity: 0;
+}
 
 
 
@@ -876,6 +808,26 @@ background-color: #EBE8E8;
   @media screen and (max-width: 430px) {
     html{
         overflow: hidden;
+    }
+    .color{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 600px;
+        background-color: #EBE8E8;
+        opacity: 1;
+    }
+
+    .question{
+        top: 5%;
+        left: -5%;
+        width: 100%;
+        right: 0;
+    }
+
+    .next{
+        top: 85%;
     }
 
     h1{
@@ -914,6 +866,11 @@ background-color: #EBE8E8;
         margin-top: 200px;
         z-index: 10;
         background-color: #EBE8E8;
+    }
+
+    #emotion{
+        background-color: transparent;
+        margin-top: 150px;
     }
 
     .cover{
@@ -989,7 +946,7 @@ background-color: #EBE8E8;
     .item-2{
         width: 42%;
         position: fixed;
-        top: 22%;
+        top: 23%;
         left: 23%;
         opacity: 0;
         background-color: transparent;
@@ -1044,7 +1001,7 @@ background-color: #EBE8E8;
     .cognition-text {
         width: 350px;
         right: 8%;
-        margin-top: 100px;
+        margin-top: -250px;
         
     }
 
@@ -1064,9 +1021,9 @@ background-color: #EBE8E8;
 .door-11 {
     width: 100%;
     top: 20%;
+    left: 0;
     z-index: 1;
     position: absolute; /* 确保定位 */
-    animation: slideToLeft 2s ease-in-out forwards; /* 动画效果 */
 }
 
 /* 定义动画 */
@@ -1088,8 +1045,8 @@ background-color: #EBE8E8;
 .door-19{
     width: 23%;
     bottom: 0%;
+    left: 76%;
     position: absolute; /* 确保定位 */
-    animation: slideToRight 2s ease-in-out forwards; /* 动画效果 */
 }
 
 /* 定义动画 */
@@ -1114,10 +1071,9 @@ background-color: #EBE8E8;
     width: 20%;
     rotate: 270deg;
     bottom: 41%;
-    left: -10%;
+    left: 0;
     z-index: 2;
     position: absolute; /* 确保定位 */
-    animation: slideToLeft 2s ease-in-out forwards; /* 动画效果 */
 }
 
 .door-7{
@@ -1129,11 +1085,10 @@ background-color: #EBE8E8;
 
 .door-17{
     width: 30%;
-    left: 60%;
-    top: 36%;
+    left: 69%; /* 终点 */
+    top: 35%;
     z-index: 3;
     position: absolute; /* 确保定位 */
-    animation: slideToRight1 2s ease-in-out forwards; /* 动画效果 */
 }
 
 @keyframes slideToRight1 {
@@ -1156,11 +1111,10 @@ background-color: #EBE8E8;
 
 .door-18{
     width: 12%;
-    left: 45%;
+    left: 35%;
     top: 43%;
     z-index: -5;
     position: absolute; /* 确保定位 */
-    animation: slideToRight2 2s ease-in-out forwards; /* 动画效果 */
 }
 
 @keyframes slideToRight2 {
@@ -1182,10 +1136,9 @@ background-color: #EBE8E8;
 .door-12{
     width: 12%;
     top: 50%;
-    left: 62%;
+    left: 85%;
     z-index: 5;
     position: absolute; /* 确保定位 */
-    animation: slideToRight2 2s ease-in-out forwards; /* 动画效果 */
 }
 
 @keyframes slideToRight2 {
@@ -1207,10 +1160,9 @@ background-color: #EBE8E8;
 .door-13{
     width: 25%;
     top: 42%;
-    left: 25%;
+    left: 0;
     z-index: 3;
     position: absolute; /* 确保定位 */
-    animation: slideToLeft 2s ease-in-out forwards; /* 动画效果 */
 }
 
 .door-4{
@@ -1222,9 +1174,8 @@ background-color: #EBE8E8;
 .door-14{
     width: 45%;
     top: 30%;
-    left: -15%;
+    left: 0;
     position: absolute; /* 确保定位 */
-    animation: slideToLeft2 2s ease-in-out forwards; /* 动画效果 */
 }
 
 @keyframes slideToLeft2 {
@@ -1245,9 +1196,8 @@ background-color: #EBE8E8;
 .door-15{
     width: 15%;
     top: 50%;
-    left: 0%;
+    left: 20%;
     position: absolute; /* 确保定位 */
-    animation: slideToRight3 2s ease-in-out forwards; /* 动画效果 */
 }
 
 @keyframes slideToRight3 {
@@ -1284,7 +1234,6 @@ background-color: #EBE8E8;
     left: 15%;
     z-index: -1;
     top: 0;
-    animation: colorChange 3s ease-in-out forwards;
 }
 
 @keyframes colorChange {
@@ -1302,7 +1251,7 @@ background-color: #EBE8E8;
     right: 15%;
     overflow-y: auto;
     height: 100vh;
-    margin-top: 420px;
+    margin-top: 250px;
 }
 
 
@@ -1326,85 +1275,9 @@ background-color: #EBE8E8;
 .floating-img {
     width: 120%; 
     left: 80%;
+    overflow-y: auto;
 }
 
-@keyframes floatRandom {
-    0% {
-        transform: translateX(-90%) translateY(10%); /* Start at the bottom-left corner */
-    }
-    5% {
-        transform: translateX(-85%) translateY(0%); /* Slightly move up */
-    }
-    10% {
-        transform: translateX(-75%) translateY(-10%); /* Move upward and inward */
-    }
-    15% {
-        transform: translateX(-80%) translateY(-25%); /* Continue moving upward */
-    }
-    20% {
-        transform: translateX(-75%) translateY(-40%); /* Higher position */
-    }
-    25% {
-        transform: translateX(-65%) translateY(-55%); /* Center alignment */
-    }
-    30% {
-        transform: translateX(-55%) translateY(-70%); /* Move further up */
-    }
-    33% {
-        transform: translateX(-50%) translateY(-80%); /* Peak position */
-    }
-    36% {
-        transform: translateX(-50%) translateY(-90%); /* Near the top */
-    }
-    39% {
-        transform: translateX(-49%) translateY(-100%); /* Reaching top */
-    }
-    42% {
-        transform: translateX(-46%) translateY(-110%); /* Slightly beyond view */
-    }
-    45% {
-        transform: translateX(-43%) translateY(-120%); /* Upward motion */
-    }
-    50% {
-        transform: translateX(-40%) translateY(-130%); /* Midway upward */
-    }
-    55% {
-        transform: translateX(-43%) translateY(-120%); /* Start descending */
-    }
-    58% {
-        transform: translateX(-46%) translateY(-110%); /* Gradually down */
-    }
-    62% {
-        transform: translateX(-49%) translateY(-100%); /* Move lower */
-    }
-    65% {
-        transform: translateX(-50%) translateY(-90%); /* Descending further */
-    }
-    68% {
-        transform: translateX(-50%) translateY(-80%); /* Near bottom */
-    }
-    70% {
-        transform: translateX(-55%) translateY(-75%); /* Shift inward */
-    }
-    75% {
-        transform: translateX(-65%) translateY(-60%); /* Continue downward */
-    }
-    80% {
-        transform: translateX(-75%) translateY(-45%); /* Lower position */
-    }
-    85% {
-        transform: translateX(-80%) translateY(-25%); /* Return to bottom area */
-    }
-    90% {
-        transform: translateX(-75%) translateY(-10%); /* Approaching bottom */
-    }
-    95% {
-        transform: translateX(-85%) translateY(0%); /* Near initial position */
-    }
-    100% {
-        transform: translateX(-90%) translateY(10%); /* Reset to start */
-    }
-}
 
 
 
@@ -1412,7 +1285,7 @@ background-color: #EBE8E8;
     position: absolute;
     width: 350px; 
     right: 8%;
-    margin-top: -220px;
+    margin-top: -290px;
     z-index: -10;
 }
 

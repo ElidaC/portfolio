@@ -35,8 +35,26 @@
         .cover{
             background: linear-gradient(to top, rgba(0,0,0) 55%, rgba(235, 232, 232, 0) 100%);
         }
+
+        @media screen and (max-width: 430px) {
+
+            .emotion-text{
+                z-index: -50;
+            }
+            .color{
+                background-color: black;
+            }
+            .memory-img{
+        right: 0px;
+        width: 90%;
+        height: auto;
+        max-height: 400px;
+    }
+        }
     </style>
 
+
+<div class="color"></div>
 <div class="title">
     <h1>I Feel...</h1>
     <br>
@@ -80,35 +98,35 @@
 </div>
 
 <div class="timeline">
-    <a href="memory.html">
+    <a href="one.html">
         <div class="ichi" style="background-color: #FF00C8;">
             <h2 style="color: #e8e8e8; position: absolute; bottom: -13px; left: 20px;">1</h2>
             <img src="memory/1-1.png" >
         </div>
     </a>
     <br>
-    <a href="cognition.html">
+    <a href="two.html">
         <div class="ni" style="background-color: #FF00C8;">
             <h2 style="color: #e8e8e8; position: absolute; bottom: -13px; left: 20px;">2</h2>
             <img src="cognition/2-7.png" style=" top: -30px; width: 60px; left: -20px;">
         </div>
     </a>
     <br>
-    <a href="language.html">
+    <a href="three.html">
         <div class="san" style="background-color: #FF00C8;">
             <h2 style="color: #e8e8e8; position: absolute; bottom: -13px; left: 20px;">3</h2>
             <img src="language/3-7.png" style="left: -20px; ">
         </div>
     </a>
     <br>
-    <a href="culture.html">
+    <a href="four.html">
         <div class="yon" style="background-color: #FF00C8;">
             <h2 style="color: #e8e8e8; position: absolute; bottom: -13px; left: 20px;">4</h2>
             <img src="culture/4-6.png" style="width: 50px; left: -20px;">
         </div>
     </a>
     <br>
-    <a href="emotion.html">
+    <a href="five.html">
         <div class="go" style="background-color: #FF00C8;">
             <h2 style="color: #e8e8e8; position: absolute; bottom: -13px; left: 20px;">5</h2>
             <img src="emotion/5-5.png" style="display: block; width: 60px; left: -20px; top: -20px;">
@@ -116,8 +134,12 @@
     </a>
 </div>
 
-<div class="frame">
-    <img src="emotion/long.png" width="60%" class="floating-img">
+<div class="memory-container" id="emotion">
+    <img src="emotion/shuffle-02.png" width="40%" class="memory-img">
+    <img src="emotion/shuffle-03.png" width="40%" class="memory-img">
+    <img src="emotion/shuffle-04.png" width="40%" class="memory-img">
+    <img src="emotion/shuffle-05.png" width="40%" class="memory-img">
+    <img src="emotion/shuffle-06.png" width="40%" class="memory-img">
 </div>
 
 <div class="emotion-text" style="color: #e8e8e8;">
