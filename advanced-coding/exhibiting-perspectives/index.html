@@ -11,13 +11,28 @@
 </head>
 <body>
 
-    <img src="title.png" id="image">
+  <img src="title.png" id="image" style="cursor: pointer;">
+  <div id="overlay" class="overlay" style="display: none;">
+    <div class="overlay-content">
+      <span id="close-button" class="close-button">&times;</span>
+      <h2>Design and art are 
+        present in every aspect 
+        of people's lives. In the 
+        era of AI, does it pose 
+        a threat to the creative 
+        industry? What 
+        assistance and impact 
+        can AI bring to 
+        creative professionals?</h2>
+    </div>
+  </div>
+  
     
     <div class="container">
     <div class="dropdown">
-        <label for="jobs"><h2>Jobs: &nbsp</h2></label>
+        <label for="jobs"><h2>Job Selector: &nbsp</h2></label>
         <select id="jobs">
-          <option value="">Select a job</option>
+          <option value="">What's your job?</option>
           <option value="Graphic and Visual Design">Graphic and Visual Design</option>
           <option value="Product and Industrial Design">Product and Industrial Design</option>
           <option value="Fine Arts">Fine Arts</option>
@@ -30,14 +45,14 @@
           <option value="Industries Employing Artists and Designers">Industries Employing Artists and Designers</option>
         </select>
 
-        <label for="choice"><h2>Choice: &nbsp</h2></label>
+        <label for="choice"><h2>Pros/Cons: &nbsp</h2></label>
         <select id="choice">
-          <option value="">Select a choice</option>
+          <option value="">What's your choice?</option>
           <option value="Pros">Pros</option>
           <option value="Cons">Cons</option>
         </select>
 
-        <input type="text" id="text-input" placeholder="&nbsp Why?">
+        <input type="text" id="text-input" placeholder="&nbsp What's the reason of your choice?">
         <button id="set-button">⏏︎</button>
       </div>
 

@@ -22,21 +22,14 @@ const quoteDisplay = document.getElementById("quote-display");
 
 const circleContainer = document.querySelector(".circle-list");
 
-let lastSubmittedKey = null; // Track the last submitted key
-
 // SUBMIT DATA
 setButton.onclick = function () {
   const job = jobsDropdown.value; // Selected job
   const choice = choiceDropdown.value; // Selected choice (Pros/Cons)
   const quote = inputField.value.trim(); // Input text
 
-  // Generate a unique key for the entry
-  const newEntryKey = ref.push().key; 
-  lastSubmittedKey = newEntryKey; // Save the unique key for the last entry
-
-  // Save the entry with the generated key
-  ref.child(newEntryKey).set({ job, choice, quote: quote || "" });
-
+  // Allow submission even if input is empty
+  ref.push({ job, choice, quote: quote || "" });
   inputField.value = ""; // Clear input field
 };
 
@@ -61,46 +54,11 @@ ref.on("value", (snapshot) => {
     circle.classList.add("circle", choice.toLowerCase()); // Add class based on choice (pros/cons)
     circle.dataset.quote = quote; // Attach quote to the circle
 
-    // Add "P" or "C" text only for the last submitted circle
-    if (key === lastSubmittedKey) {
-      const text = document.createElement("span");
-      text.textContent = choice === "Pros" ? "P" : choice === "Cons" ? "C" : "";
-      text.style.cssText = `
-        color: white;
-        font-size: 19px;
-        font-weight: bold;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-      `;
-      circle.appendChild(text);
-    }
-
     // Adjust size and transparency for empty input
     if (!quote) {
       circle.style.width = "20px";
       circle.style.height = "20px";
-      circle.style.opacity = "0.2";
-
-      // Prevent hover events for circles without a quote
-      circle.addEventListener("mouseenter", () => {});
-      circle.addEventListener("mouseleave", () => {});
-    } else {
-      // Enable hover events for circles with a quote
-      circle.addEventListener("mouseenter", (e) => {
-        const rect = e.target.getBoundingClientRect(); // Get the circle's position
-        quoteDisplay.style.display = "block";
-        quoteDisplay.style.left = `${rect.left}px`; // Position based on circle's X position
-        quoteDisplay.style.top = `${rect.top - 50}px`; // Position slightly above the circle
-        quoteDisplay.textContent = quote; // Set quote text
-        quoteDisplay.style.opacity = "1"; // Smooth appearance
-      });
-
-      circle.addEventListener("mouseleave", () => {
-        quoteDisplay.style.display = "none";
-        quoteDisplay.style.opacity = "0"; // Smooth disappearance
-      });
+      circle.style.opacity = "0.5";
     }
 
     // Randomize circle position
@@ -114,6 +72,21 @@ ref.on("value", (snapshot) => {
     }
 
     totalCircles++;
+
+    // Circle hover events
+    circle.addEventListener("mouseenter", (e) => {
+      const rect = e.target.getBoundingClientRect(); // Get the circle's position
+      quoteDisplay.style.display = "block";
+      quoteDisplay.style.left = `${rect.left}px`; // Position based on circle's X position
+      quoteDisplay.style.top = `${rect.top - 50}px`; // Position slightly above the circle
+      quoteDisplay.textContent = quote || "No quote provided."; // Set quote text
+      quoteDisplay.style.opacity = "1"; // Smooth appearance
+    });
+
+    circle.addEventListener("mouseleave", () => {
+      quoteDisplay.style.display = "none";
+      quoteDisplay.style.opacity = "0"; // Smooth disappearance
+    });
   }
 
   // Resize circles based on total number
@@ -126,31 +99,5 @@ ref.on("value", (snapshot) => {
       circle.style.width = `${newSize}px`;
       circle.style.height = `${newSize}px`;
     });
-  }
-});
-
-
-
-
-
-
-const image = document.getElementById("image");
-const overlay = document.getElementById("overlay");
-const closeButton = document.getElementById("close-button");
-
-// Show overlay on image click
-image.addEventListener("click", () => {
-  overlay.style.display = "flex"; // Show overlay
-});
-
-// Hide overlay on close button click
-closeButton.addEventListener("click", () => {
-  overlay.style.display = "none"; // Hide overlay
-});
-
-// Hide overlay when clicking outside content
-overlay.addEventListener("click", (e) => {
-  if (e.target === overlay) {
-    overlay.style.display = "none"; // Hide overlay
   }
 });

@@ -9,8 +9,8 @@ html {
 
 #image{
     position: absolute;
-    width: 20%;
-    right: 2%;
+    width: 17%;
+    right: 1%;
     top: 2%;
 }
 
@@ -24,7 +24,7 @@ h1 {
 
 h2 {
     font-weight: 500;
-    font-size: 20px;
+    font-size: 19px;
 }
 
 p {
@@ -32,7 +32,7 @@ p {
 }
 
 .container {
-    position: absolute;
+    position: sticky;
     top: 3%;
     display: flex;
     width: 90%;
@@ -45,7 +45,7 @@ p {
     align-items: center;    
     gap: 5px;  
     position: absolute;
-    left: 2%;         
+    left: 1%;         
 }
 
 .dropdown select {
@@ -54,11 +54,13 @@ p {
     border-radius: 5px;
 }
 
+
+
 select, input, button {
     background-color: transparent;
     border: 1px solid rgb(255, 0, 200);      
     color: white;               
-    font-size: 15px;              
+    font-size: 13.5px;              
     padding: 5px;               
     border-radius: 5px;  
     font-family: "Poltawski Nowy", serif;
@@ -69,6 +71,7 @@ select, input, button {
 
 input {
     height: 22px;
+    width: 250px;
 }
 
 button {
@@ -147,10 +150,11 @@ button:hover {
 
 
 .circle {
-    width: 15px;
-    height: 15px;
+    width: 30px;
+    height: 30px;
     border-radius: 50%;
     margin: 2px;
+    opacity: 0.7;
     cursor: pointer;
 }
 
@@ -184,3 +188,42 @@ button:hover {
     transition: opacity 0.2s ease-in-out; 
 }
 
+
+
+
+/* Overlay background */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(22, 22, 22, 0.8); /* Semi-transparent background */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+  
+  /* Overlay content */
+  .overlay-content {
+    width: 35%;
+    background: rgb(255, 0, 200);
+    color: #000;
+    padding: 40px;
+    border-radius: 8px;
+    text-align: center;
+    position: relative;
+  }
+  
+  /* Close button */
+  .close-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px;
+    color: black;
+    cursor: pointer;
+    opacity: 0;
+  }
+  
