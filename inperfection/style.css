@@ -1,0 +1,460 @@
+:root{
+    --c-bg:#DEDEDE;          /* 背景基础（不直接用灰，作为混色参考） */
+    --c-a:#569CD6;           /* 蓝 */
+    --c-b:#9CDCFE;           /* 青蓝 */
+    --c-c:#FF8A5A;           /* 橙 */
+    --c-d:#FFA6D8;           /* 粉 */
+    --c-e:#5D864A;           /* 绿 */
+    --bit-alpha: .14;        /* 字符透明度基准 */
+    --bit-size: 14px;        /* 字号 */
+  }
+
+  .nav-home {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding: 50px 15px;
+    background: black;          
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    z-index: 1000;               
+  }
+  
+  /* hover 动画：变长、变色 */
+  .nav-home:hover {
+    padding: 50px 30px;      
+    background: #569CD6;         
+    letter-spacing: 1px;          
+  }
+
+  .nav-img {
+    position: fixed;
+    width: 100%;
+    height: 20%;
+    z-index: 950;
+    top: -12%;
+  }
+
+  .rec {
+    position: fixed;
+    top: 0;
+    height: 30%;
+    width: 100%;
+    background: linear-gradient(to bottom, rgba(255,255,255,1) 20%, rgba(255,255,255,0) 100%);
+    z-index: 900;
+}
+  
+  .nav-img img {
+    position: absolute;
+  }
+
+  
+  .bar {
+    width: 100%;
+    height: 289px;
+    left: 0px;
+    top: 868px;
+    position: absolute;
+    background: #DEDEDE;
+  
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  
+    overflow-x: auto;    
+    overflow-y: hidden;
+    white-space: nowrap;  
+    scroll-behavior: smooth;
+  }
+  
+  .bar img {
+    height: 100%;   
+    width: auto;
+
+  }
+
+  .photo-card1 {
+    margin: 0 10px;
+    flex: 0 0 auto; /* 横向滚动不压缩 */
+    text-align: center;
+  }
+  
+  .photo-wrap1 {
+    position: relative;
+    display: inline-block;
+  }
+  
+  .photo-wrap1 img,
+  .photo-wrap1 video {
+    height: 250px !important;  /* 保持原大小，改这里调整缩略图尺寸 */
+    width: auto;
+    display: block;
+    object-fit: cover;
+    border-radius: 6px;
+  }
+  
+  .overlay1 {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    color: #fff;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 10px;
+    transition: opacity 0.25s ease;
+    border-radius: 6px;
+    text-align: center;
+  }
+  
+  .photo-wrap1:hover .overlay1 {
+    opacity: 1;
+  }
+  
+  .overlay1 a {
+    color: #569CD6;
+    text-decoration: underline;
+    font-weight: bold;
+  }
+
+  .overlay1 a{ color: #9CDCFE; border: 1px solid #FFA6D8;  text-decoration: underline; font-weight: 400; padding: 4px 8px;}
+
+.photo-card{
+    margin: 0 10px;
+    flex: 0 0 auto;    
+    text-align: center;
+  }
+  .photo-wrap{
+    position: relative;
+    margin-top: -100px;
+    display: inline-block;
+  }
+  .photo-wrap img,
+.photo-wrap video{
+  max-height: 380px;    
+  width: auto;       
+  height: auto;       
+  object-fit: contain;   
+  display: block;
+  border-radius: 6px;
+}
+  .overlay{
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.6);
+    color: #dedede;
+    opacity: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    padding: 10px;
+    border-radius: 6px;
+    transition: opacity .25s ease;
+    text-align: center;
+  }
+  .photo-wrap:hover .overlay{ opacity: 1; }
+  .overlay a{ color: #9CDCFE; border: 1px solid #FFA6D8;  text-decoration: underline; font-weight: 400; padding: 4px 8px;}
+
+
+  /* 三组叠放布局：宽屏 3 列，窄屏自适应 */
+.stacks-grid{
+    margin-top: 25vh;                /* 让出你顶部的 nav/rec 区域，可微调 */
+    margin-bottom: 18vh;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(240px, 1fr));
+    gap: 6vw;
+    place-items: center;
+    z-index: 1;
+    position: relative;
+  }
+  @media (max-width: 900px){
+    .stacks-grid{ grid-template-columns: 1fr; gap: 36px; margin-top: 32vh; }
+  }
+  
+/* ====== stack 区域 ====== */
+.stack-one {
+    position: relative;
+    margin: 15vh auto 20vh;
+    width: min(900px, 86vw);
+    aspect-ratio: 4/3;
+  }
+  
+  /* ====== 基础拖拽图片样式 ====== */
+  .stack-one .draggable {
+    position: absolute;
+    width: auto;                /* 保持图片本来比例 */
+    max-width: min(380px, 42vw);/* 限制最大宽度，避免太大 */
+    height: auto;
+    border-radius: 10px;
+    user-select: none;
+    cursor: grab;
+    transition: filter .2s ease;
+    /* 旋转由变量控制 */
+    --base-rot: 0deg;
+    --rot: 0deg;
+    transform: rotate(var(--base-rot)) rotate(var(--rot));
+  }
+  .stack-one .draggable:active {
+    cursor: grabbing;
+  }
+  
+  /* ====== 三层叠放 ====== */
+  .layer-back  { z-index: 1; --base-rot: -6deg; filter: brightness(.96) saturate(.9); }
+  .layer-mid   { z-index: 2; --base-rot:  4deg; opacity:.9; }
+  .layer-front { z-index: 3; --base-rot:  0deg; opacity:0.7;}
+  
+  /* ====== overlay 信息层 ====== */
+  .photo-wrap { position: relative; display: block; }
+  .photo-wrap img {
+    display:block;
+    width:100%;
+    height:auto;
+    border-radius:10px;
+  }
+  
+  .overlay {
+    position:absolute;
+    inset:0;
+    border-radius:10px;
+    color:#fff;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:2px;
+    padding:10px;
+    opacity:0;
+    transition:opacity .25s ease;
+    text-align:center;
+  }
+  .photo-wrap:hover .overlay { opacity:1; }
+  
+  /* Source 样式 */
+  .overlay .source-link {
+    color:#5D864A;                       /* 文字颜色 */
+    border:2px solid #FFA6D8;            /* 粉色边框 */
+    padding:6px 12px;
+    border-radius:6px;
+    text-decoration:none;
+    font-weight:600;
+    background:transparent;
+    transition:all .2s ease;
+  }
+  .overlay .source-link:hover {
+    background:rgba(255,166,216,.15);
+    transform:translateY(-1px);
+  }
+
+  /* overlay 仅展示，不拦截鼠标，里面的链接仍可点击 */
+.overlay { pointer-events: none; }
+.overlay a, .overlay .source-link { pointer-events: auto; }
+
+/* 旋转手柄的层级要高于图片本身 */
+.ctrl-rotate { z-index: 1000; }
+  
+  /* ====== 旋转手柄样式 ====== */
+  .ctrl-handle {
+    position:absolute;
+    width:20px;
+    height:20px;
+    border-radius:50%;
+    border:2px solid #569CD6;
+    background:#fff;
+    cursor:grab;
+    box-shadow:0 2px 6px rgba(0,0,0,.2);
+    z-index:5;
+  }
+  .ctrl-rotate {
+    top:-12px;
+    right:-12px;
+  }
+  .ctrl-handle:active { cursor:grabbing; }
+
+  .shuffle-btn{
+    position: fixed;
+    right: 0%;
+    top: 12%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    font-family: "Fira Code", monospace;
+    font-weight: 600;
+    border-radius: 999px;
+    border: 2px solid #569CD6;
+    background: white;
+    color: #569CD6;
+    cursor: pointer;
+    z-index: 2000;
+    transition: all .2s ease;
+  }
+  .shuffle-btn:hover{ background:#569CD6; color:#fff; }
+
+
+
+/* 右上角 filter */
+.filter-panel2{
+    position: fixed; top:9%; right:2%; z-index:2000;
+    background: rgba(255,255,255,.9);
+    border:1px solid #569CD6; border-radius:10px;
+    padding:8px 10px; font-family:"Fira Code", monospace;
+  }
+  .filter-panel2 select{
+    font-family: inherit; border:1px solid #569CD6; border-radius:6px; padding:4px 8px;
+  }
+  
+  /* 网格：默认 5 列，可自适应 */
+  .grid2{
+    --gap: 16px;
+    --cell: 220px;               /* 🔧 每个格子边长，改这里就行 */
+    width: min(1400px, 92vw);
+    margin: 180px auto 80px;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: var(--gap);
+  }
+  @media (max-width: 1200px){ .grid2{ grid-template-columns: repeat(4, 1fr); } }
+  @media (max-width: 900px) { .grid2{ grid-template-columns: repeat(3, 1fr); } }
+  @media (max-width: 640px) { .grid2{ grid-template-columns: repeat(2, 1fr); --cell: 180px; } }
+  
+  /* 单元格卡片 -> 固定正方形 */
+  .card2{ width: 100%; aspect-ratio: 1 / 1; position: relative; }
+  
+  /* 包裹层，用来放“可拖动平移的图面”和 overlay */
+  .photo-wrap2{
+    position: relative;
+    width: 100%; height: 100%;
+    border-radius: 10px; overflow: hidden;   /* 裁切边缘 */
+    box-shadow: 0 8px 18px rgba(0,0,0,.08);
+  }
+  
+  /* 可拖动的“图面”：用背景图做 cover，这样最短边=格子边，且能平移看全部 */
+  .pan-surface2{
+    position: absolute; inset: 0;
+    background-size: cover;                  /* 保证最短边贴合格子边 */
+    background-position: 50% 50%;            /* 初始居中 */
+    background-repeat: no-repeat;
+    cursor: grab;
+  }
+  .pan-surface2:active{ cursor: grabbing; }
+  
+  /* Hover overlay */
+  .overlay2{
+    position:absolute; inset:0; border-radius:10px;
+    background: rgba(0,0,0,.6);
+    color:#fff;
+    display:flex; flex-direction:column; justify-content:center; align-items:center;
+    gap:6px; padding:10px; opacity:0; transition:opacity .25s ease; text-align:center;
+    pointer-events: none;   /* 不挡拖拽 */
+  }
+  .photo-wrap2:hover .overlay2{ opacity:1; }
+  
+  /* Source（绿色字 + 粉色边框） */
+  .overlay2 .source-link{
+    color:#9CDCFE; border:2px solid #FFA6D8; padding:6px 12px;
+    border-radius:6px; text-decoration:none; font-weight:600;
+    background:transparent; transition:all .2s ease; pointer-events: auto;
+  }
+  .overlay2 .source-link:hover{ background:rgba(255,166,216,.15); transform:translateY(-1px); }
+
+  
+
+  *{box-sizing:border-box}
+  html,body{height:100%}
+
+  body{
+    font-family: "Fira Code", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+  }
+  
+  .bg, .tint, .noise{position:fixed;inset:0;pointer-events:none}
+  
+  .bg{
+    display:grid;
+    grid-template-columns:repeat(auto-fill, minmax(16px,1fr));
+    align-content:start;
+    opacity:.7;
+  }
+
+  .blobs {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+  }
+  
+  .blob {
+    position: absolute;
+    pointer-events: auto;
+    animation: breathe var(--dur, 5s) ease-in-out var(--delay, 0s) infinite reverse;
+    transition: outline-color .3s ease;
+  }
+  
+  .blob:hover,
+  .blob.frozen {
+    animation-play-state: paused;
+    outline: 1px solid color-mix(in oklab, var(--hi, var(--c-a)) 70%, white 30%);
+  }
+  
+  @keyframes breathe {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.06) translate(var(--dx,6px), var(--dy,-4px)); }
+    100% { transform: scale(1); }
+  }
+
+  
+
+  .free-card3 {
+    position: absolute;
+  }
+  
+  .photo-wrap3 {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  
+  .box-img3 {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;   /* 保持比例完整显示 box.png */
+    display: block;
+  }
+  
+  /* overlay 层 */
+  .overlay3 {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,.65);
+    color: #DEDEDE;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity .25s ease;
+    gap: 6px;
+    text-align: center;
+  }
+  .photo-wrap3:hover .overlay3 { opacity: 1; }
+  
+  /* Source 链接样式 */
+  .source-link3 {
+    color:#FFA6D8;
+    border:2px solid #5D864A;
+    padding:6px 48px;
+    text-decoration:underline;
+    font-weight:600;
+    background:#5D864A;
+    transition:all .2s ease;
+  }
+  .source-link3:hover {
+    background:rgba(255,166,216,.15);
+    transform:translateY(-1px);
+  }
