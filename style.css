@@ -5,3 +5,295 @@ h1{
     font-size: large;
 }
 
+.link{
+    position: absolute;
+    bottom: 0;
+    opacity: 0;
+}
+
+
+body {
+  cursor: none;
+  margin: 0;
+  display: flex;
+  background-color: #fff;
+}
+  
+  
+body a {
+  border-bottom: 2px solid #fff;
+  padding: 10px 0;
+  margin-top: 25px;
+}
+
+body .cursor {
+    pointer-events: none; /* 确保光标不会阻止其他交互 */
+
+  }
+
+
+body .cursor__ball {
+  position: absolute;
+  top: 0;
+  left: 0;
+  mix-blend-mode: difference;
+  z-index: 1000;
+}
+
+body .cursor__ball circle {
+  fill: #f7f8fa;
+}
+
+
+h3{
+    font-family: "epilogue", sans-serif;
+    font-weight: 100;
+    font-style: italic;
+    font-size: xx-large;
+}
+
+h4{
+    font-family: "ff-seria", sans-serif;
+    font-weight: 500;
+    font-style: italic;
+    font-size: large;
+}
+
+.title{
+    display: flex;
+    z-index: 200;
+}
+
+#left{
+    position: fixed;
+    left: 3%;
+}
+
+#left:hover{
+    cursor: pointer;
+}
+
+#right{
+    position: fixed;
+    right: 3%;
+    display: flex;
+    gap: 30px;
+    color: #2050F2;
+}
+
+#right a{
+    color: #2050F2;
+}
+
+#button{
+    border:1px solid #2050F2; /* 设置边框为黑色，2像素宽 */
+    padding: 3px 10px; 
+    border-radius: 20px;
+    transition: transform 0.2s;
+}
+
+#button:hover{
+    background-color: #2050F2;
+    color: #fff;
+    transition: transform 0.2s;
+}
+
+#button a:hover{
+    color: #fff;
+}
+
+
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+
+.container {
+    position: absolute;
+    padding: 75px 0;
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  
+  .gallery-wrap {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 70vh;
+  }
+  
+  .item {
+    margin-top: 100px;
+    flex: 1;
+    height: 100%;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    transition: flex 0.8s ease, filter 0.8s ease;
+    filter: grayscale(1) blur(5px); /* 初始蓝白色调 + 模糊效果 */
+  }
+  
+  .item:hover {
+    flex: 7;
+    filter: grayscale(0) blur(0px); /* hover 时恢复正常颜色并去除模糊 */
+  }
+  
+  .item-1 {
+    background-image: url(cover/1.png);
+  }
+  
+  .item-2 {
+    background-image: url(cover/2.jpg);
+  }
+  
+  .item-3 {
+    background-image: url(cover/3.JPG);
+  }
+  
+  .item-4 {
+    background-image: url(cover/4.jpg);
+  }
+  
+  .item-5 {
+    background-image: url(cover/5.png);
+  }
+  
+  #line {
+    position: fixed; 
+    top: 70%; 
+    left: 50%; 
+    width: 0.5px; 
+    height: 300px;
+    background-color: black; 
+    z-index: -1;
+  }
+
+
+  .category {
+    position: absolute;
+    width: 100%;
+    top: 110%;
+    background-color: #fff;
+  }
+
+
+.category h1{
+    font-size: xxx-large;
+    font-family: "epilogue", sans-serif;
+    font-weight: 500;
+    font-style: normal;
+    color: #2050F2;
+    margin-left: 250px;
+}
+
+.category h1:hover{
+    font-weight: 700;
+}
+  
+#one:hover::after {
+    background-image: url(cover/one.png); 
+    opacity: 1; 
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 70%;
+    transform: translateX(-50%);
+    rotate: 30deg;
+    width: 130px; 
+    height: 130px; 
+    background-size: 130px 130px; 
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #2050F2; 
+    border-style: dashed;
+    padding: 8px; 
+    border-style: dotted;
+    transition: opacity 0.3s ease; 
+  }
+  
+  #two:hover::after {
+    background-image: url(cover/two.png); 
+    opacity: 1; 
+    content: "";
+    position: absolute;
+    top: 15%;
+    left: 60%;
+    transform: translateX(-50%);
+    rotate: 10deg;
+    width: 130px; 
+    height: 130px; 
+    background-size: 130px 130px; 
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #2050F2; 
+    border-style: dotted;
+    padding: 8px; 
+    box-sizing: content-box;
+    transition: opacity 0.3s ease; 
+  }
+  
+  #three:hover::after {
+    background-image: url(cover/three.png); 
+    opacity: 1; 
+    content: "";
+    position: absolute;
+    top: 30%;
+    left: 65%;
+    transform: translateX(-50%);
+    rotate: -5deg;
+    width: 130px; 
+    height: 130px; 
+    background-size: 130px 130px; 
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #2050F2; 
+    border-style: dotted;
+    padding: 8px; 
+    box-sizing: content-box;
+    transition: opacity 0.3s ease; 
+  }
+  
+  #four:hover::after {
+    background-image: url(cover/four.png); 
+    opacity: 1; 
+    content: "";
+    position: absolute;
+    top: 55%;
+    left: 67%;
+    transform: translateX(-50%);
+    rotate: 20deg;
+    width: 130px; 
+    height: 130px; 
+    background-size: 130px 130px; 
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #2050F2; 
+    border-style: dotted;
+    padding: 8px; 
+    box-sizing: content-box;
+    transition: opacity 0.3s ease; 
+  }
+  
+  #five:hover::after {
+    background-image: url(cover/five.jpg); 
+    opacity: 1; 
+    content: "";
+    position: absolute;
+    top: 60%;
+    left: 60%;
+    transform: translateX(-50%);
+    rotate: -10deg;
+    width: 130px; 
+    height: 130px; 
+    background-size: 130px 130px; 
+    background-repeat: no-repeat;
+    background-position: center;
+    border: 1px solid #2050F2; 
+    border-style: dotted;
+    padding: 8px; 
+    box-sizing: content-box;
+    transition: opacity 0.3s ease; 
+  }
