@@ -1,0 +1,82 @@
+
+body {
+    cursor: none;
+    margin: 0;
+    display: flex;
+    background-color: #fff;
+  }
+    
+    
+  body a {
+    border-bottom: 2px solid #fff;
+    padding: 10px 0;
+    margin-top: 25px;
+  }
+  
+  body .cursor {
+      pointer-events: none; /* 确保光标不会阻止其他交互 */
+  
+    }
+  
+  
+  body .cursor__ball {
+    position: absolute;
+    top: 0;
+    left: 0;
+    mix-blend-mode: difference;
+    z-index: 1000;
+  }
+  
+  body .cursor__ball circle {
+    fill: #f7f8fa;
+  }
+  
+  
+  h3{
+      font-family: "epilogue", sans-serif;
+      font-weight: 100;
+      font-style: italic;
+      font-size: xx-large;
+  }
+  
+  h4{
+      font-family: "ff-seria", sans-serif;
+      font-weight: 500;
+      font-style: italic;
+      font-size: large;
+  }
+  
+  .title{
+      display: flex;
+      z-index: 200;
+  }
+  
+  #left{
+      position: fixed;
+      left: 3%;
+  }
+  
+  #left:hover{
+      cursor: pointer;
+  }
+  
+  #right{
+      position: fixed;
+      right: 3%;
+      display: flex;
+      gap: 30px;
+      color: #2050F2;
+  }
+  
+  #button{
+      border:1px solid #2050F2; /* 设置边框为黑色，2像素宽 */
+      padding: 3px 10px; 
+      border-radius: 20px;
+      transition: transform 0.2s;
+  }
+  
+  #button:hover{
+      background-color: #2050F2;
+      color: #fff;
+      transition: transform 0.2s;
+  }
