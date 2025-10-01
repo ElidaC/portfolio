@@ -288,3 +288,246 @@ const items2 = images.map(src => {
     const sel = document.getElementById('sortBy2');
     if (sel) sel.addEventListener('change', ()=> applyOrder2(sel.value));
   });
+
+
+
+
+
+
+
+
+
+  // === 只保留随机代码背景 (挂载到 #webpg) ===
+(function makeCodeBackground () {
+  const root = document.getElementById('webpg');  // << 目标容器
+  if (!root) return;
+
+  const palette = ['var(--c-a)','var(--c-b)','var(--c-c)','var(--c-d)','var(--c-e)'];
+  const TOKENS = [
+    ..."abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+    ..."(){}[]<>;:,.=+-*/!&|^%?_#@$",
+    ..."     ",
+  ];
+  const GLITCHES = ['¿', '§', 'Ø', '¶', '∆', '‚', '•', '≈', '«', '»', '¤'];
+
+  let intervalId = null;
+  let resizeTimer = null;
+
+  function randomToken(i) {
+    if (Math.random() < 0.10) return GLITCHES[i % GLITCHES.length];
+    return TOKENS[Math.floor(Math.random() * TOKENS.length)];
+  }
+
+  function makeSpan(char, i, cols) {
+    const span = document.createElement('span');
+    span.className = 'bit';
+    span.textContent = char;
+    const c = palette[Math.floor(Math.random() * palette.length)];
+    span.style.color = c;
+    span.style.opacity = (
+      Math.random()*0.5 + parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--bit-alpha'))
+    ).toFixed(2);
+    return span;
+  }
+
+  function populate(){
+    const bitSizeVar = getComputedStyle(document.documentElement).getPropertyValue('--bit-size').trim();
+    const bitSize = parseInt(bitSizeVar || '14', 10) || 14;
+
+    const charWidth  = bitSize;
+    const charHeight = Math.round(bitSize * 1.25);
+
+    const w = Math.max(1, Math.floor(root.clientWidth));
+    const h = Math.max(1, Math.floor(root.clientHeight));
+    const cols = Math.ceil(w / Math.max(8, charWidth));
+    const rows = Math.ceil(h / Math.max(8, charHeight)) + 2;
+
+    const htmlFrag = document.createDocumentFragment();
+    root.innerHTML = '';
+
+    for (let r = 0; r < rows; r++) {
+      let indent = ' '.repeat(Math.floor(Math.random()*8));
+      const special =
+        Math.random() < 0.08 ? '// TODO: fix me' :
+        (Math.random() < 0.06 ? 'function ' : '');
+
+      const prefixLen = Math.floor(cols * 0.2);
+      const line = (indent + special).padEnd(prefixLen, ' ');
+      const lineChars = line.split('');
+
+      for (let i = 0; i < lineChars.length && i < cols; i++) {
+        htmlFrag.appendChild(makeSpan(lineChars[i], r*cols + i, cols));
+      }
+      for (let c = lineChars.length; c < cols; c++) {
+        const ch = randomToken(r*cols + c);
+        htmlFrag.appendChild(makeSpan(ch, r*cols + c, cols));
+      }
+    }
+    root.appendChild(htmlFrag);
+  }
+
+  function onResize(){
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+      populate();
+    }, 120);
+  }
+
+  function stopTicker(){
+    if (intervalId) { clearInterval(intervalId); intervalId = null; }
+  }
+
+  function startRandom() {
+    root.classList.add('is-random');
+    root.innerHTML = '';
+    populate();
+
+    window.removeEventListener('resize', onResize);
+    window.addEventListener('resize', onResize);
+
+    stopTicker();
+    intervalId = setInterval(() => {
+      const bits = root.querySelectorAll('.bit');
+      if (!bits.length) return;
+      for (let k = 0; k < 40; k++) {
+        const idx = Math.floor(Math.random() * bits.length);
+        const el = bits[idx];
+        el.textContent = randomToken(idx);
+      }
+    }, 900);
+  }
+
+  // 初始进入随机代码模式
+  startRandom();
+
+  // 暴露全局控制
+  window.WebPG = {
+    showRandom: startRandom,
+    isRandom: () => true
+  };
+})();
+
+
+
+
+
+
+
+
+// 自定义下拉：把 #sortBy2 变成与 .filter-panel2 同风格的菜单
+(function buildCustomDropdown2(){
+  const panel = document.querySelector('.filter-panel2');
+  const sel   = document.getElementById('sortBy2');
+  if (!panel || !sel) return;
+
+  // 隐藏原生 select（保留语义与事件）
+  sel.style.position = 'absolute';
+  sel.style.opacity = '0';
+  sel.style.pointerEvents = 'none';
+  sel.tabIndex = -1;
+
+  // 容器
+  const wrap = document.createElement('div');
+  wrap.className = 'dropdown2';
+
+  // 触发按钮
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'dropdown2-btn';
+  btn.setAttribute('aria-haspopup', 'listbox');
+  btn.setAttribute('aria-expanded', 'false');
+
+  const curLabel = sel.options[sel.selectedIndex]?.text || 'Select';
+  btn.innerHTML = `
+    <span class="dropdown2-label">${curLabel}</span>
+    <span class="dropdown2-arrow">▾</span>
+  `;
+
+  // 列表
+  const list = document.createElement('ul');
+  list.className = 'dropdown2-list';
+  list.setAttribute('role', 'listbox');
+  list.tabIndex = -1;
+  list.hidden = true;
+
+  [...sel.options].forEach((opt, i) => {
+    const li = document.createElement('li');
+    li.className = 'dropdown2-item' + (opt.selected ? ' is-selected' : '');
+    li.setAttribute('role', 'option');
+    li.dataset.value = opt.value;
+    li.textContent = opt.text;
+    list.appendChild(li);
+  });
+
+  // 挂载
+  panel.appendChild(wrap);
+  wrap.appendChild(btn);
+  wrap.appendChild(list);
+
+  // 打开/关闭
+  let activeIndex = [...sel.options].findIndex(o => o.value === sel.value);
+
+  function highlight(idx){
+    const items = [...list.children];
+    items.forEach((li, i) => li.classList.toggle('is-active', i === idx));
+    // 简单对齐可见区域
+    list.scrollTop = Math.max(0, idx * 36 - 60);
+  }
+  function open(){
+    list.hidden = false;
+    btn.setAttribute('aria-expanded', 'true');
+    wrap.classList.add('open');
+    activeIndex = Math.max(0, [...sel.options].findIndex(o => o.value === sel.value));
+    highlight(activeIndex);
+    document.addEventListener('click', onDocClick);
+  }
+  function close(){
+    list.hidden = true;
+    btn.setAttribute('aria-expanded', 'false');
+    wrap.classList.remove('open');
+    document.removeEventListener('click', onDocClick);
+  }
+  function onDocClick(e){
+    if (!wrap.contains(e.target)) close();
+  }
+
+  function selectValue(val){
+    sel.value = val;
+    sel.dispatchEvent(new Event('change', { bubbles: true }));
+    btn.querySelector('.dropdown2-label').textContent =
+      [...sel.options].find(o => o.value === val)?.text || val;
+    [...list.children].forEach(li =>
+      li.classList.toggle('is-selected', li.dataset.value === val)
+    );
+  }
+
+  // 事件
+  btn.addEventListener('click', () => list.hidden ? open() : close());
+
+  list.addEventListener('click', (e) => {
+    const li = e.target.closest('.dropdown2-item');
+    if (!li) return;
+    selectValue(li.dataset.value);
+    close();
+  });
+
+  // 键盘可达性
+  btn.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault(); open(); list.focus();
+    }
+  });
+  list.addEventListener('keydown', (e) => {
+    const max = sel.options.length - 1;
+    if (e.key === 'Escape') { e.preventDefault(); close(); btn.focus(); return; }
+    if (e.key === 'ArrowDown') { e.preventDefault(); activeIndex = Math.min(max, activeIndex + 1); highlight(activeIndex); }
+    if (e.key === 'ArrowUp')   { e.preventDefault(); activeIndex = Math.max(0, activeIndex - 1);   highlight(activeIndex); }
+    if (e.key === 'Home')      { e.preventDefault(); activeIndex = 0;  highlight(activeIndex); }
+    if (e.key === 'End')       { e.preventDefault(); activeIndex = max; highlight(activeIndex); }
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      const li = list.children[activeIndex];
+      if (li){ selectValue(li.dataset.value); close(); btn.focus(); }
+    }
+  });
+})();

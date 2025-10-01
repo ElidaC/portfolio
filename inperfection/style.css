@@ -7,17 +7,70 @@
     --c-e:#5D864A;           /* 绿 */
     --bit-alpha: .14;        /* 字符透明度基准 */
     --bit-size: 14px;        /* 字号 */
+    --webpg-h: 20vh; 
   }
+
+/* 顶部“随机代码”背景条 */
+#webpg{
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: var(--webpg-h);         /* ← 用变量控制高度 */
+  pointer-events: none;
+  z-index: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20px,1fr));
+  align-content: start;
+  opacity: .9;
+
+  /* 从上到下淡出：1 → 0 */
+  -webkit-mask-image: linear-gradient(to bottom,
+                      rgba(0,0,0,1) 0%,
+                      rgba(0,0,0,.35) 60%,
+                      rgba(0,0,0,0) 100%);
+          mask-image: linear-gradient(to bottom,
+                      rgba(0,0,0,1) 0%,
+                      rgba(0,0,0,.35) 60%,
+                      rgba(0,0,0,0) 100%);
+}
+
+/* 可选：给正文让出空间，避免被 #webpg 盖住 */
+body{ padding-top: calc(var(--webpg-h) + 12px); }
+
+/* 响应式（可选）：小屏稍微矮一点，大屏更高 */
+@media (max-width: 768px){
+  :root{ --webpg-h: 16vh; }
+}
+@media (min-width: 1440px){
+  :root{ --webpg-h: 24vh; }
+}
+
+
+  /* 文本模式：细窄阅读栏（12% 宽） */
+.bg.is-text{
+  display:flex;
+  padding: clamp(6px, 4vw, 6px);
+}
+.bg-text{
+  width: 12vw;                 /* 🔧 你要的 12% 视口宽度 */
+  max-width: 12vw;             /* 防止被放大 */
+  font-family: "Fira Code", ui-monospace, Menlo, Consolas, monospace;
+  font-size: clamp(12px, 1.2vw, 16px);
+  line-height: 1.7;
+  word-break: break-word;
+}
+.bg-text p{ margin: 0 0 0.8em; }
 
   .nav-home {
     position: fixed;
-    top: 0px;
-    left: 0px;
+    top: -2px;
+    left: -5px;
     padding: 50px 15px;
     background: black;          
     color: white;
     text-decoration: none;
     font-weight: bold;
+    border-radius: 6px;
     transition: all 0.3s ease;
     z-index: 1000;               
   }
@@ -180,7 +233,9 @@
   
 /* ====== stack 区域 ====== */
 .stack-one {
-    position: relative;
+    position: absolute;
+    left: 10%;
+    top: 2%;
     margin: 15vh auto 20vh;
     width: min(900px, 86vw);
     aspect-ratio: 4/3;
@@ -300,16 +355,66 @@
 /* 右上角 filter */
 .filter-panel2{
     position: fixed; top:9%; right:2%; z-index:2000;
-    background: rgba(255,255,255,.9);
-    border:1px solid #569CD6; border-radius:10px;
     padding:8px 10px; font-family:"Fira Code", monospace;
   }
-  .filter-panel2 select{
-    font-family: inherit; border:1px solid #569CD6; border-radius:6px; padding:4px 8px;
+
+  .dropdown2{
+    position: relative;
+    min-width: 180px;
   }
+  .dropdown2-btn{
+    width: 100%;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 10px;
+    padding: 8px 12px;
+    font: inherit; color:#333; background: rgba(255,255,255,.95);
+    border:1.5px solid #569CD6; border-radius:8px;
+    box-shadow: 0 0 4px rgba(86,156,214,0.18) inset;
+    cursor: pointer;
+    transition: border-color .2s ease, box-shadow .2s ease, background .2s ease;
+  }
+  .dropdown2-btn:hover{
+    background:#fff;
+  }
+  .dropdown2-btn:focus{
+    outline: none;
+    border-color:#FF8A5A;
+    box-shadow: 0 0 0 2px rgba(255,138,90,.25);
+  }
+  .dropdown2-arrow{ color:#569CD6; font-size:12px; }
   
+  /* 展开列表 */
+  .dropdown2-list{
+    position: absolute; left:0; right:0; top: calc(100% + 6px);
+    max-height: 280px; overflow:auto;
+    background: rgba(255,255,255,.98);
+    border:1.5px solid #569CD6; border-radius:10px;
+    box-shadow: 0 8px 24px rgba(0,0,0,.12);
+    padding:6px; margin:0; list-style:none;
+    backdrop-filter: blur(2px);   /* 轻微磨砂（支持的浏览器） */
+    z-index: 10;
+  }
+  .dropdown2-item{
+    padding: 8px 10px;
+    border-radius: 6px;
+    color:#333;
+    cursor: pointer;
+    transition: background .15s ease, color .15s ease;
+  }
+  .dropdown2-item:hover,
+  .dropdown2-item.is-active{
+    background: #FFA6D8;
+  }
+  .dropdown2-item.is-selected{
+    background: #5D864A;
+    color:#FFA6D8;
+  }
+
   /* 网格：默认 5 列，可自适应 */
   .grid2{
+    position: absolute;
+    left: 3.9%;
+    top: 0;
     --gap: 16px;
     --cell: 220px;               /* 🔧 每个格子边长，改这里就行 */
     width: min(1400px, 92vw);
