@@ -3,17 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=League+Spartan:wght@100..900&family=Original+Surfer&family=Ribeye&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <title>FEET</title>
 </head>
 <body>
     <a href="im.html" class="nav-home"></a>
 
+    <style>
+        html, body {
+          margin: 0;
+          padding: 0;
+          height: 100%;
+          overflow: hidden; 
+        }
+
+        .memory {
+            position: fixed;
+            top: 22%;  
+            left: 15%;
+            width: 65%;
+            font-size: 25px; 
+            font-family: Fira Code; 
+            font-weight: 300; 
+            line-height: 27px;
+            background: transparent;
+            z-index: 150;
+}
+      </style>
+
     <div id="webpg"></div>
 
     <button id="shuffleBtn" class="shuffle-btn" type="button">Shuffle</button>
 
+    <div id="memory" class="memory"></div>
 
+    <div class="bar"
+    style="width: 100%; height: 350px; left: 0; top: 50%; position: absolute; background: #DEDEDE;">
+</div>
     <script src="feet.js"></script>
 </body>
 </html>
