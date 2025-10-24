@@ -86,7 +86,7 @@ h4{
 }
 
 #button{
-    border:1px solid #2050F2; /* 设置边框为黑色，2像素宽 */
+    border:1px solid #2050F2; 
     padding: 3px 10px; 
     border-radius: 20px;
     transition: transform 0.2s;

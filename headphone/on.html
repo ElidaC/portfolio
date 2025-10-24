@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="on.css">
+    <title>Listening As Isolation</title>
+</head>
+
+<body data-page="on" class="theme-on">
+  <a class="about-link" href="about.html">About</a>
+
+  <!-- 左侧纵向数轴（可拖动 + 粒度变化） -->
+  <aside class="v-axis">
+    <span class="v-label v-label--top">L</span>
+    <div class="v-track" role="slider" aria-label="Texture"
+         aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" tabindex="0">
+      <div class="v-thumb" data-draggable="true"></div>
+    </div>
+    <span class="v-label v-label--bottom">R</span>
+  </aside>
+
+  <main class="content">
+
+
+    <div class="h-axis" role="slider" aria-label="Power"
+         aria-valuemin="0" aria-valuemax="1" aria-valuenow="1"
+         tabindex="0">
+      <span class="h-label">ON</span>
+      <div class="h-track">
+        <div class="h-thumb" data-position="on"></div>
+      </div>
+      <span class="h-label">OFF</span>
+    </div>
+
+
+    <section id="blocks" aria-label="Reactive Blocks"></section>
+
+
+  <div class="blocks-layer">
+    <div class="block-soundable1 block soundable" style="--x:15%; --y:65%; --h:480px; --delay:0.1s;"></div>
+    <div class="block"          style="--x:25%; --y:29%; --h:120px; --delay:0.2s;"></div>
+    <div class="block-soundable2 block soundable" style="--x:50%; --y:15%; --h:180px; --delay:0.1s;"></div>
+    <div class="block"          style="--x:80%; --y:20%; --h:120px; --delay:0.2s;"></div>
+    <div class="block-soundable3 block soundable" style="--x:80%; --y:85%; --h:180px; --delay:0.1s;"></div>
+    <div class="block"          style="--x:90%; --y:60%; --h:120px; --delay:0.2s;"></div>
+</div>
+
+    <div id="texture" aria-hidden="true"></div>
+  </main>
+
+   
+    <script src="on.js"></script>
+</body>
+</html>

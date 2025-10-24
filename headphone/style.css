@@ -1,0 +1,122 @@
+/* 基础变量与主题 */
+:root{
+    --fg: #111;
+    --bg: #fff;
+    --line: #111;
+    --accent: #111;
+    --thumb-size: 18px;
+    --track-thickness: 2px;
+    --grain-opacity: 0;           /* 0~1，由 JS 在 on.html 动态更新 */
+    --title-rotate: -180deg;      /* 可根据你的设计微调 */
+  }
+  
+  .theme-on{
+    --fg: #fff;
+    --bg: #000;
+    --line: #fff;
+    --accent: #fff;
+  }
+  
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; }
+  body{
+    margin:0; color:var(--fg); background:var(--bg); font-family: ui-serif, Georgia, "Times New Roman", serif;
+  }
+  
+  /* 顶部 about */
+  .about-link{
+    position:fixed; top:16px; right:24px; text-decoration:none;
+    color:var(--fg); font-size:18px; letter-spacing:.02em;
+  }
+  .about-link.current{ pointer-events:none; opacity:.6; }
+  
+  /* 版式 */
+  .content{
+    height:100%;
+    display:grid;
+    place-items:center;
+    padding:2rem 4rem 3rem 6rem; /* 留出左轴空间 */
+  }
+  
+  .title{
+    position: absolute;
+    top: 5%;
+    left: 10%;
+    font-size: clamp(36px, 7vw, 120px);
+    font-weight: 400; margin:0;
+    user-select:none;
+  }
+
+  .title_{
+    position: absolute;
+    top: 20%;
+    left: 30%;
+    font-size: clamp(36px, 7vw, 120px);
+    font-weight: 400; margin:0;
+    transform: rotate(var(--title-rotate));
+    user-select:none;
+  }
+  
+  /* —— 左侧纵向数轴 —— */
+  .v-axis{
+    position:fixed; left:18px; top:0; bottom:0; width:40px;
+    display:flex; flex-direction:column; align-items:center; justify-content:center; gap:10px;
+  }
+  .v-label{ font-size:14px; user-select:none; }
+  .v-label--top{ position:absolute; top:3%; left:40%; }
+  .v-label--bottom{ position:absolute; bottom:3%; left:40%; }
+  .v-track{
+    position:relative; height: calc(100vh - 120px); width:2px; background:var(--line);
+    outline:none;
+  }
+  .v-thumb{
+    --y: 0%; /* 0 顶部 → 100 底部，由 JS 设定 */
+    position:absolute; left:50%; transform:translate(-50%, -50%);
+    top:calc(var(--y) * 1%); width:var(--thumb-size); height:var(--thumb-size);
+    border-radius:50%;
+    background: var(--accent);
+    /* grain 叠加层：粒度随 --grain-opacity 增强 */
+    box-shadow: 0 0 0 2px var(--bg) inset;
+  }
+  .v-thumb::after{
+    content:""; position:absolute; inset:0; border-radius:50%;
+    background:
+      radial-gradient(circle at 30% 30%, currentColor 0 2px, transparent 3px) 0 0/6px 6px,
+      radial-gradient(circle at 70% 60%, currentColor 0 1.5px, transparent 2.5px) 3px 3px/6px 6px,
+      radial-gradient(circle at 50% 50%, currentColor 0 1.5px, transparent 2.5px) 1px 4px/6px 6px;
+    opacity: var(--grain-opacity);
+    mix-blend-mode: normal; /* 在黑/白主题下都可见 */
+    pointer-events:none;
+  }
+  .v-track[aria-disabled="true"]{ opacity:.5; }
+  .v-thumb[aria-disabled="true"]{ cursor:not-allowed; }
+  
+  /* —— 右侧横向数轴 —— */
+  .h-axis{
+    position: absolute;
+    top: 40%;
+    right: 15%;
+    display:grid; 
+    grid-template-columns:auto 1fr auto; 
+    gap:16px; 
+    align-items:center;
+    user-select:none; width:min(720px, 20vw);
+  }
+  .h-label{ font-size:16px; }
+  .h-track{
+    position:relative; height:var(--track-thickness); background:var(--line);
+  }
+  .h-thumb{
+    --x: 0%; 
+    position:absolute; top:50%; 
+    transform:translate(-50%, -50%);
+    left:calc(var(--x) * 1%);
+    width:var(--thumb-size); 
+    height:var(--thumb-size); 
+    border-radius:50%;
+    background:var(--accent);
+    box-shadow: 0 0 0 2px var(--bg) inset;
+  }
+  
+
+

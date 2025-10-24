@@ -6,7 +6,11 @@ body {
     background-color: #fff;
   }
     
-    
+  a{
+    text-decoration: none;
+    color: black;
+}
+
   body a {
     border-bottom: 2px solid #fff;
     padding: 10px 0;
@@ -79,4 +83,10 @@ body {
       background-color: #2050F2;
       color: #fff;
       transition: transform 0.2s;
+  }
+
+  .list{
+    position: absolute;
+    top: 10%;
+    left: 5%;
   }

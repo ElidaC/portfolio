@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Listening As Isolation</title>
+</head>
+
+    <body data-page="index">
+      <a class="about-link" href="about.html" aria-label="About">About</a>
+    
+      <aside class="v-axis" aria-hidden="true">
+        <span class="v-label v-label--top">L</span>
+        <div class="v-track">
+          <div class="v-thumb" data-draggable="false"></div>
+        </div>
+        <span class="v-label v-label--bottom">R</span>
+      </aside>
+    
+      <main class="content">
+        <h1 class="title">{Listening </h1>
+        <h1 class="title_">{As Isolation</h1>
+
+        <div class="h-axis" role="slider" aria-label="Power"
+             aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"
+             tabindex="0">
+          <span class="h-label">ON</span>
+          <div class="h-track">
+            <div class="h-thumb" data-position="off"></div>
+          </div>
+          <span class="h-label">OFF</span>
+        </div>
+      </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
