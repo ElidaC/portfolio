@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Listening in Between</title>
+</head>
+<body>
+
+  <div class="h-axis"
+       role="slider" aria-label="Power"
+       aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"
+       tabindex="0">
+    <span class="h-label" data-side="on">ON</span>
+    <div class="h-track">
+      <div class="h-thumb" data-position="off"></div>
+    </div>
+    <span class="h-label" data-side="off">OFF</span>
+  </div>
+
+
+  <div class="mode-bar" role="group" aria-label="Listening Modes">
+    <button class="mode-btn" data-sound="audio/1-2.mp3" onclick="playAudio(this)">Off</button>
+    <button class="mode-btn" data-sound="audio/1-1.mp3" onclick="playAudio(this)">Transparency</button>
+    <button class="mode-btn" data-sound="audio/1-3.mp3" onclick="playAudio(this)">Noise Cancellation</button>
+  </div>
+
+
+
+  <script>
+
+
+let currentAudio = null;
+
+  function playAudio(btn) {
+    const src = btn.dataset.sound;
+
+    // 停止上一个音频
+    if (currentAudio) {
+      currentAudio.pause();
+      currentAudio.currentTime = 0;
+    }
+
+    // 播放新的音频
+    currentAudio = new Audio(src);
+    currentAudio.play().catch(err => console.error('播放失败：', err));
+  }
+
+
+
+
+
+  (() => {
+    const clamp = (n, min, max) => Math.min(Math.max(n, min), max);
+    const $ = (s, root = document) => root.querySelector(s);
+  
+    const hAxis  = $(".h-axis");
+    const hTrack = $(".h-track");
+    const hThumb = $(".h-thumb");
+    if (!hAxis || !hTrack || !hThumb) return;
+  
+    // —— 页面识别：on.html / off.html / 其它 —— //
+    const path = (location.pathname || "").toLowerCase();
+    const isOnPage  = /(^|\/)on\.html$/.test(path);
+    const isOffPage = /(^|\/)off\.html$/.test(path);
+  
+    // —— 位置工具 —— //
+    const pxToPercent = (clientX) => {
+      const rect = hTrack.getBoundingClientRect();
+      const x = clamp(clientX - rect.left, 0, rect.width);
+      return (x / rect.width) * 100;
+    };
+  
+    function setPos(percent, {updateAria=false} = {}) {
+      percent = clamp(percent, 0, 100);
+      hThumb.style.setProperty("--x", percent);
+      if (updateAria) {
+        // ON=0, OFF=1  （如果你想反过来，把 0/1 对调）
+        const ariaNow = percent <= 50 ? 0 : 1;
+        hAxis.setAttribute("aria-valuenow", String(ariaNow));
+      }
+    }
+  
+    function snap(percent) {
+      return percent <= 50 ? 0 : 100;
+    }
+  
+    function navigateByPercent(percent) {
+      const side = percent === 0 ? "on" : "off";
+      if (side === "on") window.location.href = "on.html";
+      else window.location.href = "off.html";
+    }
+  
+    // —— 初始化：on.html 在 ON，off.html 在 OFF，其它按 data-position —— //
+    if (isOnPage) {
+      setPos(0,   {updateAria:true});
+    } else if (isOffPage) {
+      setPos(100, {updateAria:true});
+    } else {
+      const init = (hThumb.dataset.position || "off").toLowerCase() === "on" ? 0 : 100;
+      setPos(init, {updateAria:true});
+    }
+  
+    // —— 交互：拖拽 —— //
+    let dragging = false;
+    let pointerId = null;
+  
+    const onMove = (e) => {
+      if (!dragging) return;
+      const clientX = (e.touches && e.touches[0]?.clientX) ?? e.clientX;
+      setPos(pxToPercent(clientX), {updateAria:true});
+    };
+  
+    const onUp = (e) => {
+      if (!dragging) return;
+      dragging = false;
+      if (pointerId != null && hThumb.hasPointerCapture?.(pointerId)) {
+        hThumb.releasePointerCapture(pointerId);
+      }
+      const clientX = (e.changedTouches && e.changedTouches[0]?.clientX) ?? e.clientX;
+      const snapped = snap(pxToPercent(clientX));
+      setPos(snapped, {updateAria:true});
+      navigateByPercent(snapped);
+      pointerId = null;
+      // 移除全局监听
+      window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pointerup", onUp);
+      window.removeEventListener("touchmove", onMove);
+      window.removeEventListener("touchend", onUp);
+    };
+  
+    // 拇指按下开始拖拽
+    hThumb.addEventListener("pointerdown", (e) => {
+      e.preventDefault();
+      dragging = true;
+      pointerId = e.pointerId;
+      hThumb.setPointerCapture?.(pointerId);
+      window.addEventListener("pointermove", onMove);
+      window.addEventListener("pointerup", onUp);
+    });
+  
+    // 触控支持
+    hThumb.addEventListener("touchstart", (e) => {
+      dragging = true;
+      window.addEventListener("touchmove", onMove, {passive:false});
+      window.addEventListener("touchend", onUp);
+    }, {passive:true});
+  
+    // —— 点击轨道直接吸附并跳转 —— //
+    hTrack.addEventListener("pointerdown", (e) => {
+      if (e.target === hThumb) return; // 已由拇指处理
+      const p = pxToPercent(e.clientX);
+      const snapped = snap(p);
+      setPos(snapped, {updateAria:true});
+      navigateByPercent(snapped);
+    });
+  
+    // —— 点击 ON/OFF 文本 —— //
+    document.querySelectorAll(".h-label").forEach(lbl => {
+      lbl.addEventListener("click", () => {
+        const text = (lbl.textContent || "").trim().toLowerCase();
+        if (text === "on")  { setPos(0,   {updateAria:true}); navigateByPercent(0); }
+        if (text === "off") { setPos(100, {updateAria:true}); navigateByPercent(100); }
+      });
+    });
+  
+    // —— 键盘：在 .h-axis 上 —— //
+    hAxis.addEventListener("keydown", (e) => {
+      const k = e.key;
+      const curr = parseFloat(getComputedStyle(hThumb).getPropertyValue("--x")) || 0;
+  
+      if (k === "ArrowLeft")  { e.preventDefault(); setPos(curr - 5, {updateAria:true}); }
+      if (k === "ArrowRight") { e.preventDefault(); setPos(curr + 5, {updateAria:true}); }
+      if (k === "Home")       { e.preventDefault(); setPos(0,   {updateAria:true}); }
+      if (k === "End")        { e.preventDefault(); setPos(100, {updateAria:true}); }
+  
+      if (k === "Enter" || k === " ") {
+        e.preventDefault();
+        const snapped = snap(curr);
+        setPos(snapped, {updateAria:true});
+        navigateByPercent(snapped);
+      }
+    });
+  })();
+  </script>
+</body>
+</html>

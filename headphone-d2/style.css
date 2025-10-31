@@ -1,0 +1,235 @@
+html, body {
+    margin: 0;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+  .dot {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #111;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .dot:hover {
+    width: 150px;
+    height: 200px;
+    border-radius: 0px;
+    background-size: cover;
+    background-position: center;
+    z-index: 10;
+    cursor: pointer;
+  }
+  
+  /* —— 必要变量（你的原样式基础上补全） —— */
+  :root{
+    /* 水平开关（已有） */
+    --track-thickness: 1px;
+    --thumb-size: 22px;
+    --line: black;
+    --accent: #222;
+    --bg: #fff;
+  
+    /* 竖直三挡（新增） */
+    --track-height: 78vh; /* 轨道高度 */
+  --track-width: 10px;  /* 轨道粗细（黑） */
+  --knob-size: 38px;    /* 圆球直径 */
+  --ring: 3px;          /* 白色描边 */
+  --shadow: 0 6px 16px rgba(0,0,0,.25);
+  }
+  
+  .h-axis{
+    position: absolute;
+    top: 40%;
+    right: 15%;
+    display:grid; 
+    grid-template-columns:auto 1fr auto; 
+    gap:16px; 
+    align-items:center;
+    user-select:none;
+    width:min(720px, 20vw);
+  }
+  
+  .h-label{ font-size:16px; cursor: pointer; }
+  
+  .h-track{
+    position:relative;
+    height:var(--track-thickness);
+    background:var(--line);
+  }
+  
+  .h-thumb{
+    --x: 100; 
+    position:absolute; top:50%;
+    left:calc(var(--x) * 1%);
+    transform:translate(-50%, -50%);
+    width:var(--thumb-size); 
+    height:var(--thumb-size); 
+    border-radius:50%;
+    background:var(--accent);
+    box-shadow: 0 0 0 2px var(--bg) inset, 0 2px 8px rgba(0,0,0,.15);
+    cursor: grab;
+    transition: box-shadow .15s ease;
+  }
+  .h-thumb:active { cursor: grabbing; }
+  
+  .navigation{
+    background-color: #111;
+    width: 2%;
+    height: 100%;
+    transition: all 0.3s ease;;
+  }
+  .navigation:hover{
+    width: 4%;
+    cursor: pointer;
+  }
+  
+  #native{
+    line-height: 9px;
+  }
+  #english{
+    line-height: 5px;
+  }
+  
+  .text{
+    position: absolute;
+    top: 30%;
+    left: 10%;
+    width: 50%;
+    font-size: 1rem;
+  }
+  #english { display: none; }
+  
+  .intro{
+    position: absolute;
+    font-size: 1rem;
+    top: 10%;
+    left: 10%;
+    width: 50%;
+    line-height: 5px;
+  }
+  
+  .lang-switch {
+    position: fixed;
+    top: 16px;
+    right: 16px;
+    display: flex;
+    gap: 8px;
+  }
+  .lang-btn {
+    background: none;
+    border: 1px solid #111;
+    color: #111;
+    padding: 4px 10px;
+    cursor: pointer;
+    font-size: 14px;
+    letter-spacing: 0.5px;
+    transition: all 0.2s;
+  }
+  .lang-btn.active {
+    background: #111;
+    color: #fff;
+  }
+  .lang-btn:hover {
+    background: #111;
+    color: #fff;
+  }
+  
+  /* ——字体调节—— */
+  .font-control {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+  }
+  .control-btn {
+    width: 28px;
+    height: 28px;
+    border: 1px solid #111;
+    background: none;
+    position: relative;
+    cursor: pointer;
+  }
+  .control-btn::before,
+  .control-btn::after {
+    content: "";
+    position: absolute;
+    background: #111;
+  }
+  /* 减号 */
+  .control-btn.minus::before {
+    width: 60%;
+    height: 1px;
+    top: 50%;
+    left: 20%;
+  }
+  /* 加号 */
+  .control-btn.plus::before {
+    width: 60%;
+    height: 1px;
+    top: 50%;
+    left: 20%;
+  }
+  .control-btn.plus::after {
+    width: 1px;
+    height: 60%;
+    top: 20%;
+    left: 50%;
+  }
+  
+
+/* ===== 模式方块按钮样式 ===== */
+.mode-bar {
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: 24px;
+    display: flex;
+    gap: 12px;
+    z-index: 1000;
+  }
+  
+  .mode-btn {
+    width: 120px;
+    height: 120px;
+    border: 1px solid #111;
+    background: #fff;
+    color: #111;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: .4px;
+    cursor: pointer;
+    transition: transform .12s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+    user-select: none;
+  }
+  
+  .mode-btn:hover { transform: translateY(-2px); }
+  .mode-btn:active { transform: translateY(0); }
+  
+/* active（当前模式）样式：黑底白字 */
+.mode-btn.active {
+    background: #111;
+    color: #fff;
+    box-shadow: 0 6px 16px rgba(0,0,0,.25);
+  }
+  
+  /* 按下瞬间（点击中） */
+  .mode-btn:active {
+    transform: translateY(1px);
+  }
+  
+  /* 小屏优化 */
+  @media (max-width: 640px) {
+    .mode-btn { width: 92px; height: 92px; font-size: 12px; }
+    .mode-bar { bottom: 16px; gap: 10px; }
+  }
