@@ -5,9 +5,38 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="style.css" />
   <title>Listening in Between</title>
+
+  <style>
+    body {
+      background-image: url("video1.MOV");
+      background-size: 100% auto;  
+  background-repeat: no-repeat; 
+  background-position: top center;
+  background-attachment: scroll; 
+    }
+
+    .fade {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  background: linear-gradient(
+  to top,
+  rgba(255, 255, 255, 1) 10%,
+  rgba(255, 255, 255, 0) 100%
+);
+  pointer-events: none; 
+}
+  </style>
+
 </head>
+
+
+
 <body>
 
+  <div class="fade"></div>
   <div class="h-axis"
        role="slider" aria-label="Power"
        aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"
@@ -20,11 +49,19 @@
   </div>
 
 
+
+
+
   <div class="mode-bar" role="group" aria-label="Listening Modes">
-    <button class="mode-btn" data-sound="audio/1-2.mp3" onclick="playAudio(this)">Off</button>
-    <button class="mode-btn" data-sound="audio/1-1.mp3" onclick="playAudio(this)">Transparency</button>
-    <button class="mode-btn" data-sound="audio/1-3.mp3" onclick="playAudio(this)">Noise Cancellation</button>
-  </div>
+  <form>
+    <label><input data-sound="audio/1-1.mp3" onclick="playAudio(this)" type="radio" name="band" value="am" checked><span>Default Mode</span></label>
+
+    <label><input data-sound="audio/1-2.mp3" onclick="playAudio(this)" type="radio" name="band" value="fm"><span>Transparency</span></label>
+
+    <label><input data-sound="audio/1-3.mp3" onclick="playAudio(this)" type="radio" name="band" value="mw"><span>Noise Cancellation</span></label>
+  </form>
+</div>
+
 
 
 

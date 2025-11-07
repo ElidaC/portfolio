@@ -133,25 +133,55 @@
 
 
 
-  // 切换语言显示
-const native = document.getElementById("native");
-const english = document.getElementById("english");
+
+
+
+
+
+// 找到被标记为 native 的区块
+const nativeSection = document.querySelector("[data-native='true']");
+const nativeLang = nativeSection ? nativeSection.id : "chinese";
+
+// 所有语言区块
+const sections = {
+  chinese: document.getElementById("chinese"),
+  korean: document.getElementById("korean"),
+  english: document.getElementById("english")
+};
+
+// 初始化：显示 native，其他隐藏
+for (const key in sections) {
+  sections[key].style.display = (key === nativeLang) ? "block" : "none";
+}
+
 const buttons = document.querySelectorAll(".lang-btn");
 
 buttons.forEach(btn => {
   btn.addEventListener("click", () => {
+
+    // 按钮高亮
     buttons.forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
-    const lang = btn.dataset.lang;
+
+    let lang = btn.dataset.lang;
+
+    // 如果点到 native 按钮 → 回到 data-native="true" 那段语言
     if (lang === "native") {
-      native.style.display = "block";
-      english.style.display = "none";
-    } else {
-      native.style.display = "none";
-      english.style.display = "block";
+      lang = nativeLang;
+    }
+
+    // 切换语言显示
+    for (const key in sections) {
+      sections[key].style.display = (key === lang) ? "block" : "none";
     }
   });
 });
+
+
+
+
+
+
 
 
 const plus = document.querySelector(".plus");

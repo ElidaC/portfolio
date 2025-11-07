@@ -43,14 +43,17 @@ html, body {
   
   .h-axis{
     position: absolute;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 40px;
+    padding: 10px;
     top: 40%;
-    right: 15%;
+    right: 10%;
     display:grid; 
     grid-template-columns:auto 1fr auto; 
     gap:16px; 
     align-items:center;
     user-select:none;
-    width:min(720px, 20vw);
+    width:min(620px, 15vw);
   }
   
   .h-label{ font-size:16px; cursor: pointer; }
@@ -63,7 +66,8 @@ html, body {
   
   .h-thumb{
     --x: 100; 
-    position:absolute; top:50%;
+    position:absolute; 
+    top:50%;
     left:calc(var(--x) * 1%);
     transform:translate(-50%, -50%);
     width:var(--thumb-size); 
@@ -78,16 +82,16 @@ html, body {
   
   .navigation{
     background-color: #111;
-    width: 2%;
+    width: 5%;
     height: 100%;
     transition: all 0.3s ease;;
   }
   .navigation:hover{
-    width: 4%;
+    width: 8%;
     cursor: pointer;
   }
   
-  #native{
+  #chinese, #korean{
     line-height: 9px;
   }
   #english{
@@ -97,25 +101,24 @@ html, body {
   .text{
     position: absolute;
     top: 30%;
-    left: 10%;
+    left: 17%;
     width: 50%;
     font-size: 1rem;
   }
-  #english { display: none; }
   
   .intro{
     position: absolute;
     font-size: 1rem;
     top: 10%;
-    left: 10%;
+    left: 17%;
     width: 50%;
     line-height: 5px;
   }
   
   .lang-switch {
     position: fixed;
-    top: 16px;
-    right: 16px;
+    top: 10%;
+    right: 5%;
     display: flex;
     gap: 8px;
   }
@@ -141,8 +144,8 @@ html, body {
   /* ——字体调节—— */
   .font-control {
     position: fixed;
-    right: 16px;
-    bottom: 16px;
+    right: 5%;
+    bottom: 5%;
     display: flex;
     flex-direction: column;
     gap: 8px;
@@ -184,52 +187,129 @@ html, body {
   }
   
 
-/* ===== 模式方块按钮样式 ===== */
+
 .mode-bar {
+    width: 45%;
     position: fixed;
     left: 50%;
     transform: translateX(-50%);
-    bottom: 24px;
+    bottom: 3%;
     display: flex;
-    gap: 12px;
+    gap: 20px;
     z-index: 1000;
   }
   
-  .mode-btn {
-    width: 120px;
-    height: 120px;
-    border: 1px solid #111;
-    background: #fff;
-    color: #111;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: .4px;
+
+
+
+
+
+
+
+  body, input {
+    line-height: 30px;
+  }
+
+  form, label {
+    width: 100%;
+  }
+  form {
+    margin: auto;
+    padding: 0 1.5em;
+    display: flex;
+  }
+  label {
+    display: block;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+    padding: 1em 0 1.8em;
+  }
+  label:first-child input {
+    border-radius: 0.5em 0 0 0.5em;
+    box-shadow:
+      0.1em 0 0 #2726267f inset,
+      -0.1em 0 0 #27262600 inset,
+      0 0.1em 0 #afa490 inset,
+      0 -0.1em 0 #ffffff3f,
+      0 0.2em 0.5em #0000007f,
+      0 -0.1em 0 #926086 inset,
+      -0.1em -0.2em 0 #ffffff7f inset,
+      0.2em 0 0 #ffffff7f inset;
+  }
+  label:last-child input {
+    border-radius: 0 0.5em 0.5em 0;
+    box-shadow:
+      0 -0.1em 0 #926086 inset,
+      0.1em 0 0 #2726267f inset,
+      -0.1em 0 0 #2726267f inset,
+      0 0.1em 0 #afa490 inset,
+      -0.1em 0 0 #afa490 inset,
+      0 -0.1em 0 #ffffff3f,
+      0 0.2em 0.5em #0000007f,
+      -0.1em -0.1em 0 0.1em #ffffff7f inset;
+  }
+  label:first-child input:checked {
+    box-shadow:
+      0.1em 0 0 #272626af inset,
+      -0.1em 0 0 #272626 inset,
+      0 0.1em 0 #847a62 inset,
+      0 -0.1em 0 #ffffff3f,
+      0 0.1em 0 #ffffff7f,
+      0 -0.1em 0 #722257 inset,
+      -0.1em -0.2em 0 #ffffff7f inset,
+      0.2em 0 0 #ffffff7f inset;
+  }
+  label:last-child input:checked {
+    box-shadow:
+      0.1em 0 0 #272626af inset,
+      -0.1em 0 0 #272626 inset,
+      0 -0.1em 0 #722257 inset,
+      0 0.1em 0 #847a62 inset,
+      -0.1em 0 0 #847a62 inset,
+      0 -0.1em 0 #ffffff3f,
+      0 0.1em 0 #ffffff7f,
+      -0.1em -0.1em 0 0.1em #ffffff7f inset;
+  }
+  input {
+    background-image: linear-gradient(#ffffff 33%,#414751 58%,#837b52,#c5baa1,#c3adaa);
+    border-radius: 0;
+    box-shadow:
+      0.1em 0 0 #2726267f inset,
+      -0.1em 0 0 #27262600 inset,
+      0 0.1em 0 #afa490 inset,
+      0 -0.1em 0 #ffffff3f,
+      0 0.2em 0.5em #0000007f,
+      0 -0.1em 0 #926086 inset,
+      -0.1em -0.2em 0 #ffffff7f inset;
     cursor: pointer;
-    transition: transform .12s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
-    box-shadow: 0 2px 8px rgba(0,0,0,.08);
-    user-select: none;
+    display: block;
+    margin-bottom: 0.5em;
+    width: 100%;
+    height: 1em;
+    transition: box-shadow var(--transDur) ease-in-out;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
   }
-  
-  .mode-btn:hover { transform: translateY(-2px); }
-  .mode-btn:active { transform: translateY(0); }
-  
-/* active（当前模式）样式：黑底白字 */
-.mode-btn.active {
-    background: #111;
-    color: #fff;
-    box-shadow: 0 6px 16px rgba(0,0,0,.25);
+  input:checked {
+    background-image: linear-gradient(#ffffff 33%,#414751 58%,#827a7b,#c0b6ac,#c3adaa);
+    box-shadow:
+      0.1em 0 0 #272626af inset,
+      -0.1em 0 0 #272626 inset,
+      0 0.1em 0 #847a62 inset,
+      0 -0.1em 0 #ffffff3f,
+      0 0.1em 0 #ffffff7f,
+      0 -0.1em 0 #722257 inset,
+      -0.1em -0.2em 0 #ffffff7f inset;
   }
-  
-  /* 按下瞬间（点击中） */
-  .mode-btn:active {
-    transform: translateY(1px);
+  input:checked + span {
+    opacity: 1;
   }
-  
-  /* 小屏优化 */
-  @media (max-width: 640px) {
-    .mode-btn { width: 92px; height: 92px; font-size: 12px; }
-    .mode-bar { bottom: 16px; gap: 10px; }
+  input:focus {
+    outline: transparent;
   }
+  input + span {
+    opacity: 0.65;
+    transition: opacity var(--transDur) ease-in-out;
+  }
+ 
