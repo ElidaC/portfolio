@@ -145,7 +145,6 @@ const nativeLang = nativeSection ? nativeSection.id : "chinese";
 // 所有语言区块
 const sections = {
   chinese: document.getElementById("chinese"),
-  korean: document.getElementById("korean"),
   english: document.getElementById("english")
 };
 
