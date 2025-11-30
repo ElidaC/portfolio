@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="style.css" />
+  <title>Listening in Between</title>
+
+  <style>
+    body {
+      background-image: url("bg/3-1.png");
+      background-size: 100% auto;  
+  background-repeat: no-repeat; 
+  background-position: top center;
+  background-attachment: scroll; 
+    }
+
+    .fade {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 100%; 
+  background: linear-gradient(
+  to top,
+  rgba(255, 255, 255, 1) 5%,
+  rgba(255, 255, 255, 0) 30%
+);
+  pointer-events: none; 
+}
+
+.track-area {
+  position: relative;   
+  width: 100%;
+  height: 300px;   
+}
+
+.track-bar {
+  position: absolute;
+  background: #0084ff;
+  transition: height 0.1s linear;
+  width: 80px;
+  height: 360px;
+}
+
+
+/* 上下动的关键帧动画 
+@keyframes track-bounce {
+  0%   { transform: scaleY(0.5); }
+  50%  { transform: scaleY(1.4); }
+  100% { transform: scaleY(0.7); }
+}
+  */
+
+  @keyframes track-bounce {
+  0%   { transform: translateY(0); }
+  50%  { transform: translateY(-50px); } /* 往上跳一点 */
+  100% { transform: translateY(0); }
+}
+
+/* 播放状态：加上这个类就会动 */
+.track-bar.playing {
+  animation: track-bounce 3s infinite ease-in-out;
+}
+
+.track-bar:nth-child(1).playing { animation-delay: 0s; }
+.track-bar:nth-child(2).playing { animation-delay: -0.5s; }
+.track-bar:nth-child(3).playing { animation-delay: -1s; }
+.track-bar:nth-child(4).playing { animation-delay: -1.5s; }
+.track-bar:nth-child(5).playing { animation-delay: -2s; }
+.track-bar:nth-child(6).playing { animation-delay: -0s; }
+.track-bar:nth-child(7).playing { animation-delay: -1.5s; }
+  </style>
+
+</head>
+
+
+
+<body>
+
+  <div class="fade"></div>
+  <div class="h-axis"
+       role="slider" aria-label="Power"
+       aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"
+       tabindex="0">
+    <span class="h-label" data-side="on">ON</span>
+    <div class="h-track">
+      <div class="h-thumb" data-position="on"></div>
+    </div>
+    <span class="h-label" data-side="off">OFF</span>
+  </div>
+
+
+
+<div class="track-area">
+    <div class="track-bar" style="left: 10%; top: 0;"></div>
+    <div class="track-bar" style="left: 15%; top: 50%;"></div>
+    <div class="track-bar" style="left: 45%; top: -60%;"></div>
+    <div class="track-bar" style="right: 5%; top: 220%;"></div>
+  </div>
+
+
+  <div class="mode-bar" role="group" aria-label="Listening Modes">
+  <form>
+    <label>
+      <input data-sound="audio/3-1.mp3"
+             data-bg="bg/3-1.png"
+             onclick="playAudio(this)"
+             type="radio" name="band" value="am" checked>
+      <span>Default Mode</span>
+    </label>
+    
+    <label>
+      <input data-sound="audio/3-2.mp3"
+             data-bg="bg/3-2.png"
+             onclick="playAudio(this)"
+             type="radio" name="band" value="fm">
+      <span>Transparency</span>
+    </label>
+    
+    <label>
+      <input data-sound="audio/3-3.mp3"
+             data-bg="bg/3-3.png"
+             onclick="playAudio(this)"
+             type="radio" name="band" value="mw">
+      <span>Noise Cancellation</span>
+    </label>
+  </form>
+</div>
+
+
+
+
+  <script>
+
+
+let currentAudio = null;
+
+// 控制 track-bar 是否播放动画
+function setBarsPlaying(isPlaying) {
+  const bars = document.querySelectorAll('.track-bar');
+  bars.forEach(bar => {
+    if (isPlaying) {
+      bar.classList.add('playing');
+    } else {
+      bar.classList.remove('playing');
+    }
+  });
+}
+
+function playAudio(btn) {
+  const src = btn.dataset.sound;
+  const bg  = btn.dataset.bg;
+
+  // 停止上一个音频
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+  }
+
+  // 播放新的音频
+  currentAudio = new Audio(src);
+  currentAudio.play()
+    .then(() => {
+      // 播放成功，启动方块动画
+      setBarsPlaying(true);
+    })
+    .catch(err => {
+      console.error('播放失败：', err);
+      setBarsPlaying(false);
+    });
+
+  // 切换背景图
+  if (bg) {
+    document.body.style.backgroundImage = `url("${bg}")`;
+  }
+
+  // 播放结束时停掉动画
+  currentAudio.addEventListener('ended', () => {
+    setBarsPlaying(false);
+  });
+}
+
+
+
+(() => {
+  const clamp = (n, min, max) => Math.min(Math.max(n, min), max);
+  const $ = (s, root = document) => root.querySelector(s);
+
+  const hAxis  = $(".h-axis");
+  const hTrack = $(".h-track");
+  const hThumb = $(".h-thumb");
+  if (!hAxis || !hTrack || !hThumb) return;
+
+  // —— 页面识别：on.html / off.html / 其它 —— //
+  const path = (location.pathname || "").toLowerCase();
+  const isOnPage  = /(^|\/)on\.html$/.test(path);
+  const isOffPage = /(^|\/)off\.html$/.test(path);
+
+  // —— 位置工具 —— //
+  const pxToPercent = (clientX) => {
+    const rect = hTrack.getBoundingClientRect();
+    const x = clamp(clientX - rect.left, 0, rect.width);
+    return (x / rect.width) * 100;
+  };
+
+  function setPos(percent, {updateAria=false} = {}) {
+    percent = clamp(percent, 0, 100);
+    hThumb.style.setProperty("--x", percent);
+    if (updateAria) {
+      // ON=0, OFF=1
+      const ariaNow = percent <= 50 ? 0 : 1;
+      hAxis.setAttribute("aria-valuenow", String(ariaNow));
+    }
+  }
+
+  function snap(percent) {
+    return percent <= 50 ? 0 : 100;
+  }
+
+  function navigateByPercent(percent) {
+    const side = percent === 0 ? "on" : "off";
+    if (side === "on") window.location.href = "on3.html";
+    else window.location.href = "off3.html";
+  }
+
+  // —— 初始化：on.html 在 ON，off.html 在 OFF，其它按 data-position —— //
+  if (isOnPage) {
+    setPos(0,   {updateAria:true});
+  } else if (isOffPage) {
+    setPos(100, {updateAria:true});
+  } else {
+    const init = (hThumb.dataset.position || "off").toLowerCase() === "on" ? 0 : 100;
+    setPos(init, {updateAria:true});
+  }
+
+  // —— 交互：拖拽 —— //
+  let dragging = false;
+  let pointerId = null;
+
+  const onMove = (e) => {
+    if (!dragging) return;
+    const clientX = (e.touches && e.touches[0]?.clientX) ?? e.clientX;
+    setPos(pxToPercent(clientX), {updateAria:true});
+  };
+
+  const onUp = (e) => {
+    if (!dragging) return;
+    dragging = false;
+    if (pointerId != null && hThumb.hasPointerCapture?.(pointerId)) {
+      hThumb.releasePointerCapture(pointerId);
+    }
+    const clientX = (e.changedTouches && e.changedTouches[0]?.clientX) ?? e.clientX;
+    const snapped = snap(pxToPercent(clientX));
+    setPos(snapped, {updateAria:true});
+    navigateByPercent(snapped);
+    pointerId = null;
+    // 移除全局监听
+    window.removeEventListener("pointermove", onMove);
+    window.removeEventListener("pointerup", onUp);
+    window.removeEventListener("touchmove", onMove);
+    window.removeEventListener("touchend", onUp);
+  };
+
+  // 拇指按下开始拖拽
+  hThumb.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    dragging = true;
+    pointerId = e.pointerId;
+    hThumb.setPointerCapture?.(pointerId);
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+  });
+
+  // 触控支持
+  hThumb.addEventListener("touchstart", (e) => {
+    dragging = true;
+    window.addEventListener("touchmove", onMove, {passive:false});
+    window.addEventListener("touchend", onUp);
+  }, {passive:true});
+
+  // —— 点击轨道直接吸附并跳转 —— //
+  hTrack.addEventListener("pointerdown", (e) => {
+    if (e.target === hThumb) return; // 已由拇指处理
+    const p = pxToPercent(e.clientX);
+    const snapped = snap(p);
+    setPos(snapped, {updateAria:true});
+    navigateByPercent(snapped);
+  });
+
+  // —— 点击 ON/OFF 文本 —— //
+  document.querySelectorAll(".h-label").forEach(lbl => {
+    lbl.addEventListener("click", () => {
+      const text = (lbl.textContent || "").trim().toLowerCase();
+      if (text === "on")  { setPos(0,   {updateAria:true}); navigateByPercent(0); }
+      if (text === "off") { setPos(100, {updateAria:true}); navigateByPercent(100); }
+    });
+  });
+
+  // —— 键盘：在 .h-axis 上 —— //
+  hAxis.addEventListener("keydown", (e) => {
+    const k = e.key;
+    const curr = parseFloat(getComputedStyle(hThumb).getPropertyValue("--x")) || 0;
+
+    if (k === "ArrowLeft")  { e.preventDefault(); setPos(curr - 5, {updateAria:true}); }
+    if (k === "ArrowRight") { e.preventDefault(); setPos(curr + 5, {updateAria:true}); }
+    if (k === "Home")       { e.preventDefault(); setPos(0,   {updateAria:true}); }
+    if (k === "End")        { e.preventDefault(); setPos(100, {updateAria:true}); }
+
+    if (k === "Enter" || k === " ") {
+      e.preventDefault();
+      const snapped = snap(curr);
+      setPos(snapped, {updateAria:true});
+      navigateByPercent(snapped);
+    }
+  });
+})();
+  </script>
+</body>
+</html>

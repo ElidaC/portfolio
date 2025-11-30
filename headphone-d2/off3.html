@@ -5,6 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
     <title>Listening in Between</title>
+
+    <style>
+      body {
+  position: relative;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("bg/3-1.png");
+  background-size: 105% auto;
+  background-position: top center;
+  filter: blur(20px); 
+  opacity: 0.3;  
+  transform: scale(1.1); 
+  z-index: -1;
+}
+
+.navigation{
+  background-color: #0084ff;
+}
+
+p{
+  color: #0084ff;
+}
+      </style>
 </head>
 <body>
 
@@ -36,27 +64,27 @@
   </div>
 
     <div class="text" id="chinese" data-native="true">
-        <p section="line1">在这个世界里我是安全的，不用焦虑不用担心的。</p>
-        <p section="line2">行走在路上，坐在地铁上、飞机上，</p>
-        <p section="line3">有太多不可预测的事情可能会发生。</p>
-        <p section="line4">戴上耳机，开启降噪，我可以将一切外在的不确定性都一起屏蔽掉。</p>
-        <p section="line5">耳机里有太多太多与朋友和家人的记忆，</p>
-        <p section="line6">它好像一个3D环绕的回忆录,里面有泪水有笑声,</p>
-        <p section="line7">那些影子和片段像电影一样一幕幕从我脑海里滑过。</p>
+        <p style="position: absolute; top:30%; left: 20%;">在这个世界里我是安全的，不用焦虑不用担心的。</p>
+        <p style="position: absolute; top:35%; left: 15%;">行走在路上，坐在地铁上、飞机上，</p>
+        <p style="position: absolute; top:40%; left: 25%;">有太多不可预测的事情可能会发生。</p>
+        <p style="position: absolute; top:45%; left: 40%;">戴上耳机，开启降噪，我可以将一切外在的不确定性都一起屏蔽掉。</p>
+        <p style="position: absolute; top:50%; left: 35%;">耳机里有太多太多与朋友和家人的记忆，</p>
+        <p style="position: absolute; top:55%; left: 45%;">它好像一个3D环绕的回忆录,里面有泪水有笑声,</p>
+        <p style="position: absolute; top:60%; left: 30%;">那些影子和片段像电影一样一幕幕从我脑海里滑过。</p>
     </div>
 
     <div class="text" id="english">
-        <p section="line1">I feel safe in this private world, </p>
-        <p section="line2">with no anxiety and nothing to worry about.</p>
-        <p section="line3">When I'm walking on the street or sitting on the subway or on a plane,  </p>
-        <p section="line4">anything unpredictable could happen.</p>
-        <p section="line5">But when I put on my headphones and turn on noise cancellation, </p>
-        <p section="line6">all the uncertainty around me fades away.</p>
-        <p section="line7">What inside my headphone are countless memories with friends and family.</p>
-        <p section="line8">It feels like a 3D surround-sound memoir,</p>
-        <p section="line9">filled with tears, laughter, and everything in between.</p>
-        <p section="line10">Those shadows and fragments slide through my mind</p>
-        <p section="line11">like scenes from a movie, one after another.</p>
+        <p style="position: absolute; top:30%; left: 20%;">I feel safe in this private world, </p>
+        <p style="position: absolute; top:35%; left: 15%;">with no anxiety and nothing to worry about.</p>
+        <p style="position: absolute; top:40%; left: 25%;">When I'm walking on the street or sitting on the subway or on a plane,  </p>
+        <p style="position: absolute; top:45%; left: 40%;">anything unpredictable could happen.</p>
+        <p style="position: absolute; top:50%; left: 35%;">But when I put on my headphones and turn on noise cancellation, </p>
+        <p style="position: absolute; top:55%; left: 45%;">all the uncertainty around me fades away.</p>
+        <p style="position: absolute; top:60%; left: 30%;">What inside my headphone are countless memories with friends and family.</p>
+        <p style="position: absolute; top:65%; left: 20%;">It feels like a 3D surround-sound memoir,</p>
+        <p style="position: absolute; top:70%; left: 35%;">filled with tears, laughter, and everything in between.</p>
+        <p style="position: absolute; top:75%; left: 30%;">Those shadows and fragments slide through my mind</p>
+        <p style="position: absolute; top:80%; left: 15%;">like scenes from a movie, one after another.</p>
     </div>
 
     <div class="font-control">
@@ -65,5 +93,173 @@
       </div>
     
     <script src="script.js"></script>
+    <script>
+      (() => {
+  // 小工具函数
+  const clamp = (n, min, max) => Math.min(Math.max(n, min), max);
+  const $ = (selector, root = document) => root.querySelector(selector);
+
+  const hAxis  = $(".h-axis");
+  const hTrack = $(".h-track");
+  const hThumb = $(".h-thumb");
+
+  // 没有找到元素就直接退出
+  if (!hAxis || !hTrack || !hThumb) return;
+
+  // —— 识别当前是不是 on/off 页面（可按需要改文件名） —— //
+  const path = (location.pathname || "").toLowerCase();
+  const isOnPage  = /(^|\/)on1\.html$/.test(path);
+  const isOffPage = /(^|\/)off1\.html$/.test(path);
+
+  // 像素 → 百分比
+  const pxToPercent = (clientX) => {
+    const rect = hTrack.getBoundingClientRect();
+    const x = clamp(clientX - rect.left, 0, rect.width);
+    return (x / rect.width) * 100;
+  };
+
+  // 设置滑块位置（0–100）
+  function setPos(percent, { updateAria = false } = {}) {
+    percent = clamp(percent, 0, 100);
+    // 这里用 CSS 变量 --x 控制位置，记得在 CSS 里用 transform/left 读取它
+    hThumb.style.setProperty("--x", percent);
+
+    if (updateAria) {
+      // ON = 0, OFF = 1
+      const ariaNow = percent <= 50 ? 0 : 1;
+      hAxis.setAttribute("aria-valuenow", String(ariaNow));
+    }
+  }
+
+  // 吸附逻辑：0 或 100
+  function snap(percent) {
+    return percent <= 50 ? 0 : 100;
+  }
+
+  // 吸附后跳转页面
+  function navigateByPercent(percent) {
+    const side = percent === 0 ? "on" : "off";
+    if (side === "on") {
+      window.location.href = "on3.html";   // ← 需要的话这里改文件名
+    } else {
+      window.location.href = "off3.html";  // ← 同上
+    }
+  }
+
+  // —— 初始化位置 —— //
+  if (isOnPage) {
+    setPos(0,   { updateAria: true });
+  } else if (isOffPage) {
+    setPos(100, { updateAria: true });
+  } else {
+    const init = (hThumb.dataset.position || "off").toLowerCase() === "on" ? 0 : 100;
+    setPos(init, { updateAria: true });
+  }
+
+  // —— 拖拽逻辑 —— //
+  let dragging  = false;
+  let pointerId = null;
+
+  const onMove = (e) => {
+    if (!dragging) return;
+    const clientX = (e.touches && e.touches[0]?.clientX) ?? e.clientX;
+    setPos(pxToPercent(clientX), { updateAria: true });
+  };
+
+  const onUp = (e) => {
+    if (!dragging) return;
+    dragging = false;
+
+    if (pointerId != null && hThumb.hasPointerCapture?.(pointerId)) {
+      hThumb.releasePointerCapture(pointerId);
+    }
+
+    const clientX = (e.changedTouches && e.changedTouches[0]?.clientX) ?? e.clientX;
+    const snapped = snap(pxToPercent(clientX));
+    setPos(snapped, { updateAria: true });
+    navigateByPercent(snapped);
+
+    pointerId = null;
+
+    // 移除全局事件监听
+    window.removeEventListener("pointermove", onMove);
+    window.removeEventListener("pointerup", onUp);
+    window.removeEventListener("touchmove", onMove);
+    window.removeEventListener("touchend", onUp);
+  };
+
+  // 鼠标 / 触控板拖拽
+  hThumb.addEventListener("pointerdown", (e) => {
+    e.preventDefault();
+    dragging  = true;
+    pointerId = e.pointerId;
+
+    hThumb.setPointerCapture?.(pointerId);
+    window.addEventListener("pointermove", onMove);
+    window.addEventListener("pointerup", onUp);
+  });
+
+  // 触屏拖拽
+  hThumb.addEventListener("touchstart", (e) => {
+    dragging = true;
+    window.addEventListener("touchmove", onMove, { passive: false });
+    window.addEventListener("touchend", onUp);
+  }, { passive: true });
+
+  // —— 点击轨道：直接吸附并跳转 —— //
+  hTrack.addEventListener("pointerdown", (e) => {
+    if (e.target === hThumb) return; // 如果点的是拇指，就让拇指自己的逻辑处理
+    const p       = pxToPercent(e.clientX);
+    const snapped = snap(p);
+    setPos(snapped, { updateAria: true });
+    navigateByPercent(snapped);
+  });
+
+  // —— 点击 ON/OFF 文本 —— //
+  document.querySelectorAll(".h-label").forEach((lbl) => {
+    lbl.addEventListener("click", () => {
+      const text = (lbl.textContent || "").trim().toLowerCase();
+      if (text === "on") {
+        setPos(0,   { updateAria: true });
+        navigateByPercent(0);
+      }
+      if (text === "off") {
+        setPos(100, { updateAria: true });
+        navigateByPercent(100);
+      }
+    });
+  });
+
+  // —— 键盘支持：在 .h-axis 上 —— //
+  hAxis.addEventListener("keydown", (e) => {
+    const k    = e.key;
+    const curr = parseFloat(getComputedStyle(hThumb).getPropertyValue("--x")) || 0;
+
+    if (k === "ArrowLeft") {
+      e.preventDefault();
+      setPos(curr - 5, { updateAria: true });
+    }
+    if (k === "ArrowRight") {
+      e.preventDefault();
+      setPos(curr + 5, { updateAria: true });
+    }
+    if (k === "Home") {
+      e.preventDefault();
+      setPos(0, { updateAria: true });
+    }
+    if (k === "End") {
+      e.preventDefault();
+      setPos(100, { updateAria: true });
+    }
+
+    if (k === "Enter" || k === " ") {
+      e.preventDefault();
+      const snapped = snap(curr);
+      setPos(snapped, { updateAria: true });
+      navigateByPercent(snapped);
+    }
+  });
+})();
+    </script>
 </body>
 </html>
