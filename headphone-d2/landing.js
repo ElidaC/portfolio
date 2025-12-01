@@ -14,3 +14,8 @@ dots.forEach(dot => {
     dot.style.backgroundColor = 'black';
   });
 });
+
+
+
+
+

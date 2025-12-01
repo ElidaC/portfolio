@@ -53,22 +53,29 @@ buttons.forEach(btn => {
 const plus = document.querySelector(".plus");
 const minus = document.querySelector(".minus");
 const intro = document.querySelector(".intro");
-const texts = document.querySelectorAll(".text");
+const chinese = document.querySelector("#chinese");
+const english = document.querySelector("#english");
 
-let baseSize = 17;
+let chineseSize = 17;  // 初始中文字号
+let englishSize = 19;  // 初始英文字号
 
 function updateFontSize() {
-  intro.style.fontSize = baseSize * 1 + "px";
-  texts.forEach(t => t.style.fontSize = baseSize + "px");
+  intro.style.fontSize = chineseSize + "px"; // intro 通常中文，可改成你要的
+  
+  chinese.style.fontSize = chineseSize + "px";
+  english.style.fontSize = englishSize + "px";
+  intro.style.fontSize = englishSize + "px";
 }
 
 plus.addEventListener("click", () => {
-  baseSize = Math.min(baseSize + 1, 20);
+  chineseSize = Math.min(chineseSize + 1, 20); 
+  englishSize = Math.min(englishSize + 1, 22); 
   updateFontSize();
 });
 
 minus.addEventListener("click", () => {
-  baseSize = Math.max(baseSize - 1, 13);
+  chineseSize = Math.max(chineseSize - 1, 13); // 中文最小 14
+  englishSize = Math.max(englishSize - 1, 15); // 英文最小 12
   updateFontSize();
 });
 
