@@ -38,9 +38,6 @@ html, body {
     user-select:none;
     width:min(620px, 15vw);
     z-index: 2000;
-    font-family: "new-astro", sans-serif;
-    font-weight: 700;
-    font-style: normal;
   }
   
   .h-label{ font-size:16px; cursor: pointer; }
