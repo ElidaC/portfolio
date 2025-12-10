@@ -1,3 +1,70 @@
+const axis  = document.querySelector('.h-axis');
+const track = axis.querySelector('.h-track');
+const thumb = axis.querySelector('.h-thumb');
+
+// 三个档位：0%（ON） 50%（中间） 100%（OFF）
+const positions = [0, 50, 100];
+
+function setPositionByIndex(index) {
+  const x = positions[index];
+  thumb.style.setProperty('--x', x);
+  thumb.dataset.index = index;
+  axis.setAttribute('aria-valuenow', index); // 0,1,2
+}
+
+let dragging = false;
+
+thumb.addEventListener('mousedown', (e) => {
+  e.preventDefault();
+  dragging = true;
+});
+
+window.addEventListener('mousemove', (e) => {
+  if (!dragging) return;
+
+  const rect = track.getBoundingClientRect();
+  let percent = ((e.clientX - rect.left) / rect.width) * 100;
+  percent = Math.max(0, Math.min(100, percent));
+
+  thumb.style.setProperty('--x', percent);
+});
+
+window.addEventListener('mouseup', () => {
+  if (!dragging) return;
+  dragging = false;
+
+  // 当前实际的百分比
+  const current = parseFloat(
+    getComputedStyle(thumb).getPropertyValue('--x')
+  );
+
+  // 找最近的档位
+  let closestIndex = 0;
+  let minDiff = Infinity;
+
+  positions.forEach((p, i) => {
+    const diff = Math.abs(p - current);
+    if (diff < minDiff) {
+      minDiff = diff;
+      closestIndex = i;
+    }
+  });
+
+  setPositionByIndex(closestIndex);
+});
+
+axis.querySelectorAll('.h-label').forEach(label => {
+  label.addEventListener('click', () => {
+    const t = label.dataset.target;
+    if (t === 'on')  setPositionByIndex(0);
+    if (t === 'off') setPositionByIndex(2);
+  });
+});
+
+
+
+
+
 const dots = document.querySelectorAll('.dot');
 
 dots.forEach(dot => {
@@ -15,6 +82,8 @@ dots.forEach(dot => {
   });
 });
 
+
+/*
 
 const onLabel = document.querySelectorAll('.h-label')[0];  // ON
 const offLabel = document.querySelectorAll('.h-label')[1]; // OFF
@@ -42,4 +111,4 @@ document.addEventListener("mousemove", (e) => {
     document.body.style.backdropFilter = `blur(${blurStrength}px)`;
 });
 
-
+*/

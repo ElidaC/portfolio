@@ -22,7 +22,8 @@
   display: block;
   background: transparent;
   box-shadow: none;
-  border-radius: 0;
+  border-radius: 50%; 
+  overflow: hidden;   
   z-index: 100;
 }
 
@@ -71,42 +72,42 @@
     0 4px 8px rgba(0,0,0,0.25);
 }
 
+/*
 body { transition: filter 0.4s ease; backdrop-filter: blur(0px); }
+*/
     </style>
 </head>
 
 <body>
 
 
-    <div class="h-axis" role="slider" aria-label="Power"
-         aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"
-         tabindex="0">
-      <span class="h-label">ON</span>
-      <div class="h-track">
-        <div class="h-thumb" data-position="off"></div>
-      </div>
-      <span class="h-label">OFF</span>
-    </div>
+  <div class="h-axis" role="slider" aria-label="Power"
+  aria-valuemin="0" aria-valuemax="2" aria-valuenow="2"
+  tabindex="0">
+<span class="h-label" data-target="on">ON</span>
+<div class="h-track">
+ <!-- 初始在 OFF：--x:100 -->
+ <div class="h-thumb" data-index="2" style="--x:50"></div>
+</div>
+<span class="h-label" data-target="off">OFF</span>
+</div>
 
 
     <a class="dot" href="on1.html" style="--hover-color:#e7e7e7">
       <div class="dot-inner">
-        <img class="default-img" src="dots/1-1.png" alt="">
-        <img class="hover-img"   src="dots/1-2.png" alt="">
+        <img class="hover-img"   src="dots/1.png" alt="">
       </div>
     </a>
     
     <a class="dot" href="on2.html" style="--hover-color:#dcf7b1">
       <div class="dot-inner">
-        <img class="default-img" src="dots/2-1.png" alt="">
-        <img class="hover-img"   src="dots/2-2.png" alt="">
+        <img class="hover-img"   src="dots/2.png" alt="">
       </div>
     </a>
     
     <a class="dot" href="on3.html" style="--hover-color:#fdf8a6">
       <div class="dot-inner">
-        <img class="default-img" src="dots/3-1.png" alt="">
-        <img class="hover-img"   src="dots/3-2.png" alt="">
+        <img class="hover-img"   src="dots/3.png" alt="">
       </div>
     </a>
 

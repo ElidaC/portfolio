@@ -334,6 +334,13 @@ function playAudio(btn) {
   });
 })();
 
+axis.querySelectorAll('.h-label').forEach(label => {
+  label.addEventListener('click', () => {
+    const t = label.dataset.target;
+    if (t === 'on')  setPositionByIndex(0);
+    if (t === 'off') setPositionByIndex(2);
+  });
+});
 
 
 
@@ -341,8 +348,7 @@ function playAudio(btn) {
 
 
 
-
-
+/*
 const onLabel = document.querySelectorAll('.h-label')[0];  // ON
 const offLabel = document.querySelectorAll('.h-label')[1]; // OFF
 
@@ -367,6 +373,7 @@ document.addEventListener("mousemove", (e) => {
 
     document.body.style.filter = `blur(${blurStrength}px)`;
 });
+*/
   </script>
 </body>
 </html>

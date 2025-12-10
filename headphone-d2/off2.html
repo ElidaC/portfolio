@@ -5,9 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://use.typekit.net/sty5dnx.css">
     <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code&family=League+Spartan:wght@100..900&family=Original+Surfer&family=Ribeye&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <title>Listening in Between</title>
 
     <style>
+
       body {
   position: relative;
   overflow-x: hidden;
@@ -60,35 +64,64 @@ body { transition: filter 0.4s ease; backdrop-filter: blur(0px); }
   </div>
 
   <div class="intro">
-    <p>Chris J. - M - 8yrs</p>
-    <p>Beats</p>
-    <p>Volumn: 9/10</p>
-    <p>During workout</p>
+    <p>Chris J.  </p>
+    <p>Device: Beats  </p>
+    <p>Volume: 9/10  </p>
+    <p>Listening Experience: 8 years  </p>
+    <p>Listening Moment: during workout </p>
   </div>
 
     <div class="text" id="chinese" data-native="true">
-        <p style="position: absolute; top:30%; left: 25%;">我一戴上耳机锻炼的时候感觉整个人充满了活力，</p>
-        <p style="position: absolute; top:35%; left: 20%;">感觉整个人立马就有力气了。</p>
-        <p style="position: absolute; top:40%; left: 15%;">不同的音乐风格会让我想象出自己在各种场景里锻炼，</p>
-        <p style="position: absolute; top:45%; left: 30%;">特别带感，</p>
-        <p style="position: absolute; top:50%; left: 35%;">这已经成为我运动时候最享受的部分了。</p>
+        <p style="position: absolute; top:35%; left: 25%;">我一戴上耳机锻炼的时候感觉整个人充满了活力，</p>
+        <p style="position: absolute; top:40%; left: 20%;">感觉整个人立马就有力气了。</p>
+        <p style="position: absolute; top:45%; left: 15%;">不同的音乐风格会让我想象出自己在各种场景里锻炼，</p>
+        <p style="position: absolute; top:50%; left: 30%;">特别带感，</p>
+        <p style="position: absolute; top:55%; left: 35%;">这已经成为我运动时候最享受的部分了。</p>
     </div>
 
 
     <div class="text" id="english">
-        <p style="position: absolute; top:30%; left: 25%;">The moment I put on my headphones to work out, </p>
-        <p style="position: absolute; top:35%; left: 20%;"> I feel instantly energized. </p>
-        <p style="position: absolute; top:40%; left: 15%;">It feels like my whole body switches on.</p>
-        <p style="position: absolute; top:45%; left: 30%;">Different kinds of music make me imagine myself training in all sorts of scenes, </p>
-        <p style="position: absolute; top:50%; left: 35%;">and it just hits perfectly, </p>
-        <p style="position: absolute; top:55%; left: 30%;">which has became my favorite part of exercising.</p>
+        <p style="position: absolute; top:35%; left: 25%;">The moment I put on my headphones to work out, </p>
+        <p style="position: absolute; top:40%; left: 20%;"> I feel instantly energized. </p>
+        <p style="position: absolute; top:45%; left: 15%;">It feels like my whole body switches on.</p>
+        <p style="position: absolute; top:50%; left: 30%;">Different kinds of music make me imagine myself training in all sorts of scenes, </p>
+        <p style="position: absolute; top:55%; left: 35%;">and it just hits perfectly, </p>
+        <p style="position: absolute; top:60%; left: 30%;">which has became my favorite part of exercising.</p>
     </div>
+
+
+    <div class="draggable-box" data-box-id="box5" style="top: 40%; left: 20%;">
+      <p>Orange-red blends the stimulation of red and the optimism of yellow, which symbolizes energy burst, motivation, and high arousal.</p>
+      <p id="source">ColorPsychology.org Editorial Team. (2023-2024). Orange Color Psychology — Energy & Action Representation. ColorPsychology.org.</p>
+    </div>
+  
+    <div class="draggable-box" data-box-id="box6" style="top: 10%; left: 70%;">
+      <p>Music inside headphones reduces perceived fatigue, enhances performance and focus during physical training.</p>
+      <p id="source">Devereux, G., et al. (2024). The Effects of Music on Physiology, Perception, and Performance During Resistance Training. Journal of Strength & Conditioning Research.</p>
+    </div>
+  
+    <div class="draggable-box" data-box-id="box7" style="top: 55%; left: 15%;">
+      <p>Higher exercise intensity is often paired with higher-tempo music, as movement speed naturally falls in sync with the beat.</p>
+      <p id="source">Maddigan, M., et al. (2024). The Exercise Intensity-Music-Tempo Preference Relationship. Physiology & Behavior.</p>
+    </div>
+  
+    <div class="draggable-box" data-box-id="box8" style="top: 65%; left: 55%;">
+    <p>Green represents emotional balance, nature connection, relaxation, and mental restoration.</p>
+    <p id="source">ColorPsychology.org Editorial Team. (2023-2024). Green Color Psychology — Balance, Nature & Restoration. ColorPsychology.org.</p>
+  </div>
+
+
 
     <div class="font-control">
         <button class="control-btn plus"></button>
         <button class="control-btn minus"></button>
       </div>
     
+
+
+
+
+
     <script src="script.js"></script>
     <script>
       (() => {
@@ -257,6 +290,13 @@ body { transition: filter 0.4s ease; backdrop-filter: blur(0px); }
     }
   });
 })();
+axis.querySelectorAll('.h-label').forEach(label => {
+  label.addEventListener('click', () => {
+    const t = label.dataset.target;
+    if (t === 'on')  setPositionByIndex(0);
+    if (t === 'off') setPositionByIndex(2);
+  });
+});
     </script>
 </body>
 </html>

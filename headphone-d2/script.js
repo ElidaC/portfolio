@@ -1,4 +1,108 @@
 
+// 新增：三个白底黑框的拖拽逻辑 + 记住位置
+(function setupDraggableBoxes() {
+  const boxes = document.querySelectorAll('.draggable-box');
+  const STORAGE_KEY = 'draggable-box-positions-' + location.pathname; // 每个页面单独保存
+
+  // 读取已保存的位置
+  const saved = (() => {
+    try {
+      return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+    } catch (e) {
+      return {};
+    }
+  })();
+
+  // 先把保存过的位置还原出来
+  boxes.forEach(box => {
+    const id = box.dataset.boxId;
+    if (!id) return;
+    const pos = saved[id];
+    if (pos) {
+      box.style.left = pos.left + 'px';
+      box.style.top  = pos.top  + 'px';
+    }
+  });
+
+  // 保存单个 box 的当前位置
+  function saveBoxPosition(box) {
+    const id = box.dataset.boxId;
+    if (!id) return;
+
+    const rect = box.getBoundingClientRect();
+    const data = (() => {
+      try {
+        return JSON.parse(localStorage.getItem(STORAGE_KEY)) || {};
+      } catch (e) {
+        return {};
+      }
+    })();
+
+    data[id] = {
+      left: rect.left + window.scrollX,
+      top:  rect.top  + window.scrollY
+    };
+
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }
+
+  boxes.forEach(box => {
+    let isDragging = false;
+    let startX = 0;
+    let startY = 0;
+    let startLeft = 0;
+    let startTop = 0;
+
+    const getPos = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        return { x: e.touches[0].clientX, y: e.touches[0].clientY };
+      }
+      return { x: e.clientX, y: e.clientY };
+    };
+
+    const onMove = (e) => {
+      if (!isDragging) return;
+      e.preventDefault();
+      const { x, y } = getPos(e);
+      const dx = x - startX;
+      const dy = y - startY;
+      box.style.left = (startLeft + dx) + 'px';
+      box.style.top  = (startTop  + dy) + 'px';
+    };
+
+    const onUp = () => {
+      if (!isDragging) return;
+      isDragging = false;
+
+      // 松手时保存当前位置
+      saveBoxPosition(box);
+
+      window.removeEventListener('pointermove', onMove);
+      window.removeEventListener('pointerup', onUp);
+      window.removeEventListener('touchmove', onMove);
+      window.removeEventListener('touchend', onUp);
+    };
+
+    const onDown = (e) => {
+      e.preventDefault();
+      isDragging = true;
+      const rect = box.getBoundingClientRect();
+      const { x, y } = getPos(e);
+      startX = x;
+      startY = y;
+      startLeft = rect.left + window.scrollX;
+      startTop  = rect.top  + window.scrollY;
+
+      window.addEventListener('pointermove', onMove);
+      window.addEventListener('pointerup', onUp);
+      window.addEventListener('touchmove', onMove, { passive: false });
+      window.addEventListener('touchend', onUp);
+    };
+
+    box.addEventListener('pointerdown', onDown);
+    box.addEventListener('touchstart', onDown, { passive: false });
+  });
+})();
 
 
 
@@ -87,7 +191,7 @@ updateFontSize();
 
 
 
-
+/*
 
 const onLabel = document.querySelectorAll('.h-label')[0];  // ON
 const offLabel = document.querySelectorAll('.h-label')[1]; // OFF
@@ -113,3 +217,5 @@ document.addEventListener("mousemove", (e) => {
 
     document.body.style.filter = `blur(${blurStrength}px)`;
 });
+
+*/
