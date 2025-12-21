@@ -44,35 +44,6 @@ uniq.forEach(el => {
 });
 
 
-function setHoverWidthByImage(sectionEl, imgEl){
-  const w = imgEl.naturalWidth || 1;
-  const h = imgEl.naturalHeight || 1;
-  const ratio = w / h;
-
-  // 基于比例算 hover 宽度：越横越宽
-  // 0.52 ~ 0.82 之间变化，你可以按感觉微调
-  const vw = Math.max(52, Math.min(82, 52 + (ratio - 1) * 22));
-
-  sectionEl.style.setProperty("--mediaHoverW", `${vw}vw`);
-}
-
-document.querySelectorAll(".section").forEach(section=>{
-  const img = section.querySelector(".preview-img");
-  if(!img) return;
-
-  // 初始图加载后设置 hover 宽度
-  if (img.complete) setHoverWidthByImage(section, img);
-  img.addEventListener("load", ()=>setHoverWidthByImage(section, img));
-
-  // list hover -> 切图
-  section.querySelectorAll(".work-link").forEach(link=>{
-    link.addEventListener("mouseenter", ()=>{
-      const next = link.getAttribute("data-img");
-      if(next) img.src = next;
-    });
-  });
-});
-
 /* ========== section scroll reveal ========== */
 const sections = document.querySelectorAll('.section');
 
