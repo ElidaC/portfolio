@@ -1,92 +1,236 @@
-
 body {
-    cursor: none;
-    margin: 0;
-    display: flex;
-    background-color: #fff;
-  }
-    
-  a{
-    text-decoration: none;
-    color: black;
+  cursor: none;
+  margin: 0;
+  background-color: #fff;
+}
+  
+  
+body a {
+  border-bottom: 2px solid #fff;
+  padding: 10px 0;
+  margin-top: 25px;
 }
 
-  body a {
-    border-bottom: 2px solid #fff;
-    padding: 10px 0;
-    margin-top: 25px;
-  }
-  
-  body .cursor {
-      pointer-events: none; /* 确保光标不会阻止其他交互 */
-  
-    }
-  
-  
-  body .cursor__ball {
-    position: absolute;
-    top: 0;
-    left: 0;
-    mix-blend-mode: difference;
-    z-index: 1000;
-  }
-  
-  body .cursor__ball circle {
-    fill: #f7f8fa;
-  }
-  
-  
-  h3{
-      font-family: "epilogue", sans-serif;
-      font-weight: 100;
-      font-style: italic;
-      font-size: xx-large;
-  }
-  
-  h4{
-      font-family: "ff-seria", sans-serif;
-      font-weight: 500;
-      font-style: italic;
-      font-size: large;
-  }
-  
-  .title{
-      display: flex;
-      z-index: 200;
-  }
-  
-  #left{
-      position: fixed;
-      left: 3%;
-  }
-  
-  #left:hover{
-      cursor: pointer;
-  }
-  
-  #right{
-      position: fixed;
-      right: 3%;
-      display: flex;
-      gap: 30px;
-      color: #2050F2;
-  }
-  
-  #button{
-      border:1px solid #2050F2; /* 设置边框为黑色，2像素宽 */
-      padding: 3px 10px; 
-      border-radius: 20px;
-      transition: transform 0.2s;
-  }
-  
-  #button:hover{
-      background-color: #2050F2;
-      color: #fff;
-      transition: transform 0.2s;
+body .cursor {
+    pointer-events: none; /* 确保光标不会阻止其他交互 */
   }
 
-  .list{
-    position: absolute;
-    top: 10%;
-    left: 5%;
+
+body .cursor__ball {
+  position: absolute;
+  top: 0;
+  left: 0;
+  mix-blend-mode: difference;
+  z-index: 2000;
+}
+
+body .cursor__ball circle{
+  fill: #f7f8fa;
+}
+
+/* cursor 默认尺寸更顺滑一点 */
+.cursor__ball{
+  transition: transform .18s ease;
+  transform: translate3d(0,0,0) scale(1);
+}
+
+/* 放大态：hover 到指定元素时触发 */
+.cursor.is-hovering .cursor__ball{
+  transform: translate3d(0,0,0) scale(2.2); /* 放大倍数你可调 1.6~2.8 */
+}
+
+#button{
+    background-color: #2050F2;
+    color: #fff;
+    padding: 3px 10px; 
+    border-radius: 20px;
+    transition: transform 0.2s;
+}
+
+#button a:hover{
+    color: #fff;
+}
+
+.cover{
+  min-height:100vh;
+  position:relative;
+  padding:24px 28px 48px;
+  display:flex;
+  flex-direction:column;
+  gap:28px;
+}
+
+.topbar{
+  position: fixed;
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+  font-size:12px;
+  z-index: 1000;
   }
+  .topbar .left{ font-weight:600; }
+
+  .rule{
+    position: absolute;
+    height:1px;
+    background:var(--line);
+    width:100%;
+    left: 0%;
+    top: 8%;
+    }
+  
+  *{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+margin:0;
+font-family: "itc-avant-garde-gothic-pro", sans-serif;
+font-weight: 300;
+font-style: normal;
+color:var(--text);
+background:var(--bg);
+}
+
+
+:root{
+  --bg:#ffffff;
+  --text:#111;
+  --line:#d9d9d9;
+  --pad:28px;
+}
+
+a{ color:inherit; text-decoration:none; }
+
+
+.page{
+  position:relative;
+  min-height:100vh;
+  padding: var(--pad);
+}
+
+/* 右上角作品名 */
+.title{
+  text-align: right;
+  position:fixed;
+  width: 60%;
+  top: 5%;
+  right: 5%;
+  font-size:70px;
+  font-weight:700;
+  letter-spacing:.01em;
+  line-height:0.9;
+  z-index: 100;
+}
+
+/* 右侧：同类作品 A/B/C/D，从底部往上排 */
+.side{
+  position: fixed;
+  right: 3%; 
+  bottom: 10%;             
+  width: 160px;
+  display:flex;
+  align-items:flex-end;
+  justify-content:flex-end;
+}
+
+/* 竖线 */
+.side::before{
+  content:"";
+  position:fixed;
+  right: 18%;
+  top:0;
+  bottom:0;
+  width:1px;
+  background: var(--line);
+}
+
+/* A/B/C/D 列：反向排列（底部开始往上） */
+.other-list{
+  display:flex;
+  flex-direction:column; /* ✅ 关键：从底往上 */
+  align-items:flex-start;
+  font-size:12px;
+  color: #d9d9d9;
+}
+
+.other-list a{
+  font-weight:300;
+  transition: font-weight .15s ease;
+  margin-top: -10px;
+}
+.other-list a:hover{
+  font-weight:700;
+}
+
+
+
+/* ===== bottom container ===== */
+.bottom{
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  height: 9%;          /* ✅ 统一高度（你可以改） */
+  z-index: 999;
+}
+
+/* ===== LEFT : PREV ===== */
+.nav-item.nav-prev{
+  width: 25%;
+  height: 100%;          /* 继承 bottom 高度 */
+  display: flex;
+  background: white;
+}
+
+.nav-item.nav-prev .sq{
+  width: 100%;
+  height: 100%;          /* ✅ 关键：填满父级 */
+  border: 1px solid #111;
+  background: transparent;
+  transition: background-color .18s ease;
+}
+
+.nav-item.nav-prev:hover .sq{
+  background: #2050F2;
+}
+
+
+.nav-item.nav-next{
+  width: 75%;
+  height: 100%;          /* 继承 bottom 高度 */
+  display: flex;
+}
+
+.nav-item.nav-next .sq{
+  width: 100%;
+  height: 100%;          /* ✅ 同样填满 */
+  border: 1px solid #111;
+  background: black;
+  transition: background-color .18s ease;
+}
+
+.nav-item.nav-next:hover .sq{
+  background: #2050F2;
+}
+
+
+
+
+.work{
+  position: absolute;
+  left: 28px;          
+  top: 20vh;           
+  width: 75vw;        
+  max-width: 1100px;   
+  z-index: 1;
+}
+
+
+/* 响应式：小屏略缩字号 */
+@media (max-width:900px){
+  .title{ font-size:44px; }
+  .side{ right: var(--pad); width: 120px; }
+  .other-list{ font-size:16px; }
+  .sq{ width:40px; height:40px; }
+}

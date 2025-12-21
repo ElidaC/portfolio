@@ -1,21 +1,6 @@
-
-h1{
-    color: black;
-    font-family: 'Courier New', Courier, monospace;
-    font-size: large;
-}
-
-.link{
-    position: absolute;
-    bottom: 0;
-    opacity: 0;
-}
-
-
 body {
   cursor: none;
   margin: 0;
-  display: flex;
   background-color: #fff;
 }
   
@@ -27,8 +12,7 @@ body a {
 }
 
 body .cursor {
-    pointer-events: none; /* 确保光标不会阻止其他交互 */
-
+    pointer-events: none; 
   }
 
 
@@ -37,64 +21,29 @@ body .cursor__ball {
   top: 0;
   left: 0;
   mix-blend-mode: difference;
-  z-index: 1000;
+  z-index: 2000;
 }
 
 body .cursor__ball circle {
   fill: #f7f8fa;
 }
 
-
-h3{
-    font-family: "epilogue", sans-serif;
-    font-weight: 100;
-    font-style: italic;
-    font-size: xx-large;
+/* cursor 默认尺寸更顺滑一点 */
+.cursor__ball{
+  transition: transform .18s ease;
+  transform: translate3d(0,0,0) scale(1);
 }
 
-h4{
-    font-family: "ff-seria", sans-serif;
-    font-weight: 500;
-    font-style: italic;
-    font-size: large;
-}
-
-.title{
-    display: flex;
-    z-index: 200;
-}
-
-#left{
-    position: fixed;
-    left: 3%;
-}
-
-#left:hover{
-    cursor: pointer;
-}
-
-#right{
-    position: fixed;
-    right: 3%;
-    display: flex;
-    gap: 30px;
-    color: #2050F2;
-}
-
-#right a{
-    color: #2050F2;
+/* 放大态：hover 到指定元素时触发 */
+.cursor.is-hovering .cursor__ball{
+  transform: translate3d(0,0,0) scale(2.2); /* 放大倍数你可调 1.6~2.8 */
 }
 
 #button{
-    border:1px solid #2050F2; 
-    padding: 3px 10px; 
-    border-radius: 20px;
-    transition: transform 0.2s;
-}
-
-#button:hover{
     background-color: #2050F2;
     color: #fff;
+    padding: 3px 10px; 
+    border-radius: 20px;
     transition: transform 0.2s;
 }
 
@@ -104,196 +53,409 @@ h4{
 
 
 
-a{
-    text-decoration: none;
-    color: black;
+h1{
+  color: black;
+  font-size: large;
+}
+
+:root{
+--bg:#ffffff;
+--text:#111;
+--line:#d9d9d9;
+--max:1200px;
+--gap:32px;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+body{
+margin:0;
+font-family: "itc-avant-garde-gothic-pro", sans-serif;
+font-weight: 300;
+font-style: normal;
+color:var(--text);
+background:var(--bg);
+}
+
+a{ color:inherit; text-decoration:none; }
+ul{ margin:0; padding:0; list-style:none; }
+
+
+.cover{
+min-height:100vh;
+position:relative;
+padding:24px 28px 48px;
+display:flex;
+flex-direction:column;
+gap:28px;
+
+background-image: url("ecbg.png"); 
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.topbar{
+position: fixed;
+display:flex;
+align-items:flex-start;
+justify-content:space-between;
+gap:10px;
+font-size:12px;
+z-index: 1000;
+}
+.topbar .left{ font-weight:600; }
+.topbar .center{
+flex:1;
+line-height:1.2;
+font-weight:300;
+position: fixed;
+left: 18%;
+}
+.topbar .right{
+position: fixed;
+top: -1%;
+right: 2%;
+font-weight:300;
+letter-spacing:.04em;
+text-decoration:none;
+cursor:pointer;
+white-space:nowrap;
+}
+.topbar .right:hover{
+  font-weight: 700;
+}
+.rule{
+position: absolute;
+height:1px;
+background:var(--line);
+width:100%;
+left: 0%;
+top: 8%;
+}
+
+.cover-center{
+flex:1;
+display:grid;
+place-items:center;
+position:relative;
 }
 
 
-.container {
-    position: absolute;
-    padding: 75px 0;
-    margin: 0 auto;
-    width: 100%;
-  }
-  
-  
-  .gallery-wrap {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: 70vh;
-  }
-  
-  .item {
-    margin-top: 100px;
-    flex: 1;
-    height: 100%;
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    transition: flex 0.8s ease, filter 0.8s ease;
-    filter: grayscale(1) blur(5px); /* 初始蓝白色调 + 模糊效果 */
-  }
-  
-  .item:hover {
-    flex: 7;
-    filter: grayscale(0) blur(0px); /* hover 时恢复正常颜色并去除模糊 */
-  }
-  
-  .item-1 {
-    background-image: url(cover/1.png);
-  }
-  
-  .item-2 {
-    background-image: url(cover/2.jpg);
-  }
-  
-  .item-3 {
-    background-image: url(cover/3.JPG);
-  }
-  
-  .item-4 {
-    background-image: url(cover/4.jpg);
-  }
-  
-  .item-5 {
-    background-image: url(cover/5.png);
-  }
-  
-  #line {
-    position: fixed; 
-    top: 70%; 
-    left: 50%; 
-    width: 0.5px; 
-    height: 300px;
-    background-color: black; 
-    z-index: -1;
-  }
-
-
-  .category {
-    position: absolute;
-    width: 100%;
-    top: 110%;
-    background-color: #fff;
-  }
-
-
-.category h1{
-    font-size: xxx-large;
-    font-family: "epilogue", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-    color: #2050F2;
-    margin-left: 250px;
+.hero{
+position:relative;
+width:min(900px, 92vw);
+height:320px;
+}
+.hero .name-main{
+position:absolute;
+left:50%;
+top:49%;
+transform:translate(-50%,-50%);
+font-size:86px;
+letter-spacing:.02em;
+font-weight:700;
+line-height:1;
+white-space:nowrap;
+}
+.hero .name-ghost{
+position:absolute;
+left:70%;
+top:52%;
+transform:translate(-50%,-50%);
+font-size:64px;
+font-style:italic;
+color:rgba(17,17,17,.18);
+font-weight:500;
+white-space:nowrap;
+}
+.hero .name-flip{
+position:absolute;
+left:37%;
+top:30%;
+transform:translate(-50%,-50%) rotate(180deg);
+font-size:86px;
+letter-spacing:.02em;
+font-weight:700;
+opacity:.9;
+white-space:nowrap;
+}
+.hero .subtitle{
+position:absolute;
+left:50%;
+top:70%;
+transform:translateX(-50%);
+text-align:center;
+font-size:14px;
+line-height:1.3;
+color:#222;
+font-weight:300;
 }
 
-.category h1:hover{
-    font-weight: 700;
+.scroll-hint{
+position:absolute;
+left:28px;
+bottom:18px;
+font-size:12px;
+color:var(--muted);
 }
-  
-#one:hover::after {
-    background-image: url(cover/one.png); 
-    opacity: 1; 
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 70%;
-    transform: translateX(-50%);
-    rotate: 30deg;
-    width: 130px; 
-    height: 130px; 
-    background-size: 130px 130px; 
-    background-repeat: no-repeat;
-    background-position: center;
-    border: 1px solid #2050F2; 
-    border-style: dashed;
-    padding: 8px; 
-    border-style: dotted;
-    transition: opacity 0.3s ease; 
+
+.section{
+  --mediaW: 45vw;
+  --mediaHoverW: 70vw; /* fallback */
+}
+
+
+.section{
+position:relative;
+margin-top: -100px;
+padding: 120px 0 80px; 
+padding-bottom: 140px; 
+overflow:hidden;
+border-top:1px solid var(--line);
+
+  opacity: 0;
+  transform: translateY(70px);      /* 原来 24px -> 70px 更明显 */
+  filter: blur(6px);                /* 轻微模糊，进场更有质感 */
+  transition:
+    opacity .85s cubic-bezier(.16, 1, .3, 1),
+    transform .85s cubic-bezier(.16, 1, .3, 1),
+    filter .85s cubic-bezier(.16, 1, .3, 1);
+  will-change: opacity, transform, filter;
+}
+
+.section.is-visible{
+  opacity: 1;
+  transform: translateY(0);
+  filter: blur(0);
+}
+
+/* 子元素错位进入：文字先，图片后（更“明显”但不浮夸） */
+.section .text-pane{
+  opacity: 0;
+  transform: translateY(34px);
+  transition:
+    opacity 1.75s cubic-bezier(.16, 1, .3, 1),
+    transform 1.75s cubic-bezier(.16, 1, .3, 1);
+  transition-delay: .08s;
+  padding-left: 140px;   
+}
+
+
+
+.section.is-visible .text-pane,
+.section.is-visible .edge-media{
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* 无障碍：用户系统设置“减少动效”时关闭动画 */
+@media (prefers-reduced-motion: reduce){
+  .section, .section .text-pane, .section .edge-media{
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+    opacity: 1 !important;
   }
-  
-  #two:hover::after {
-    background-image: url(cover/two.png); 
-    opacity: 1; 
-    content: "";
-    position: absolute;
-    top: 15%;
-    left: 60%;
-    transform: translateX(-50%);
-    rotate: 10deg;
-    width: 130px; 
-    height: 130px; 
-    background-size: 130px 130px; 
-    background-repeat: no-repeat;
-    background-position: center;
-    border: 1px solid #2050F2; 
-    border-style: dotted;
-    padding: 8px; 
-    box-sizing: content-box;
-    transition: opacity 0.3s ease; 
-  }
-  
-  #three:hover::after {
-    background-image: url(cover/three.png); 
-    opacity: 1; 
-    content: "";
-    position: absolute;
-    top: 30%;
-    left: 65%;
-    transform: translateX(-50%);
-    rotate: -5deg;
-    width: 130px; 
-    height: 130px; 
-    background-size: 130px 130px; 
-    background-repeat: no-repeat;
-    background-position: center;
-    border: 1px solid #2050F2; 
-    border-style: dotted;
-    padding: 8px; 
-    box-sizing: content-box;
-    transition: opacity 0.3s ease; 
-  }
-  
-  #four:hover::after {
-    background-image: url(cover/four.png); 
-    opacity: 1; 
-    content: "";
-    position: absolute;
-    top: 55%;
-    left: 67%;
-    transform: translateX(-50%);
-    rotate: 20deg;
-    width: 130px; 
-    height: 130px; 
-    background-size: 130px 130px; 
-    background-repeat: no-repeat;
-    background-position: center;
-    border: 1px solid #2050F2; 
-    border-style: dotted;
-    padding: 8px; 
-    box-sizing: content-box;
-    transition: opacity 0.3s ease; 
-  }
-  
-  #five:hover::after {
-    background-image: url(cover/five.jpg); 
-    opacity: 1; 
-    content: "";
-    position: absolute;
-    top: 60%;
-    left: 60%;
-    transform: translateX(-50%);
-    rotate: -10deg;
-    width: 130px; 
-    height: 130px; 
-    background-size: 130px 130px; 
-    background-repeat: no-repeat;
-    background-position: center;
-    border: 1px solid #2050F2; 
-    border-style: dotted;
-    padding: 8px; 
-    box-sizing: content-box;
-    transition: opacity 0.3s ease; 
-  }
+}
+
+
+.split{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background-color: transparent;
+  align-items: start; /* ✅ 让两列从上对齐，不强行拉伸 */
+}
+
+/* 左右交错：data-side 控制图片区在左还是右 */
+.section[data-side="right"] .split{ direction:rtl; }
+.section[data-side="right"] .split > *{ direction:ltr; }
+
+/* ========== 文字侧：白底网格 ========== */
+.text-pane{
+position:relative;
+padding:28px;
+background:
+  linear-gradient(to right, rgba(0,0,0,0) 1px, transparent 1px),
+  linear-gradient(to bottom, rgba(0,0,0,0) 1px, transparent 1px);
+background-size: var(--gridSize) var(--gridSize);
+background-color:#fff;
+}
+
+/* breadcrumb / info 文字（像你截图） */
+.crumbs{
+font-size:14px;
+letter-spacing:.02em;
+opacity:.9;
+}
+.big-title{
+margin:10vh 0 0;     /* 把标题推到中下位置 */
+font-size:56px;
+font-weight:700;
+line-height: 50px;
+color:black;
+}
+
+/* works list */
+.works{
+  margin-top: 15px;
+font-size:14px;
+max-width: 420px;
+}
+.works a{
+display:flex;
+margin-top: -2px;
+align-items:center;
+opacity:.92;
+}
+.works a .idx{
+width:28px;
+color:rgba(0,0,0,0);
+font-variant-numeric: tabular-nums;
+}
+.works a:hover{
+font-weight: 700;
+}
+.works a:hover .label{
+text-decoration: none;
+}
+
+
+/* ========== 图片侧：贴边 + hover 变宽 ========== */
+.media-pane{
+position:relative; /* 仅用于占位：真正贴边的是 .edge-media */
+background:#fff;
+}
+
+/* 贴边媒体层：永远挨着浏览器边缘 */
+.edge-media{
+position:absolute;
+top:0; bottom:0;
+width: var(--mediaW);
+transition: width .28s ease;
+z-index:5;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+/* ===== image shuffle ===== */
+.edge-media.shuffle{
+  position: absolute;
+  overflow: hidden;
+}
+
+.shuffle-img{
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+
+  opacity: 0;
+  transition: opacity .6s ease;
+}
+
+/* 当前显示的那一张 */
+.shuffle-img.is-active{
+  opacity: 1;
+}
+
+/* 根据 section side 决定贴哪边 */
+.section[data-side="left"]  .edge-media{ right:0; }
+.section[data-side="right"] .edge-media{ left:0; }
+
+
+.edge-media img{
+width:100%;
+height:100%;
+display:block;
+}
+
+/* ================= 第 5 个：4 图 + 中间 heading 覆盖 ================= */
+.final{
+border-top:1px solid var(--line);
+padding:0;
+min-height:92vh;
+position:relative;
+overflow:hidden;
+}
+
+.final-wrap{
+position:relative;
+min-height:92vh;
+}
+
+.final-gallery{
+height:92vh;
+display:flex;
+}
+
+.final-item{
+position:relative;
+flex:1;
+overflow:hidden;
+transition:flex .32s ease, opacity .32s ease, filter .32s ease;
+opacity:.65;
+filter:saturate(.95) contrast(.95);
+}
+
+.final-item img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:block;
+transform:scale(1.02);
+transition:transform .45s ease;
+}
+
+/* hover 某张变宽 + 更清晰 */
+.final-item:hover{
+flex:1.7;
+opacity:1;
+filter:saturate(1.05) contrast(1.02);
+}
+.final-item:hover img{ transform:scale(1.05); }
+
+.final-sub{
+position:absolute;
+left:14px;
+right:14px;
+bottom:14px;
+font-size:13px;
+letter-spacing:.02em;
+color:white;
+padding:8px 10px;
+border-radius:12px;
+backdrop-filter: blur(6px);
+}
+
+/* 中间 heading 覆盖 */
+.final-center{
+position:absolute;
+inset:0;
+display:grid;
+place-items:center;
+text-align:center;
+pointer-events:none;
+}
+.final-center h2{
+margin:0;
+font-size:56px;
+letter-spacing:.02em;
+color:#fff;
+text-shadow:0 10px 26px rgba(0,0,0,.35);
+}
+.final-center p{
+margin:10px 0 0;
+color:rgba(255,255,255,.82);
+font-size:14px;
+}
+
+/* ================= responsive ================= */
+@media (max-width:900px){
+.split{ grid-template-columns:1fr; }
+.media-pane{ display:none; }        /* 小屏直接隐藏贴边大图，避免挤压 */
+.big-title{ margin-top:22vh; font-size:40px; }
+.final-gallery{ height:92vh; }
+}
