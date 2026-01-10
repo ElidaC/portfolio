@@ -8,52 +8,33 @@
   <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     <title>Sculpture</title>
 </head>
+
 <body>
-    <div class="cursor">
-        <div class="cursor__ball cursor__ball--big">
-          <svg height="30" width="30">
-            <circle cx="15" cy="15" r="12" stroke-width="0"></circle>
-          </svg>
-        </div>
-        
-        <div class="cursor__ball cursor__ball--small">
-          <svg height="10" width="10">
-            <circle cx="5" cy="5" r="4" stroke-width="0"></circle>
-          </svg>
-        </div>
-      </div>
+  <header class="cover" id="top">
+    <div class="topbar">
+      <div class="left" id="button"><a href="../index.html">EC World</a></div>
+    </div>
+  </header>
 
-      
-      <header class="cover" id="top" >
-        <div class="topbar">
-          <div class="left" id="button"><a href="../index.html">EC World</a></div>
-      </div>
-      </header>
+  <div class="tags" id="tags">
+    <div class="tag" data-tag="sculpture">SCULPTURE</div>
+    <div class="tag" data-tag="painting">PAINTING</div>
+    <div class="tag" data-tag="mixed-media">MIXED MEDIA</div>
+    <div class="tag is-active" data-tag="printmaking">PRINTMAKING</div>
+  </div>
 
+  <!-- stage -->
+  <div class="stage">
+    <div class="rail">
+      <div class="track" id="track"></div>
+    </div>
+  </div>
 
-
-
-        <div class="tags" id="tags">
-            <div class="tag" data-tag="sculpture">SCULPTURE</div>
-            <div class="tag" data-tag="painting">PAINTING</div>
-            <div class="tag" data-tag="mixed-media">MIXED MEDIA</div>
-            <div class="tag is-active" data-tag="printmaking">PRINTMAKING</div>
-          </div>
-    
-      <!-- stage -->
-      <div class="stage">
-        <div class="rail">
-          <div class="track" id="track"></div>
-        </div>
-      </div>
-    
-      <div class="hud" id="hud">01 / 01</div>
-    
+  <div class="hud" id="hud">01 / 01 </div>
+  <div class="hint">→</div>
 
 
-
-
-      <script src="../fineart.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+  <script src="../fineart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
 </body>
 </html>

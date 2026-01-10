@@ -1,60 +1,321 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://use.typekit.net/sty5dnx.css">
-    <link rel="stylesheet" href="../fineart.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://use.typekit.net/sty5dnx.css">
+  <link rel="stylesheet" href="../fineart.css">
   <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon">
-    <title>Sculpture</title>
+  <title>Sculpture</title>
 </head>
+
 <body>
-    <div class="cursor">
-        <div class="cursor__ball cursor__ball--big">
-          <svg height="30" width="30">
-            <circle cx="15" cy="15" r="12" stroke-width="0"></circle>
-          </svg>
-        </div>
-        
-        <div class="cursor__ball cursor__ball--small">
-          <svg height="10" width="10">
-            <circle cx="5" cy="5" r="4" stroke-width="0"></circle>
-          </svg>
-        </div>
-      </div>
+  <header class="cover" id="top">
+    <div class="topbar">
+      <div class="left" id="button"><a href="../index.html">EC World</a></div>
+    </div>
+  </header>
 
-      
-        <header class="cover" id="top" >
-          <div class="topbar">
-            <div class="left" id="button"><a href="../index.html">EC World</a></div>
-        </div>
-        </header>
+  <div class="tags" id="tags">
+    <div class="tag is-active" data-tag="sculpture" >SCULPTURE</div>
+    <div class="tag" data-tag="painting" >PAINTING</div>
+    <div class="tag" data-tag="mixed-media">MIXED MEDIA</div>
+    <div class="tag" data-tag="printmaking">PRINTMAKING</div>
+  </div>
+
+  <!-- stage -->
+  <div class="stage">
+    <div class="rail">
+      <div class="track" id="track"></div>
+    </div>
+  </div>
+
+  <div class="hud" id="hud">01 / 01 </div>
+  <div class="hint">→</div>
+
+
+  <div id="works-source" hidden>
+    <article class="work"
+      data-id="sculpt-01"
+      data-tags="sculpture"
+      data-title="Triangular Blooming1"
+      data-desc="Metal">
+      <img src="sculpture/body1.JPG" alt="">
+      <img src="sculpture/body2.JPG" alt="">
+      <img src="sculpture/body3.JPG" alt="">
+      <img src="sculpture/body4.JPG" alt="">
+    </article>
+
+    <article class="work"
+      data-id="sculpt-02"
+      data-tags="sculpture"
+      data-title="Triangular Blooming2"
+      data-desc="Metal">
+      <img src="sculpture/bracelet.JPG" alt="">
+    </article>
+
+    <article class="work"
+      data-id="sculpt-03"
+      data-tags="sculpture"
+      data-title="I remember..."
+      data-desc="Wood, plaster, calligraphy pen, rice paper...">
+      <img src="sculpture/calligraphypen.png" alt="">
+    </article>
+
+    <article class="work"
+      data-id="sculpt-04"
+      data-tags="sculpture"
+      data-title="Walk Through Strokes"
+      data-desc="Wood, ink, rice paper, acrylic painting...">
+      <img src="sculpture/csy.JPG" alt="">
+    </article>
+
+    <article class="work"
+      data-id="sculpt-05"
+      data-tags="sculpture"
+      data-title="Cubicity"
+      data-desc="Wood, plastic bag, plaster, chip board, wire, sewing thread...">
+      <img src="sculpture/cube.jpg" alt="">
+    </article>
+
+    <article class="work"
+      data-id="sculpt-06"
+      data-tags="sculpture"
+      data-title="Light the Path"
+      data-desc="Wood, UV resin, acrylic painting, quartz sand...">
+      <img src="sculpture/light1.jpg" alt="">
+      <img src="sculpture/light2.jpg" alt="">
+    </article>
+
+    <article class="work"
+      data-id="sculpt-07"
+      data-tags="sculpture"
+      data-title="Distortion"
+      data-desc="Bristal paper, wood stick...">
+      <img src="sculpture/park.gif" alt="">
+    </article>
+
+    <article class="work"
+      data-id="sculpt-08"
+      data-tags="sculpture"
+      data-title="Tentacles"
+      data-desc="Rice paper, aluminum foil, plastic paper, acrylic painting...">
+      <img src="sculpture/Tentacles.jpg" alt="">
+    </article>
 
 
 
 
-        <div class="tags" id="tags">
-            <div class="tag is-active" data-tag="sculpture">SCULPTURE</div>
-            <div class="tag" data-tag="painting">PAINTING</div>
-            <div class="tag" data-tag="mixed-media">MIXED MEDIA</div>
-            <div class="tag" data-tag="printmaking">PRINTMAKING</div>
-          </div>
+
+
+    <article class="work"
+      data-id="painting-01"
+      data-tags="painting"
+      data-title="Bloom in Motion"
+      data-desc="Acrylic on canvas">
+      <img src="painting/hua1.png" alt="">
+      <img src="painting/hua2.png" alt="">
+    </article>
+
+    <article class="work"
+      data-id="painting-02"
+      data-tags="painting"
+      data-title="Time and Tide"
+      data-desc="Acrylic on cartboard">
+      <img src="painting/grandma.JPG" alt="">
+    </article>
+
+    <article class="work"
+      data-id="painting-03"
+      data-tags="painting"
+      data-title="Untitled"
+      data-desc="Oil on paper">
+      <img src="painting/container.png" alt="">
+    </article>
+
+    <article class="work"
+      data-id="painting-04"
+      data-tags="painting"
+      data-title="Fruitful Life"
+      data-desc="Posca on canvas">
+      <img src="painting/color.JPG" alt="">
+    </article>
+
+    <article class="work"
+      data-id="painting-05"
+      data-tags="painting"
+      data-title="Still Nooks"
+      data-desc="Acrylic on wooden plank">
+      <img src="painting/room1.png" alt="">
+    </article>
+
+    <article class="work"
+      data-id="painting-06"
+      data-tags="painting"
+      data-title="Fallen Angel"
+      data-desc="Acrylic and posca on cartboard">
+      <img src="painting/evil.jpg" alt="">
+    </article>
+
+    <article class="work"
+      data-id="painting-07"
+      data-tags="painting"
+      data-title="Into the Corner"
+      data-desc="Acrylic on cnavas">
+      <img src="painting/room2.JPG" alt="">
+    </article>
+
+    <article class="work"
+      data-id="painting-08"
+      data-tags="painting"
+      data-title="Back in Time"
+      data-desc="Charcoal on cartboard">
+      <img src="painting/machine.JPG" alt="">
+    </article>
+
+    <article class="work"
+      data-id="painting-09"
+      data-tags="painting"
+      data-title="Untitled"
+      data-desc="Acrylic on wood">
+      <img src="painting/color2.jpg" alt="">
+    </article>
+
+    <article class="work"
+      data-id="painting-10"
+      data-tags="painting"
+      data-title="In Breath..."
+      data-desc="Acrylic on canvas">
+      <img src="painting/hua3.png" alt="">
+    </article>
+
+    <article class="work"
+      data-id="painting-11"
+      data-tags="painting"
+      data-title="Vision"
+      data-desc="Oil on canvas">
+      <img src="painting/stilllife.jpg" alt="">
+    </article>
+
+    <article class="work"
+      data-id="painting-12"
+      data-tags="painting"
+      data-title="Inside-out"
+      data-desc="Acrylic on cartboard">
+      <img src="painting/figure.png" alt="">
+    </article>
+
+
+
+
+
+
+
+    <article class="work"
+    data-id="mixed-01"
+    data-tags="mixed-media"
+    data-title="Trapped Light "
+    data-desc="UV resin, cable, light bolb, thread, cartboard...">
+    <img src="mixed-media/box1.JPG" alt="">
+    <img src="mixed-media/box2.JPG" alt="">
+    <img src="mixed-media/box3.JPG" alt="">
+  </article>
+
+    <article class="work"
+      data-id="mixed-02"
+      data-tags="mixed-media"
+      data-title="Natural Paradise"
+      data-desc="Cartboard, acrylic paints, cup holder, thread, straw, tree bark...">
+      <img src="mixed-media/hill.gif" alt="">
+    </article>
+
+    <article class="work"
+      data-id="mixed-03"
+      data-tags="mixed-media"
+      data-title="Hide in Ink"
+      data-desc="Rice paper, ink, bedsheet...">
+      <img src="mixed-media/hide-in-ink.jpg" alt="">
+    </article>
+
+    <article class="work"
+      data-id="mixed-04"
+      data-tags="mixed-media"
+      data-tags="Superficial Man"
+      data-desc="Clay, fabric, recycled paper, color pencil, newspaper...">
+      <img src="mixed-media/moneyhill.JPG" alt="">
+    </article>
+
+    <article class="work"
+      data-id="mixed-05"
+      data-tags="mixed-media"
+      data-tags="Stop the Train..."
+      data-desc="Paper from recycled book, acrylic paints, cartboard...">
+      <img src="mixed-media/bridge.jpg" alt="">
+    </article>
+
     
-      <!-- stage -->
-      <div class="stage">
-        <div class="rail">
-          <div class="track" id="track"></div>
-        </div>
-      </div>
-    
-      <div class="hud" id="hud">01 / 01 </div>
-      <div class="hint">→</div>
-    
 
 
 
 
-      <script src="../fineart.js"></script>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+
+
+    <article class="work"
+      data-id="print-01"
+      data-tags="printmaking"
+      data-title="I AM..."
+      data-desc="Letterpress on business cards">
+      <img src="printmaking/card2.png" alt="">
+      <img src="printmaking/card3.png" alt="">
+    </article>
+
+    <article class="work"
+    data-id="print-01"
+    data-tags="printmaking"
+    data-title="Floral Illusion"
+    data-desc="Lithography">
+    <img src="printmaking/eye-.png" alt="">
+    <img src="printmaking/eye.jpg" alt="">
+  </article>
+
+    <article class="work"
+      data-id="print-01"
+      data-tags="printmaking"
+      data-title="Let's Call It A Style!"
+      data-desc="Letterpress on paper">
+      <img src="printmaking/word1.png" alt="">
+      <img src="printmaking/word2.png" alt="">
+    </article>
+
+    <article class="work"
+      data-id="print-01"
+      data-tags="printmaking"
+      data-title="Where Dots Hesitate"
+      data-desc="Silkscreen - screenprinting">
+      <img src="printmaking/kusama1.png" alt="">
+      <img src="printmaking/kusama.png" alt="">
+    </article>
+
+    <article class="work"
+      data-id="print-01"
+      data-tags="printmaking"
+      data-title="Untitled"
+      data-desc="Letterpress on postcards">
+      <img src="printmaking/bird2.png" alt="">
+      <img src="printmaking/bird3.png" alt="">
+    </article>
+
+    <article class="work"
+      data-id="print-01"
+      data-tags="printmaking"
+      data-title="The Act of Transforming"
+      data-desc="Pressprinting">
+      <img src="printmaking/flower1.png" alt="">
+      <img src="printmaking/flower2.png" alt="">
+    </article>
+  </div>
+
+  <script src="../fineart.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
 </body>
 </html>

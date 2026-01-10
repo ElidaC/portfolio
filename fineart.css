@@ -78,7 +78,7 @@ body {
         --muted:#666;
         --line: #d9d9d9;
       
-        --artH: 52vh;
+        --artH: 60vh;
         --stageShift: -6vh;
       
         --gap: 56px;
@@ -194,7 +194,7 @@ body {
         position:fixed;
         left: 0;
         right: 0;
-        bottom: calc(var(--pad) + 80px);
+        bottom: calc(var(--pad) + 70px);
         display:flex;
         justify-content:center;
         z-index:45;
@@ -217,7 +217,7 @@ body {
         font-size:13px;
         color:var(--muted);
         line-height:1.55;
-        max-width: 78ch;
+        max-width: 150ch;
       }
       
       /* HUD 可选 */
