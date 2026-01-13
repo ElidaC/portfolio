@@ -39,3 +39,22 @@ uniq.forEach(el => {
   el.addEventListener('mouseenter', () => onMouseHover(scale));
   el.addEventListener('mouseleave', onMouseHoverOut);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

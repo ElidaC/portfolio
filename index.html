@@ -241,5 +241,19 @@
 
 <script src="home.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.1/gsap.min.js"></script>
+<script>
+  // 记录滚动位置
+  window.addEventListener("beforeunload", () => {
+    sessionStorage.setItem("scrollPos", window.scrollY);
+  });
+
+  // 恢复滚动位置
+  window.addEventListener("load", () => {
+    const pos = sessionStorage.getItem("scrollPos");
+    if (pos) {
+      window.scrollTo(0, parseInt(pos));
+    }
+  });
+</script>
 </body>
 </html>
