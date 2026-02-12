@@ -1,0 +1,254 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="https://use.typekit.net/fkd1thh.css">
+  <title>Listening in Between — Map</title>
+  <style>
+
+    :root{
+      --bg1:#f3f3f3;
+      --bg2:#e9e9e9;
+      --ink:#111;
+      --muted:#6b6b6b;
+      --pad:64px;
+
+      --font-serif: font-family: "instrument-serif", sans-serif;
+    --font-weight: 400;
+    --font-style: normal;
+    }
+    html,body{height:100%; margin:0;}
+    body{
+      overflow:hidden;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 700px at 10% 15%, rgba(0,0,0,.08), transparent 55%),
+        radial-gradient(900px 600px at 90% 20%, rgba(0,0,0,.06), transparent 58%),
+        radial-gradient(1000px 700px at 20% 90%, rgba(0,0,0,.06), transparent 55%),
+        radial-gradient(900px 600px at 95% 85%, rgba(0,0,0,.07), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+    }
+
+    .stage{
+      position:relative;
+      height:100%;
+      width:100%;
+    }
+
+    /* back arrow */
+    .back{
+      position:absolute;
+      left:42px;
+      bottom:42px;
+      display:flex;
+      align-items:center;
+      gap:14px;
+      cursor:pointer;
+      user-select:none;
+      color:rgba(0,0,0,.55);
+      z-index:20;
+      text-decoration:none;
+    }
+    .back .shaft{
+      width:52px; height:1px;
+      background:rgba(0,0,0,.45);
+      position:relative;
+    }
+    .back .shaft::before{
+      content:"";
+      position:absolute;
+      left:-2px; top:50%;
+      width:10px; height:10px;
+      border-left:1.5px solid rgba(0,0,0,.45);
+      border-bottom:1.5px solid rgba(0,0,0,.45);
+      transform:translateY(-50%) rotate(45deg);
+    }
+    .back:hover{ color:rgba(0,0,0,.8); }
+
+    /* circles */
+    .circle{
+      position:absolute;
+      width:54px;
+      height:54px;
+      border-radius:50%;
+      background:#000;
+      transform:translate(-50%,-50%);
+      opacity:.12;
+      transition:opacity 250ms ease, transform 250ms ease, filter 250ms ease;
+      cursor:pointer;
+      z-index:6;
+    }
+    .circle.active{
+      opacity:1;
+      transform:translate(-50%,-50%) scale(1.02);
+    }
+    .circle:hover{
+      opacity:1;
+      transform:translate(-50%,-50%) scale(1.06);
+    }
+
+    /* tooltip preview (hover) */
+    .tip{
+      position:absolute;
+      min-width:220px;
+      max-width:280px;
+      padding:12px 12px 10px;
+      background:rgba(255,255,255,.88);
+      border:1px solid rgba(0,0,0,.12);
+      border-radius:10px;
+      backdrop-filter: blur(6px);
+      box-shadow: 0 10px 24px rgba(0,0,0,.10);
+      transform:translate(12px, -50%);
+      pointer-events:none;
+      opacity:0;
+      transition:opacity 150ms ease;
+      z-index:30;
+    }
+    .tip.on{ opacity:1; }
+    .tip .thumb{
+      width:100%;
+      aspect-ratio: 16/9;
+      border-radius:8px;
+      background:#ddd;
+      overflow:hidden;
+      margin-bottom:10px;
+      position:relative;
+    }
+    .tip .thumb img{
+      width:100%; height:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .tip .title{
+      font-size:16px;
+      margin:0 0 4px 0;
+    }
+    .tip .meta{
+      margin:0;
+      font-size:13px;
+      color:rgba(0,0,0,.55);
+    }
+
+    /* phrases */
+    .phrase{
+      position:absolute;
+      font-size:26px;
+      color:rgba(0,0,0,.92);
+      white-space:nowrap;
+      transform-origin: 50% 50%;
+      opacity:0;
+      z-index:4;
+      pointer-events:none;
+      filter: blur(0px);
+      transition:opacity 500ms ease, transform 900ms ease;
+    }
+    .phrase.show{
+      opacity:1;
+    }
+    .phrase.fade{
+      opacity:0;
+    }
+
+    .mode{
+  /* tweakables */
+  --w: 200px;
+  --h: 40px;
+  --knob: 16px;
+
+  position:absolute;
+  right:54px;
+  top:50%;
+  transform:translateY(-50%);
+  width:var(--w);
+  height:var(--h);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:50;
+  user-select:none;
+}
+
+.mode .track{
+  width:100%;
+  height:2px;
+  background:rgba(0,0,0,.35);
+  position:relative;
+}
+
+.mode .knob{
+  position:absolute;
+  top:50%;
+  width:var(--knob);
+  height:var(--knob);
+  border-radius:50%;
+  background:#000;
+  transform:translateY(-50%);   /* only center vertically */
+  left: var(--knobLeft, 0px);   /* pixel-perfect */
+  cursor:grab;
+  touch-action:none;
+}
+
+/* labels aligned to the line ends */
+.mode .label{
+  position:absolute;
+  top:18px;
+  font-size:13px;
+  color:rgba(0,0,0,.8);
+  line-height:1;
+  white-space:nowrap;
+}
+
+.mode .label.left{
+  left:0;
+}
+
+.mode .label.right{
+  right:0;
+}
+
+    .fade{
+      position:fixed;
+      inset:0;
+      background:rgba(255,255,255,.92);
+      opacity:0;
+      pointer-events:none;
+      transition:opacity 420ms ease;
+      z-index:999;
+    }
+    .fade.on{ opacity:1; }
+
+    /* subtle “axes” hint (optional, invisible by default) */
+    .axisHint{
+      position:absolute;
+      left:40px;
+      top:36px;
+      font-size:12px;
+      color:rgba(0,0,0,.38);
+      user-select:none;
+      display:none;
+    }
+  </style>
+</head>
+<body>
+  <div class="stage" id="stage">
+    <a class="back" href="index.html" aria-label="Back to landing">
+      <div class="shaft"></div>
+    </a>
+
+    <div class="mode" aria-label="Mode slider">
+      <div class="track" id="track">
+        <div class="knob" id="knob" role="slider" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.5"></div>
+        <div class="label left">ON</div>
+        <div class="label right">OFF</div>
+      </div>
+    </div>
+
+    <div class="axisHint">x: years (0–21), y: volume (0–10)</div>
+  </div>
+
+  <div class="fade" id="fade"></div>
+
+  <script src="map.js"></script>
+</body>
+</html>

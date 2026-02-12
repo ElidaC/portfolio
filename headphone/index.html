@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="https://use.typekit.net/fkd1thh.css">
+  <title>Landing</title>
+  <style>
+    :root{
+      --bg1:#f7f7f7;
+      --ink:#111;
+      --muted:#777;
+
+      --font-serif: font-family: "instrument-serif", sans-serif;
+    --font-weight: 400;
+    --font-style: normal;
+    }
+    html,body{height:100%;margin:0}
+    body{
+      overflow:hidden;
+      color:var(--ink);
+      background:
+        radial-gradient(1200px 700px at 10% 15%, rgba(0,0,0,.08), transparent 55%),
+        radial-gradient(900px 600px at 90% 20%, rgba(0,0,0,.06), transparent 58%),
+        radial-gradient(1000px 700px at 20% 90%, rgba(0,0,0,.06), transparent 55%),
+        radial-gradient(900px 600px at 95% 85%, rgba(0,0,0,.07), transparent 55%),
+        linear-gradient(180deg, var(--bg1), var(--bg2));
+    }
+    .wrap{
+      position:relative;
+      width:100%;
+      height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:64px;
+      box-sizing:border-box;
+    }
+    .title{
+      max-width:min(980px, 92vw);
+      font-size: clamp(44px, 6.2vw, 92px);
+      line-height:1.02;
+      letter-spacing:-0.01em;
+      font-weight:400;
+    }
+    .title .brace{font-size:1.05em}
+    .title .underline{
+      display:inline-block;
+      position:relative;
+      padding-bottom:.06em;
+      cursor:pointer;
+    }
+    .title .underline::after{
+      content:"";
+      position:absolute;
+      left:0;right:0;bottom:-.08em;
+      height:1.5px;
+      background:rgba(0,0,0,.9);
+      transform-origin:left;
+      transform:scaleX(.25);
+      transition:transform .45s ease;
+    }
+    .title .underline:hover::after{transform:scaleX(1)}
+    .hint{
+      position:absolute;
+      bottom:38px;
+      left:50%;
+      transform:translateX(-50%);
+      font-size:14px;
+      color:var(--muted);
+      user-select:none;
+      display:flex;
+      align-items:center;
+      gap:10px;
+      letter-spacing:.04em;
+    }
+    .hint .line{
+      width:56px;height:1px;background:rgba(0,0,0,.25);
+    }
+    /* 过渡遮罩 */
+    .fade{
+      pointer-events:none;
+      position:fixed;inset:0;
+      background:var(--bg1);
+      opacity:0;
+      transition:opacity .6s ease;
+    }
+    .fade.on{opacity:1}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="title">
+      <span class="brace">{</span>How would you<br/>
+      describe your<br/>
+      “<span class="underline" id="enter">headphone world</span>”<span class="brace">}</span> ?
+    </div>
+
+  </div>
+
+  <div class="fade" id="fade"></div>
+
+  <script>
+    const fade = document.getElementById('fade');
+    const enter = document.getElementById('enter');
+
+    function go(){
+      fade.classList.add('on');
+      setTimeout(()=>location.href='map.html', 520);
+    }
+
+    enter.addEventListener('click', go);
+
+    // 滚轮进入（只触发一次）
+    let fired = false;
+    window.addEventListener('wheel', (e)=>{
+      if(fired) return;
+      if(e.deltaY > 18){ fired = true; go(); }
+    }, {passive:true});
+
+    // 轻微拖动进入（移动端也可）
+    let startY = null;
+    window.addEventListener('pointerdown', (e)=>{ startY = e.clientY; });
+    window.addEventListener('pointerup', (e)=>{
+      if(fired || startY==null) return;
+      const dy = startY - e.clientY;
+      if(dy > 60){ fired = true; go(); }
+      startY = null;
+    });
+  </script>
+</body>
+</html>

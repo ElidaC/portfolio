@@ -1,0 +1,106 @@
+:root{
+  --font-serif: font-family: "instrument-serif", sans-serif;
+  --font-weight: 400;
+  --font-style: normal;
+      --bg1:#f3f3f3;
+      --bg2:#e9e9e9;
+      --ink:#111;
+      --muted:#6b6b6b;
+
+
+    --bar-track: rgba(0,0,0,.35);
+    --bar-label: rgba(0,0,0,.8);
+    --bar-knob: #000;
+  
+    --bar-width: 240px;
+    --bar-height: 40px;
+    --bar-knob-size: 16px;
+    --bar-line-height: 2px;
+  
+    /* 位置：默认右侧垂直居中 */
+    --bar-right: 54px;
+    --bar-top: 50%;
+  }
+
+  /* page-common.css */
+html,body{height:100%; margin:0;}
+body{
+  overflow:hidden;
+  font-family: var(--font-serif);
+  color:#111;
+  background:
+    radial-gradient(1200px 700px at 10% 15%, rgba(0,0,0,.08), transparent 55%),
+    radial-gradient(900px 600px at 90% 20%, rgba(0,0,0,.06), transparent 58%),
+    radial-gradient(1000px 700px at 20% 90%, rgba(0,0,0,.06), transparent 55%),
+    radial-gradient(900px 600px at 95% 85%, rgba(0,0,0,.07), transparent 55%),
+    linear-gradient(180deg, #f3f3f3, #e9e9e9);
+}
+.fade{
+  position:fixed;
+  inset:0;
+  background:rgba(255,255,255,.92);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 420ms ease;
+  z-index:999;
+}
+.fade.on{opacity:1;}
+  
+  .modeBar{
+    position:absolute;
+    right: var(--bar-right);
+    top: var(--bar-top);
+    transform: translateY(-50%);
+    width: var(--bar-width);
+    height: var(--bar-height);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:50;
+    user-select:none;
+  }
+  
+  .modeBar__track{
+    width:100%;
+    height: var(--bar-line-height);
+    background: var(--bar-track);
+    position:relative;
+  }
+  
+  .modeBar__knob{
+    position:absolute;
+    top:50%;
+    width: var(--bar-knob-size);
+    height: var(--bar-knob-size);
+    border-radius:50%;
+    background: var(--bar-knob);
+    transform: translate(-50%,-50%);
+    left: 50%;
+    cursor: grab;
+    touch-action:none;
+  }
+  
+  .modeBar__label{
+    position:absolute;
+    top: 18px;
+    font-size:12px;
+    color: var(--bar-label);
+    letter-spacing:.02em;
+    font-family: var(--font-serif);
+  }
+  
+  .modeBar__label--left{
+    left:-4px;
+    transform: translateX(-100%);
+  }
+  
+  .modeBar__label--right{
+    right:-4px;
+    transform: translateX(100%);
+  }
+  
+  .modeBar__label--mid{
+    left:50%;
+    transform: translateX(-50%);
+    opacity: var(--bar-mid-opacity, 0);
+  }
