@@ -1,274 +1,463 @@
+
+const DATA = [
+  {
+    id: "p01",
+    years: 4,
+    volume: 5,
+    size: 75, 
+    thumb: "bg/amaya2.png", 
+    imgA: "bg/amaya2.png",  
+    imgB: "bg/amaya1.png",  
+    title: "Reflective Shelter",
+    link: "world/amaya.html",
+    accent: "beige",
+    info: {
+      interviewee: "Amaaya V.E.",
+      device: "AirPods",
+      volume: "5/10",
+      experience: "4 years",
+      moment: "when walking & working out",
+    },
+  },
+
+  {
+    id: "p02",
+    years: 10,
+    volume: 5,
+    size: 75, 
+    thumb: "bg/ashley2.png", 
+    imgA: "bg/ashley2.png",  
+    imgB: "bg/ashley1.png",  
+    title: "Rhythmic Calm",
+    link: "world/ashley.html",
+    accent: "skyblue",
+    info: {
+      interviewee: "Ashley S.",
+      device: "AirPods Pro Max",
+      volume: "5/10",
+      experience: "10 years",
+      moment: "only when going on walks or runs",
+    },
+  },
+
+  {
+    id: "p03",
+    years: 8,
+    volume: 9,
+    size: 75, 
+    thumb: "bg/chris2.png", 
+    imgA: "bg/chris2.png",  
+    imgB: "bg/chris1.png",  
+    title: "Energy Boost",
+    link: "world/chris.html",
+    accent: "orangered",
+    info: {
+      interviewee: "Chris J.",
+      device: "Beats",
+      volume: "9/10",
+      experience: "8 years",
+      moment: "during workout",
+    },
+  },
+
+  {
+    id: "p04",
+    years: 12,
+    volume: 8,
+    size: 75, 
+    thumb: "bg/daelyn2.png", 
+    imgA: "bg/daelyn2.png",  
+    imgB: "bg/daelyn1.png",  
+    title: "Inner Escape",
+    link: "world/daelyn.html",
+    accent: "beige",
+    info: {
+      interviewee: "Daelyn D.",
+      device: "AirPods",
+      volume: "8/10",
+      experience: "12 years",
+      moment: "all the time(studying, walking, relaxing, & sleeping...)",
+    },
+  },
+
+  {
+    id: "p05",
+    years: 10,
+    volume: 8,
+    size: 75, 
+    thumb: "bg/demi2.png", 
+    imgA: "bg/demi2.png",  
+    imgB: "bg/demi1.png",  
+    title: "Gentle Companion",
+    link: "world/demi.html",
+    accent: "lightgreen",
+    info: {
+      interviewee: "Demi Z.",
+      device: "AirPods",
+      volume: "8/10",
+      experience: "10 years",
+      moment: "on commute & during lunch break",
+    },
+  },
+
+  {
+    id: "p06",
+    years: 7,
+    volume: 6,
+    size: 75, 
+    thumb: "bg/di2.png", 
+    imgA: "bg/di2.png",  
+    imgB: "bg/di1.png",  
+    title: "Emotional Orchestra",
+    link: "world/di.html",
+    accent: "pink",
+    info: {
+      interviewee: "Di X.",
+      device: "QDC",
+      volume: "6/10",
+      experience: "7 years",
+      moment: "while transcribing the music",
+    },
+  },
+
+  {
+    id: "p07",
+    years: 6,
+    volume: 4,
+    size: 75, 
+    thumb: "bg/entao2.png", 
+    imgA: "bg/entao2.png",  
+    imgB: "bg/entao1.png",  
+    title: "Private Entertain Time",
+    link: "world/entao.html",
+    accent: "black",
+    info: {
+      interviewee: "Entao Z.",
+      device: "AirPods & Vivo tws4 HiFi",
+      volume: "4/10",
+      experience: "6 years",
+      moment: "when there's people around",
+    },
+  },
+
+  {
+    id: "p08",
+    years: 8,
+    volume: 6,
+    size: 75, 
+    thumb: "bg/erin2.png", 
+    imgA: "bg/erin2.png",  
+    imgB: "bg/erin1.png",  
+    title: "Selective Reality",
+    link: "world/erin.html",
+    accent: "red",
+    info: {
+      interviewee: "Erin D.",
+      device: "AirPods Pro Max",
+      volume: "6/10",
+      experience: "8 years",
+      moment: "while calling family and friends in public",
+    },
+  },
+
+  {
+    id: "p09",
+    years: 21,
+    volume: 4,
+    size: 75, 
+    thumb: "bg/gang2.png", 
+    imgA: "bg/gang2.png",  
+    imgB: "bg/gang1.png",  
+    title: "Creative Source",
+    link: "world/gang.html",
+    accent: "orange",
+    info: {
+      interviewee: "Gang C.",
+      device: "Monster",
+      volume: "4/10",
+      experience: "21 years",
+      moment: "when doing design work",
+    },
+  },
+
+  {
+    id: "p10",
+    years: 9,
+    volume: 4,
+    size: 75, 
+    thumb: "bg/helen2.png", 
+    imgA: "bg/helen2.png",  
+    imgB: "bg/helen1.png",  
+    title: "Memory Scanctuary",
+    link: "world/helen.html",
+    accent: "blue",
+    info: {
+      interviewee: "Helen C.",
+      device: "Sony",
+      volume: "4/10",
+      experience: "9 years",
+      moment: "on commute",
+    },
+  },
+
+  {
+    id: "p11",
+    years: 4,
+    volume: 2,
+    size: 75, 
+    thumb: "bg/joe2.png", 
+    imgA: "bg/joe2.png",  
+    imgB: "bg/joe1.png",  
+    title: "Soul Listener",
+    link: "world/joe.html",
+    accent: "cyan",
+    info: {
+      interviewee: "Joe Z.",
+      device: "HUAWEI",
+      volume: "2/10",
+      experience: "4 years",
+      moment: "when being alone",
+    },
+  },
+
+  {
+    id: "p12",
+    years: 3,
+    volume: 4,
+    size: 75, 
+    thumb: "bg/nerwen2.png", 
+    imgA: "bg/nerwen2.png",  
+    imgB: "bg/nerwen1.png",  
+    title: "Listening Ritual",
+    link: "world/nerwen.html",
+    accent: "darkred",
+    info: {
+      interviewee: "Nerwen C.",
+      device: "Sony",
+      volume: "4/10",
+      experience: "3 years",
+      moment: "while listening to music albums",
+    },
+  },
+
+  {
+    id: "p13",
+    years: 5,
+    volume: 5,
+    size: 75, 
+    thumb: "bg/tara2.png", 
+    imgA: "bg/tara2.png",  
+    imgB: "bg/tara1.png",  
+    title: "Emotional Recharge",
+    link: "world/tara.html",
+    accent: "darkblue",
+    info: {
+      interviewee: "Tara W.",
+      device: "AirPods Pro",
+      volume: "5/10",
+      experience: "5 years",
+      moment: "when feeling down at midnight",
+    },
+  },
+];
+
 // =========================
-    //  DATA: replace with yours
-    // =========================
-    const DATA = [
-        {
-          id:"p01",
-          size:160,
-          thumbGray:"bg/chris2.png",
-          imgA:"bg/chris2.png",
-          imgB:"bg/chris1.png",
-          desc:"The moment I put on my headphones to work out, I feel instantly energized. It feels like my whole body switches on.Different kinds of music make me imagine myself training in all sorts of scenes, and it just hits perfectly, which has became my favorite part of exercising.",
-          title:"Energy Boost",
-          link:"world/chris.html"
-        },
-        // ...补到 13 个
-      ];
-  
-      // =========================
-      //  Helpers
-      // =========================
-      function clamp(v,min,max){ return Math.max(min, Math.min(max, v)); }
-      function lerp(a,b,t){ return a + (b-a)*t; }
-  
-      const stage = document.getElementById('stage');
-      const fade = document.getElementById('fade');
-  
-      function go(url){
-        fade.classList.add('on');
-        setTimeout(()=> location.href = url, 460);
-      }
-  
-      // =========================
-      //  Cursor state
-      // =========================
-      const cursor = { x: window.innerWidth/2, y: window.innerHeight/2 };
-      window.addEventListener('mousemove', (e)=>{ cursor.x=e.clientX; cursor.y=e.clientY; }, {passive:true});
-  
-      // =========================
-      //  Detail (inline, no panel)
-      // =========================
-      const detail = document.getElementById('detail');
-      const detailHit = document.getElementById('detailHit');
-      const dDesc = document.getElementById('dDesc');
-      const dTitleLink = document.getElementById('dTitleLink');
-      const dImgA = document.getElementById('dImgA');
-      const dImgB = document.getElementById('dImgB');
-  
-      const state = { running:true, selected:null };
-  
-      function openDetail(obj){
-        state.running = false;
-        state.selected = obj;
-      
-        // freeze + dim others
-        bubbles.forEach(b=>{
-          if(b === obj){
-            b.el.style.opacity = '0';
-            b.el.style.pointerEvents = 'none';
-          }else{
-            b.el.style.opacity = '0.28';
-          }
-        });
-  
-        // selected becomes color
-        obj.el.style.filter = 'saturate(1) contrast(1.05)';
-        obj.el.querySelector('img').style.filter = 'none';
-  
-        dDesc.textContent = obj.d.desc || '';
-        dTitleLink.textContent = obj.d.title || 'Enter headphone world';
-        dTitleLink.href = obj.d.link || '#';
-        dImgA.src = obj.d.imgA || obj.d.thumbGray;
-        dImgB.src = obj.d.imgB || obj.d.thumbGray;
-  
-        detail.classList.add('on');
-        detail.setAttribute('aria-hidden', 'false');
-      }
-  
-      function closeDetail(){
-        detail.classList.remove('on');
-        detail.setAttribute('aria-hidden', 'true');
-      
-        bubbles.forEach(b=>{
-          b.el.style.opacity = '.92';
-          b.el.style.pointerEvents = 'auto';
-          b.el.style.filter = 'saturate(0) contrast(1.08)';
-          b.el.querySelector('img').style.filter = 'grayscale(1) saturate(0)';
-        });
-      
-        state.running = true;
-        state.selected = null;
-      }
-  
-      detailHit.addEventListener('click', closeDetail);
-      window.addEventListener('keydown', (e)=>{
-        if(e.key === 'Escape' && detail.classList.contains('on')) closeDetail();
-      });
-  
-      // =========================
-      //  Bubbles (each follows cursor independently + breathing size)
-      // =========================
-      const bubbles = [];
-  
-      function spawn(){
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-  
-        DATA.forEach((d, i)=>{
-          const el = document.createElement('div');
-          el.className = 'bubble';
-          el.style.width = d.size + 'px';
-          el.style.height = d.size + 'px';
-  
-          const img = document.createElement('img');
-          img.src = d.thumbGray;
-          img.alt = '';
-          el.appendChild(img);
-  
-          // random initial placement (avoid slider zone)
-          let x = lerp(80, w-320, Math.random());
-          let y = lerp(80, h-80, Math.random());
-  
-          // drift velocity
-          const vx = lerp(-0.20, 0.20, Math.random());
-          const vy = lerp(-0.16, 0.16, Math.random());
-  
-          // independent cursor follow params
-          const followX = lerp(12, 52, Math.random()) * (Math.random()<0.5 ? -1 : 1);
-          const followY = lerp(10, 44, Math.random()) * (Math.random()<0.5 ? -1 : 1);
-          const lag = lerp(0.05, 0.15, Math.random());
-          const orbit = lerp(6, 20, Math.random());
-          const orbitSpeed = lerp(0.008, 0.02, Math.random());
-          const phase = Math.random()*Math.PI*2;
-  
-          // breathing: stronger + second layer (so not “fixed”)
-          const base = lerp(0.92, 1.10, Math.random());
-          const amp1 = lerp(0.06, 0.15, Math.random());
-          const amp2 = lerp(0.02, 0.06, Math.random());
-          const breathSpeed = lerp(0.75, 1.25, Math.random());
-  
-          let ox = 0, oy = 0;
-  
-          const obj = {
-            d, el,
-            x, y, vx, vy,
-            followX, followY, lag,
-            orbit, orbitSpeed,
-            phase,
-            base, amp1, amp2, breathSpeed,
-            t: 0,
-            ox, oy
-          };
-          bubbles.push(obj);
-  
-          el.style.left = x + 'px';
-          el.style.top  = y + 'px';
-  
-          el.addEventListener('click', (e)=>{
-            e.stopPropagation();
-            if(!state.running) return;
-            openDetail(obj);
-          });
-  
-          stage.insertBefore(el, detail); // keep bubbles under detail layer
-        });
-      }
-  
-      function tick(){
-        if(state.running){
-          const w = window.innerWidth;
-          const h = window.innerHeight;
-  
-          const nx = (cursor.x / w - 0.5);
-          const ny = (cursor.y / h - 0.5);
-  
-          for(const b of bubbles){
-            b.t += 0.012;
-  
-            // drift
-            b.x += b.vx;
-            b.y += b.vy;
-  
-            // wrap
-            const margin = 140;
-            if(b.x < -margin) b.x = w + margin;
-            if(b.x > w + margin) b.x = -margin;
-            if(b.y < -margin) b.y = h + margin;
-            if(b.y > h + margin) b.y = -margin;
-  
-            // independent cursor target
-            const targetOx = nx * b.followX + Math.cos(b.t*b.orbitSpeed + b.phase) * b.orbit;
-            const targetOy = ny * b.followY + Math.sin(b.t*b.orbitSpeed + b.phase) * b.orbit;
-  
-            // inertia per bubble
-            b.ox = b.ox + (targetOx - b.ox) * b.lag;
-            b.oy = b.oy + (targetOy - b.oy) * b.lag;
-  
-            // breathing size (two-layer so always changing)
-            const s =
-              b.base +
-              Math.sin(b.t*b.breathSpeed + b.phase) * b.amp1 +
-              Math.sin(b.t*(b.breathSpeed*0.52) + b.phase*1.7) * b.amp2;
-  
-            // final position
-            const px = b.x + b.ox;
-            const py = b.y + b.oy;
-  
-            b.el.style.left = px + 'px';
-            b.el.style.top  = py + 'px';
-            b.el.style.transform = `translate(-50%,-50%) scale(${s.toFixed(3)})`;
-          }
-        }
-  
-        requestAnimationFrame(tick);
-      }
-  
-      // click empty background closes detail (optional)
-      stage.addEventListener('click', ()=>{
-        if(detail.classList.contains('on')) closeDetail();
-      });
-  
-      // =========================
-      //  Slider navigation (OFF page)
-      //  - release left -> on.html
-      //  - release center -> map.html
-      //  - release right -> stay off
-      // =========================
-      const track = document.getElementById('track');
-      const knob  = document.getElementById('knob');
-  
-      let value = 0.90;
-      let dragging = false;
-  
-      function setKnob(v){
-        value = clamp(v, 0, 1);
-        knob.style.left = (value * 100) + '%';
-        knob.setAttribute('aria-valuenow', value.toFixed(2));
-      }
-      setKnob(0.92);
-  
-      function pointerToValue(clientX){
-        const r = track.getBoundingClientRect();
-        return (clientX - r.left) / r.width;
-      }
-  
-      knob.addEventListener('pointerdown', (e)=>{
-        dragging = true;
-        knob.setPointerCapture(e.pointerId);
-        knob.style.cursor = 'grabbing';
-        e.stopPropagation();
-      });
-      knob.addEventListener('pointermove', (e)=>{
-        if(!dragging) return;
-        setKnob(pointerToValue(e.clientX));
-        e.stopPropagation();
-      });
-      knob.addEventListener('pointerup', (e)=>{
-        dragging = false;
-        knob.style.cursor = 'grab';
-        e.stopPropagation();
-  
-        if(value < 0.20){
-          setKnob(0.05);
-          go('on.html');
-        }else if(value < 0.65){
-          setKnob(0.5);
-          go('map.html');
-        }else{
-          setKnob(0.95);
-        }
-      });
-  
-      // init
-      spawn();
-      requestAnimationFrame(tick);
+// Utilities
+// =========================
+const stage = document.getElementById("stage");
+const map = document.getElementById("map");
+
+const crosshair = document.getElementById("crosshair");
+const lineH = document.getElementById("lineH");
+const lineV = document.getElementById("lineV");
+
+const overlay = document.getElementById("overlay");
+const overlayBackdrop = document.getElementById("overlayBackdrop");
+const closeBtn = document.getElementById("closeBtn");
+
+const iName = document.getElementById("iName");
+const iDevice = document.getElementById("iDevice");
+const iVolume = document.getElementById("iVolume");
+const iYears = document.getElementById("iYears");
+const iMoment = document.getElementById("iMoment");
+
+const imgA = document.getElementById("imgA");
+const imgB = document.getElementById("imgB");
+const titleLink = document.getElementById("titleLink");
+const titleText = document.getElementById("titleText");
+
+function clamp(v, min, max) { return Math.max(min, Math.min(max, v)); }
+function lerp(a, b, t) { return a + (b - a) * t; }
+
+let circles = [];
+let hovered = null;     // index
+let selected = null;    // index
+
+// layout mapping
+function computeXY(years, volume){
+  const w = window.innerWidth;
+  const h = window.innerHeight;
+
+  const pad = 120;
+  const left = pad;
+  const right = w - pad - 260; // reserve nav area like before
+  const top = pad;
+  const bottom = h - pad;
+
+  const tx = clamp(years / 21, 0, 1);
+  const ty = clamp(volume / 10, 0, 1);
+
+  const x = lerp(left, right, tx);
+  const y = lerp(bottom, top, ty); // invert y
+  return { x, y };
+}
+
+function setCrosshairAt(x, y){
+  // horizontal from left -> x
+  lineH.style.top = `${y}px`;
+  lineH.style.width = `${x}px`;
+
+  // vertical from bottom -> y
+  const h = window.innerHeight;
+  lineV.style.left = `${x}px`;
+  lineV.style.height = `${h - y}px`;
+
+  crosshair.classList.add("on");
+  crosshair.setAttribute("aria-hidden", "false");
+}
+
+function hideCrosshair(){
+  // only hide when nothing selected
+  if (selected !== null) return;
+  crosshair.classList.remove("on");
+  crosshair.setAttribute("aria-hidden", "true");
+}
+
+function applyHiddenExcept(idx){
+  circles.forEach((c, i) => {
+    c.classList.toggle("hidden", i !== idx);
+  });
+}
+
+function clearHidden(){
+  circles.forEach((c) => c.classList.remove("hidden"));
+}
+
+function openOverlay(d){
+  overlay.classList.add("on");
+  overlay.setAttribute("aria-hidden", "false");
+
+  // fill info
+  iName.textContent = d.info?.interviewee ?? "";
+  iDevice.textContent = d.info?.device ?? "";
+  iVolume.textContent = d.info?.volume ?? "";
+  iYears.textContent = d.info?.experience ?? "";
+  iMoment.textContent = d.info?.moment ?? "";
+
+  // images
+  imgA.src = d.imgA || d.thumb || "";
+  imgB.src = d.imgB || d.thumb || "";
+
+  // title link
+  titleText.textContent = d.title || "Enter headphone world";
+  titleLink.href = d.link || "#";
+
+  // accent for title
+  titleLink.style.color = d.accent || "orangered";
+  titleLink.style.textDecorationColor = d.accent || "orangered";
+}
+
+function closeOverlay(){
+  overlay.classList.remove("on");
+  overlay.setAttribute("aria-hidden", "true");
+}
+
+// render
+function render(){
+  map.innerHTML = "";
+  circles = [];
+
+  DATA.forEach((d, idx) => {
+    const el = document.createElement("div");
+    el.className = "circle";
+    el.dataset.idx = String(idx);
+
+    const { x, y } = computeXY(d.years, d.volume);
+
+    el.style.left = `${x}px`;
+    el.style.top = `${y}px`;
+
+    const size = d.size || 64;
+    el.style.width = `${size}px`;
+    el.style.height = `${size}px`;
+
+    el.style.setProperty("--img", `url("${d.thumb || ""}")`);
+
+    el.addEventListener("mouseenter", () => {
+      if (selected !== null) return; // when overlay open, ignore hover
+      hovered = idx;
+      setCrosshairAt(x, y);
+    });
+
+    el.addEventListener("mouseleave", () => {
+      if (selected !== null) return;
+      hovered = null;
+      hideCrosshair();
+    });
+
+    el.addEventListener("click", (e) => {
+      e.stopPropagation();
+
+      selected = idx;
+      hovered = null;
+
+      // keep crosshair fixed at selected
+      setCrosshairAt(x, y);
+
+      // hide others
+      applyHiddenExcept(idx);
+
+      // open overlay bar
+      openOverlay(d);
+    });
+
+    map.appendChild(el);
+    circles.push(el);
+  });
+}
+
+function resetToGallery(){
+  selected = null;
+  hovered = null;
+  closeOverlay();
+  clearHidden();
+  hideCrosshair();
+}
+
+// close logic
+closeBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  resetToGallery();
+});
+
+overlayBackdrop.addEventListener("click", () => {
+  // clicking outside bar closes too (optional)
+  resetToGallery();
+});
+
+window.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && selected !== null) resetToGallery();
+});
+
+// keep crosshair aligned on resize (recompute)
+window.addEventListener("resize", () => {
+  render();
+  if (selected !== null) {
+    const d = DATA[selected];
+    const { x, y } = computeXY(d.years, d.volume);
+    setCrosshairAt(x, y);
+  }
+});
+
+// init
+render();

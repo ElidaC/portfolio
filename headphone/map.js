@@ -2,20 +2,19 @@
 //  DATA: replace with yours
 // =========================
 const DATA = [
-    // years: 0-21, volume: 0-10 (0 bottom, 10 top)
-    { id:"p01", years:2,  volume:8,  title:"Interviewee 01", preview:"https://picsum.photos/seed/a/640/360", link:"headphone-world/p01.html" },
-    { id:"p02", years:6,  volume:2,  title:"Interviewee 02", preview:"https://picsum.photos/seed/b/640/360", link:"headphone-world/p02.html" },
-    { id:"p03", years:10, volume:5,  title:"Interviewee 03", preview:"https://picsum.photos/seed/c/640/360", link:"headphone-world/p03.html" },
-    { id:"p04", years:14, volume:7,  title:"Interviewee 04", preview:"https://picsum.photos/seed/d/640/360", link:"headphone-world/p04.html" },
-    { id:"p05", years:18, volume:3,  title:"Interviewee 05", preview:"https://picsum.photos/seed/e/640/360", link:"headphone-world/p05.html" },
-    { id:"p06", years:20, volume:6,  title:"Interviewee 06", preview:"https://picsum.photos/seed/f/640/360", link:"headphone-world/p06.html" },
-    { id:"p07", years:1,  volume:4,  title:"Interviewee 07", preview:"https://picsum.photos/seed/g/640/360", link:"headphone-world/p07.html" },
-    { id:"p08", years:8,  volume:9,  title:"Interviewee 08", preview:"https://picsum.photos/seed/h/640/360", link:"headphone-world/p08.html" },
-    { id:"p09", years:12, volume:1,  title:"Interviewee 09", preview:"https://picsum.photos/seed/i/640/360", link:"headphone-world/p09.html" },
-    { id:"p10", years:4,  volume:6,  title:"Interviewee 10", preview:"https://picsum.photos/seed/j/640/360", link:"headphone-world/p10.html" },
-    { id:"p11", years:16, volume:4,  title:"Interviewee 11", preview:"https://picsum.photos/seed/k/640/360", link:"headphone-world/p11.html" },
-    { id:"p12", years:21, volume:8,  title:"Interviewee 12", preview:"https://picsum.photos/seed/l/640/360", link:"headphone-world/p12.html" },
-    { id:"p13", years:9,  volume:3,  title:"Interviewee 13", preview:"https://picsum.photos/seed/m/640/360", link:"headphone-world/p13.html" },
+    { id:"p01", years:2,  volume:8,  title:"Interviewee 01", preview:"bg/amaya2.png", link:"world/amaya.html" },
+    { id:"p02", years:6,  volume:2,  title:"Interviewee 02", preview:"bg/ashley2.png", link:"world/ashley.html" },
+    { id:"p03", years:10, volume:5,  title:"Interviewee 03", preview:"bg/chris2.png", link:"world/chris.html" },
+    { id:"p04", years:14, volume:7,  title:"Interviewee 04", preview:"bg/daelyn2.png", link:"world/daelyn.html" },
+    { id:"p05", years:18, volume:3,  title:"Interviewee 05", preview:"bg/demi2.png", link:"world/demi.html" },
+    { id:"p06", years:20, volume:6,  title:"Interviewee 06", preview:"bg/di2.png", link:"world/di.html" },
+    { id:"p07", years:1,  volume:4,  title:"Interviewee 07", preview:"bg/entao2.png", link:"world/entao.html" },
+    { id:"p08", years:8,  volume:9,  title:"Interviewee 08", preview:"bg/erin2.png", link:"world/erin.html" },
+    { id:"p09", years:12, volume:1,  title:"Interviewee 09", preview:"bg/gang2.png", link:"world/gang.html" },
+    { id:"p10", years:4,  volume:6,  title:"Interviewee 10", preview:"bg/helen2.png", link:"world/helen.html" },
+    { id:"p11", years:16, volume:4,  title:"Interviewee 11", preview:"bg/joe2.png", link:"world/joe.html" },
+    { id:"p12", years:21, volume:8,  title:"Interviewee 12", preview:"bg/nerwen2.png", link:"world/nerwen.html" },
+    { id:"p13", years:9,  volume:3,  title:"Interviewee 13", preview:"bg/tara2.png", link:"world/tara.html" },
   ];
   
   const PHRASES = [
@@ -234,50 +233,7 @@ const DATA = [
     setTimeout(phraseLoop, 3600);
   }
   
-  // =====================================
-  //  Slider: drag -> on/off navigation
-  // =====================================
-  const track = document.getElementById('track');
-  const knob  = document.getElementById('knob');
   
-  let value = 0.5; // 0..1
-  let dragging = false;
-  
-  function setKnob(v){
-    value = clamp(v, 0, 1);
-    knob.style.left = (value * 100) + '%';
-    knob.setAttribute('aria-valuenow', value.toFixed(2));
-  }
-  setKnob(0.5);
-  
-  function pointerToValue(clientX){
-    const r = track.getBoundingClientRect();
-    return (clientX - r.left) / r.width;
-  }
-  
-  knob.addEventListener('pointerdown', (e)=>{
-    dragging = true;
-    knob.setPointerCapture(e.pointerId);
-    knob.style.cursor = 'grabbing';
-  });
-  knob.addEventListener('pointermove', (e)=>{
-    if(!dragging) return;
-    setKnob(pointerToValue(e.clientX));
-  });
-  knob.addEventListener('pointerup', ()=>{
-    dragging = false;
-    knob.style.cursor = 'grab';
-  
-    if(value < 0.20){
-      setKnob(0.05);
-      go('on.html');
-    }else if(value > 0.80){
-      setKnob(0.95);
-      go('off.html');
-    }else{
-      setKnob(0.5);
-    }
-  });
   
   // init
   renderCircles();

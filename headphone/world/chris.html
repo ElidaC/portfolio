@@ -6,32 +6,43 @@
   <link rel="stylesheet" href="https://use.typekit.net/fkd1thh.css">
   <link rel="stylesheet" href="world.css">
   <title>Headphone World</title>
-  <style>
-    :root{
-      --accent: orangered;
-    }
-    body{
-  position: relative;
-  margin: 0;
-}
 
-body::before{
-  content: "";
-  position: fixed;
-  inset: 0;
-  background-image: url("../bg/chris0.png");
-  background-size: cover;
-  background-position: 50% 50%;
-  opacity: 0.3;              /* 👈 30% */
-  z-index: -1;
-  pointer-events: none;
-}
+  <style>
+    :root{ --accent: orangered;}
+    
+
+    body{
+      position: relative;
+      margin: 0;
+    }
+
+    body::before{
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: var(--backdrop, none);
+      background-size: cover;
+      background-position: 50% 50%;
+      opacity: 0.30;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .desc{
+      grid-column: 1 / -1;
+      margin-top: -20px;
+      max-width: 460px;
+      line-height: 1.6;
+      font-size: 22px;
+      color: rgba(0,0,0,.75);
+      opacity: var(--infoOpacity);
+      transform: translateY(var(--infoY));
+      transition: opacity 400ms ease, transform 400ms ease;
+      white-space: pre-wrap; /* 保留换行 */
+      font-family: "instrument-serif", sans-serif;
+    }
   </style>
 </head>
-
-
-
-
 
 <body>
   <div class="stage" id="stage">
@@ -40,14 +51,11 @@ body::before{
     </div>
 
     <div class="letters" id="letters"></div>
-    <div class="bigTitle" id="bigTitle">Energy Boost</div>
+    <div class="bigTitle" id="bigTitle">Inner Escape</div>
+
 
     <div class="info" id="info">
-      <div class="k">{Interviewee}</div><div class="v" id="vName">Chris J.</div>
-      <div class="k">{Device}</div><div class="v" id="vDevice">Beats</div>
-      <div class="k">{Volume}</div><div class="v" id="vVolume">9/10</div>
-      <div class="k">{Listening Experience}</div><div class="v" id="vYears">8 years</div>
-      <div class="k">{Listening Moment}</div><div class="v" id="vMoment">during workout</div>
+      <div class="desc" id="description"></div>
     </div>
 
     <div class="back" id="back" title="Back to map">
@@ -81,9 +89,9 @@ body::before{
     </div>
   </div>
 
-
-
-
+  <script>
+    window.WORLD_ID = "chris";
+  </script>
   <script src="world.js"></script>
 </body>
 </html>

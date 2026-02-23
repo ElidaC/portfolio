@@ -17,6 +17,9 @@
       --font-serif: "instrument-serif", sans-serif;
       --font-weight: 400;
       --font-style: normal;
+
+      --navW: 260px; /* reserve right for nav */
+      --dot: 16px;
     }
     html,body{height:100%; margin:0;}
     body{
@@ -55,69 +58,73 @@
       position:absolute;
       left: 15%;
       top: 34%;
-      width:min(560px, 58vw);
-      font-size:18px;
-      line-height:1.55;
+      width:min(650px, 70vw);
+      font-size:22px;
+      line-height:1.3;
       color:rgba(0,0,0,.82);
     }
 
-   /* ===== Mode bar (match map/on/off positioning + true edge snapping) ===== */
-.mode{
-  /* tweakables */
-  --w: 200px;
-  --h: 40px;
-  --knob: 16px;
-
-  position:absolute;
-  right:54px;
-  top:50%;
-  transform:translateY(-50%);
-  width:var(--w);
-  height:var(--h);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:50;
-  user-select:none;
-}
-
-.mode .track{
-  width:100%;
-  height:2px;
-  background:rgba(0,0,0,.35);
-  position:relative;
-}
-
-.mode .knob{
-  position:absolute;
-  top:50%;
-  width:var(--knob);
-  height:var(--knob);
-  border-radius:50%;
-  background:#000;
-  transform:translateY(-50%);   /* only center vertically */
-  left: var(--knobLeft, 0px);   /* pixel-perfect */
-  cursor:grab;
-  touch-action:none;
-}
-
-/* labels aligned to the line ends */
-.mode .label{
-  position:absolute;
-  top:18px;
-  font-size:13px;
-  color:rgba(0,0,0,.8);
-  line-height:1;
-  white-space:nowrap;
-}
-
-.mode .label.left{
-  left:0;
-}
-
-.mode .label.right{
-  right:0;
-}
+    .nav{
+    position:absolute;
+    top:44px;
+    right:54px;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    z-index:50;
+    user-select:none;
+  }
+  
+  .navBtn{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+    color: rgba(0,0,0,.85);
+    font-family: var(--font-serif);
+    font-size:18px;
+    font-style: normal;
+    transform-origin: right center;
+    transition: transform 180ms ease;
+  }
+  
+  /* dot base */
+  .navBtn .dot{
+    width: 16px;               /* 固定 16px */
+    height: 16px;
+    border-radius:999px;
+    background: transparent;
+    border: 1px solid transparent; /* 用 border 而不是 outline */
+    transition: border 180ms ease, background 180ms ease;
+  }
+  
+  /* selected: italic + filled dot */
+  .navBtn.active{
+    font-style: italic;
+    pointer-events: none;      /* 🔥 关键：禁止 hover */
+  }
+  
+  .navBtn.active .dot{
+    background: rgba(0,0,0,.95);
+    border: none;
+  }
+  
+/* 不再 skew 整个按钮 */
+.navBtn:not(.active):hover{
+    transform: none;
+  }
+  
+  /* 只 skew 文字 */
+  .navBtn:not(.active):hover .label{
+    display:inline-block;       /* 必须 */
+    transform: skewX(-10deg);
+    transition: transform 180ms ease;
+  }
+  
+  /* dot 只做 outline，不 skew */
+  .navBtn:not(.active):hover .dot{
+    border: 1px solid rgba(0,0,0,.65);
+  }
 
     .fade{
       position:fixed;
@@ -147,14 +154,22 @@
 
     
 
-    <div class="mode" aria-label="Mode slider">
-      <div class="track" id="track">
-        <div class="knob" id="knob" role="slider" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.10"></div>
-        <div class="label left">ON</div>
-        <div class="label right">OFF</div>
-      </div>
-    </div>
-  </div>
+    <nav class="nav" aria-label="Site navigation">
+        <a class="navBtn active" data-nav="intro" aria-current="page">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="label">{Intro}</span>
+        </a>
+  
+        <a class="navBtn" href="map.html" data-nav="home">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="label">{Listening In Between}</span>
+        </a>
+  
+        <a class="navBtn" href="off.html" data-nav="gallery">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="label">{World Gallery}</span>
+        </a>
+      </nav>
 
   <div class="fade" id="fade"></div>
 

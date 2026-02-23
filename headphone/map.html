@@ -6,7 +6,6 @@
   <link rel="stylesheet" href="https://use.typekit.net/fkd1thh.css">
   <title>Listening in Between — Map</title>
   <style>
-
     :root{
       --bg1:#f3f3f3;
       --bg2:#e9e9e9;
@@ -14,9 +13,7 @@
       --muted:#6b6b6b;
       --pad:64px;
 
-      --font-serif: font-family: "instrument-serif", sans-serif;
-    --font-weight: 400;
-    --font-style: normal;
+      --font-serif: "instrument-serif", sans-serif;
     }
     html,body{height:100%; margin:0;}
     body{
@@ -72,62 +69,28 @@
       width:54px;
       height:54px;
       border-radius:50%;
-      background:#000;
       transform:translate(-50%,-50%);
-      opacity:.12;
-      transition:opacity 250ms ease, transform 250ms ease, filter 250ms ease;
       cursor:pointer;
       z-index:6;
+      background-color:#000;
+      opacity:.12;
+      transition:opacity 250ms ease, transform 250ms ease, filter 250ms ease;
     }
+
     .circle.active{
       opacity:1;
       transform:translate(-50%,-50%) scale(1.02);
     }
+
     .circle:hover{
       opacity:1;
-      transform:translate(-50%,-50%) scale(1.06);
-    }
-
-    /* tooltip preview (hover) */
-    .tip{
-      position:absolute;
-      min-width:220px;
-      max-width:280px;
-      padding:12px 12px 10px;
-      background:rgba(255,255,255,.88);
-      border:1px solid rgba(0,0,0,.12);
-      border-radius:10px;
-      backdrop-filter: blur(6px);
-      box-shadow: 0 10px 24px rgba(0,0,0,.10);
-      transform:translate(12px, -50%);
-      pointer-events:none;
-      opacity:0;
-      transition:opacity 150ms ease;
-      z-index:30;
-    }
-    .tip.on{ opacity:1; }
-    .tip .thumb{
-      width:100%;
-      aspect-ratio: 16/9;
-      border-radius:8px;
-      background:#ddd;
+      transform:translate(-50%,-50%) scale(2.06);
+      background-image: var(--img);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       overflow:hidden;
-      margin-bottom:10px;
-      position:relative;
-    }
-    .tip .thumb img{
-      width:100%; height:100%;
-      object-fit:cover;
-      display:block;
-    }
-    .tip .title{
-      font-size:16px;
-      margin:0 0 4px 0;
-    }
-    .tip .meta{
-      margin:0;
-      font-size:13px;
-      color:rgba(0,0,0,.55);
+      background-color: transparent;
     }
 
     /* phrases */
@@ -143,69 +106,8 @@
       filter: blur(0px);
       transition:opacity 500ms ease, transform 900ms ease;
     }
-    .phrase.show{
-      opacity:1;
-    }
-    .phrase.fade{
-      opacity:0;
-    }
-
-    .mode{
-  /* tweakables */
-  --w: 200px;
-  --h: 40px;
-  --knob: 16px;
-
-  position:absolute;
-  right:54px;
-  top:50%;
-  transform:translateY(-50%);
-  width:var(--w);
-  height:var(--h);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  z-index:50;
-  user-select:none;
-}
-
-.mode .track{
-  width:100%;
-  height:2px;
-  background:rgba(0,0,0,.35);
-  position:relative;
-}
-
-.mode .knob{
-  position:absolute;
-  top:50%;
-  width:var(--knob);
-  height:var(--knob);
-  border-radius:50%;
-  background:#000;
-  transform:translateY(-50%);   /* only center vertically */
-  left: var(--knobLeft, 0px);   /* pixel-perfect */
-  cursor:grab;
-  touch-action:none;
-}
-
-/* labels aligned to the line ends */
-.mode .label{
-  position:absolute;
-  top:18px;
-  font-size:13px;
-  color:rgba(0,0,0,.8);
-  line-height:1;
-  white-space:nowrap;
-}
-
-.mode .label.left{
-  left:0;
-}
-
-.mode .label.right{
-  right:0;
-}
+    .phrase.show{ opacity:1; }
+    .phrase.fade{ opacity:0; }
 
     .fade{
       position:fixed;
@@ -228,21 +130,92 @@
       user-select:none;
       display:none;
     }
+
+    /* =========================
+       NAV (replaces slider)
+       ========================= */
+    .nav{
+      position:absolute;
+      top:44px;
+      right:54px;
+      display:flex;
+      flex-direction:column;
+      gap:5px;
+      z-index:50;
+      user-select:none;
+    }
+
+    .navBtn{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      text-decoration:none;
+      color: rgba(0,0,0,.85);
+      font-family: var(--font-serif);
+      font-size:18px;
+      font-style: normal;
+    }
+
+    .navBtn .label{
+      display:inline-block; /* ✅ 保证 skew 只作用文字 */
+      transition: transform 180ms ease;
+    }
+
+    /* dot base */
+    .navBtn .dot{
+      width: 16px;
+      height: 16px;
+      border-radius:999px;
+      background: transparent;
+      border: 1px solid transparent;
+      transition: border 180ms ease, background 180ms ease;
+    }
+
+    /* selected: italic + filled dot */
+    .navBtn.active{
+      font-style: italic;
+      pointer-events: none; /* ✅ active 不 hover */
+    }
+
+    .navBtn.active .dot{
+      background: rgba(0,0,0,.95);
+      border: none;
+    }
+
+    /* hover ONLY for not active: tilt label + outline dot */
+    .navBtn:not(.active):hover .label{
+      transform: skewX(-10deg);
+    }
+
+    .navBtn:not(.active):hover .dot{
+      border: 1px solid rgba(0,0,0,.65);
+    }
   </style>
 </head>
+
 <body>
   <div class="stage" id="stage">
     <a class="back" href="index.html" aria-label="Back to landing">
       <div class="shaft"></div>
     </a>
 
-    <div class="mode" aria-label="Mode slider">
-      <div class="track" id="track">
-        <div class="knob" id="knob" role="slider" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0.5"></div>
-        <div class="label left">ON</div>
-        <div class="label right">OFF</div>
-      </div>
-    </div>
+    <!-- ✅ NAV (replaces slider) -->
+    <nav class="nav" aria-label="Site navigation">
+      <a class="navBtn" href="on.html" data-nav="intro">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="label">{Intro}</span>
+      </a>
+
+      <a class="navBtn active" data-nav="home" aria-current="page">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="label">{Listening In Between}</span>
+      </a>
+
+      <a class="navBtn" href="off.html" data-nav="gallery">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="label">{World Gallery}</span>
+      </a>
+    </nav>
 
     <div class="axisHint">x: years (0–21), y: volume (0–10)</div>
   </div>

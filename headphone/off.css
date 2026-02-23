@@ -1,0 +1,323 @@
+:root{
+    --bg1:#f3f3f3;
+    --bg2:#e9e9e9;
+    --ink:#111;
+    --muted: rgba(0,0,0,.55);
+    --pad: 120px;
+  
+    --navW: 260px; /* reserve right for nav */
+    --dot: 16px;
+  
+    --font-serif: "instrument-serif", serif;
+  }
+  
+  html,body{height:100%; margin:0;}
+  body{
+    overflow:hidden;
+    color:var(--ink);
+    background:
+      radial-gradient(1200px 700px at 10% 15%, rgba(0,0,0,.08), transparent 55%),
+      radial-gradient(900px 600px at 90% 20%, rgba(0,0,0,.06), transparent 58%),
+      radial-gradient(1000px 700px at 20% 90%, rgba(0,0,0,.06), transparent 55%),
+      radial-gradient(900px 600px at 95% 85%, rgba(0,0,0,.07), transparent 55%),
+      linear-gradient(180deg, var(--bg1), var(--bg2));
+  }
+  
+  .stage{ position:relative; height:100%; width:100%; }
+  
+  /* -----------------------
+     Top-right nav buttons
+  ------------------------*/
+  .nav{
+    position:absolute;
+    top:44px;
+    right:54px;
+    display:flex;
+    flex-direction:column;
+    gap:10px;
+    z-index:50;
+    user-select:none;
+  }
+  
+  .nav{
+    position:absolute;
+    top:44px;
+    right:54px;
+    display:flex;
+    flex-direction:column;
+    gap:5px;
+    z-index:50;
+    user-select:none;
+  }
+  
+  .navBtn{
+    display:flex;
+    align-items:center;
+    gap:12px;
+    text-decoration:none;
+    color: rgba(0,0,0,.85);
+    font-family: var(--font-serif);
+    font-size:18px;
+    font-style: normal;
+    transform-origin: right center;
+    transition: transform 180ms ease;
+  }
+  
+  /* dot base */
+  .navBtn .dot{
+    width: 16px;               /* 固定 16px */
+    height: 16px;
+    border-radius:999px;
+    background: transparent;
+    border: 1px solid transparent; /* 用 border 而不是 outline */
+    transition: border 180ms ease, background 180ms ease;
+  }
+  
+  /* selected: italic + filled dot */
+  .navBtn.active{
+    font-style: italic;
+    pointer-events: none;      /* 🔥 关键：禁止 hover */
+  }
+  
+  .navBtn.active .dot{
+    background: rgba(0,0,0,.95);
+    border: none;
+  }
+  
+/* 不再 skew 整个按钮 */
+.navBtn:not(.active):hover{
+    transform: none;
+  }
+  
+  /* 只 skew 文字 */
+  .navBtn:not(.active):hover .label{
+    display:inline-block;       /* 必须 */
+    transform: skewX(-10deg);
+    transition: transform 180ms ease;
+  }
+  
+  /* dot 只做 outline，不 skew */
+  .navBtn:not(.active):hover .dot{
+    border: 1px solid rgba(0,0,0,.65);
+  }
+  
+  /* -----------------------
+     Map / circles
+  ------------------------*/
+  .map{
+    position:absolute;
+    inset:0;
+    z-index:10;
+  }
+  
+  .circle{
+    position:absolute;
+    width: 64px;
+    height: 64px;
+    border-radius: 999px;
+    transform: translate(-50%,-50%);
+    overflow:hidden;
+    cursor:pointer;
+  
+    /* image */
+    background-image: var(--img);
+    background-size: cover;
+    background-position: center;
+    background-repeat:no-repeat;
+  
+    filter: grayscale(1) contrast(1.08);
+    opacity: .92;
+    transition: transform 220ms ease, opacity 220ms ease, filter 220ms ease;
+  }
+  
+  .circle:hover{
+    transform: translate(-50%,-50%) scale(1.35);
+    opacity: 1;
+    filter: grayscale(0) contrast(1.05);
+  }
+  
+  .circle.hidden{
+    opacity:0 !important;
+    pointer-events:none !important;
+  }
+  
+  /* -----------------------
+     Crosshair
+  ------------------------*/
+  .crosshair{
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    z-index:20;
+    opacity:0;
+    transition: opacity 150ms ease;
+  }
+  .crosshair.on{ opacity:1; }
+  
+  .crosshair .h{
+    position:absolute;
+    height:1px;
+    background: rgba(0,0,0,.45);
+    left:0;
+    width:0;
+  }
+  .crosshair .v{
+    position:absolute;
+    width:1px;
+    background: rgba(0,0,0,.45);
+    bottom:0;
+    height:0;
+  }
+  
+  /* -----------------------
+     Overlay + bar
+  ------------------------*/
+  .overlay{
+    position:absolute;
+    inset:0;
+    z-index:40;
+    pointer-events:none;
+    opacity:0;
+    transition: opacity 220ms ease;
+  }
+  .overlay.on{
+    opacity:1;
+    pointer-events:auto;
+  }
+  
+  .overlayBackdrop{
+    position:absolute;
+    inset:0;
+    background: rgba(255,255,255,.0);
+  }
+  
+  /* bottom bar that slides up */
+  .bar{
+    position:absolute;
+    left:0;
+    right:0;
+    bottom:0;
+    background: rgba(255,255,255,.94);
+  
+    transform: translateY(110%);
+    transition: transform 260ms ease;
+    padding: 26px 54px 30px;
+  }
+  .overlay.on .bar{
+    transform: translateY(0%);
+  }
+  
+  /* close dash */
+  .close{
+    position:absolute;
+    right:54px;
+    top:16px;
+    width:48px;
+    height:36px;
+    border:none;
+    background:transparent;
+    font-size:24px;
+    line-height:1;
+    cursor:pointer;
+    color: rgba(0,0,0,.85);
+  }
+  
+  /* layout inside bar */
+  .barGrid{
+    display:grid;
+    grid-template-columns: 360px 1fr 1fr;
+    gap: 26px;
+    align-items:end;
+  }
+  
+  /* info block (left bottom like your fig) */
+  .info{
+    font-family: var(--font-serif);
+    font-size: 16px;
+    line-height: 1.65;
+    color: rgba(0,0,0,.9);
+  }
+  .info .row{
+    display:grid;
+    grid-template-columns: 220px 1fr;
+    gap: 22px;
+  }
+  .info .k{
+    color: rgba(0,0,0,.75);
+    font-style: italic;
+  }
+  .info .v{
+    color: rgba(0,0,0,.9);
+  }
+  
+  /* images */
+  .imgs{
+    position:relative;
+    height: 30%;
+    transform: translateY(-126px);
+  }
+  .imgA, .imgB{
+    position:absolute;
+    overflow:hidden;
+  }
+  .imgA{
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    max-width: 46vw;
+    aspect-ratio: 1 / 1;
+    opacity: .92;
+  }
+  .imgB{
+    left: 220px;
+    bottom: 24px;
+    width: 120%;
+    max-width: 56vw;
+    aspect-ratio: 16 / 10;
+    opacity: .96;
+  }
+  .imgs img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+  }
+  
+  /* title link (big, right) */
+  .titleArea{
+    align-self: start;
+    justify-self: end;
+    z-index: 1000;
+    transform: translateY(-354px);
+  }
+  .titleLink{
+    font-family: var(--font-serif);
+    font-style: italic;
+    font-size: 76px;
+    line-height: 1;
+    color: rgba(255,69,0,1); /* 默认橙色，你也可以在 JS 给每个 world 改 */
+    text-decoration: underline;
+    text-underline-offset: 10px;
+    text-decoration-thickness: 3px;
+  }
+  
+  /* fade for navigation if you want */
+  .fade{
+    position:fixed;
+    inset:0;
+    background:rgba(255,255,255,.92);
+    opacity:0;
+    pointer-events:none;
+    transition:opacity 420ms ease;
+    z-index:999;
+  }
+  .fade.on{ opacity:1; }
+  
+  /* responsive tweaks */
+  @media (max-width: 980px){
+    .barGrid{ grid-template-columns: 1fr; }
+    .titleArea{ justify-self: start; }
+    .titleLink{ font-size: 54px; }
+    .imgs{ height: 220px; }
+    .imgB{ left: 160px; }
+  }
