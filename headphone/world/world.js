@@ -23,7 +23,7 @@ const WORLDS = [
   {
     id: "ashley",
     title: "Rhythmic Calm",
-    accent: "skyblue",
+    accent: "rgb(127, 214, 255)",
     bgImage: "../bg/ashley1.png",
     bgBackdrop: "../bg/ashley0.png",
     description:
@@ -65,7 +65,7 @@ const WORLDS = [
   {
     id: "demi",
     title: "Gentle Companion",
-    accent: "lightgreen",
+    accent: "rgb(221, 255, 190)",
     bgImage: "../bg/demi1.png",
     bgBackdrop: "../bg/demi0.png",
     description:
@@ -79,7 +79,7 @@ const WORLDS = [
   {
     id: "di",
     title: "Emotional Orchestra",
-    accent: "pink",
+    accent: "rgb(255, 0, 183)",
     bgImage: "../bg/di1.png",
     bgBackdrop: "../bg/di0.png",
     description:
@@ -93,7 +93,7 @@ const WORLDS = [
   {
     id: "entao",
     title: "Private Entertain Time",
-    accent: "black",
+    accent: "rgb(55, 55, 55)",
     bgImage: "../bg/entao1.png",
     bgBackdrop: "../bg/entao0.png",
     description:
@@ -121,7 +121,7 @@ const WORLDS = [
   {
     id: "gang",
     title: "Creative Source",
-    accent: "orange",
+    accent: "rgb(255, 136, 0)",
     bgImage: "../bg/gang1.png",
     bgBackdrop: "../bg/gang0.png",
     description:
@@ -135,7 +135,7 @@ const WORLDS = [
   {
     id: "helen",
     title: "Memory Scanctuary",
-    accent: "blue",
+    accent: "rgb(31, 121, 255)",
     bgImage: "../bg/helen1.png",
     bgBackdrop: "../bg/helen0.png",
     description:
@@ -149,7 +149,7 @@ const WORLDS = [
   {
     id: "joe",
     title: "Soul Listener",
-    accent: "orangered",
+    accent: "cyan",
     bgImage: "../bg/joe1.png",
     bgBackdrop: "../bg/joe0.png",
     description:
@@ -163,7 +163,7 @@ const WORLDS = [
   {
     id: "nerwen",
     title: "Listening Ritual",
-    accent: "darkred",
+    accent: "rgb(139, 12, 5)",
     bgImage: "../bg/nerwen1.png",
     bgBackdrop: "../bg/nerwen0.png",
     description:
@@ -177,7 +177,7 @@ const WORLDS = [
   {
     id: "tara",
     title: "Emotional Recharge",
-    accent: "darkblue",
+    accent: "rgb(34, 24, 170)",
     bgImage: "../bg/tara1.png",
     bgBackdrop: "../bg/tara0.png",
     description:

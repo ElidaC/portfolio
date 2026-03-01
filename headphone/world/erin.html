@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="https://use.typekit.net/fkd1thh.css">
+  <link rel="stylesheet" href="world.css">
+  <title>Headphone World</title>
+
+  <style>
+    :root{ --accent: rgb(255, 136, 0);}
+    
+
+    body{
+      position: relative;
+      margin: 0;
+    }
+
+    body::before{
+      content: "";
+      position: fixed;
+      inset: 0;
+      background-image: var(--backdrop, none);
+      background-size: cover;
+      background-position: 50% 50%;
+      opacity: 0.30;
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .desc{
+      grid-column: 1 / -1;
+      margin-top: -20px;
+      max-width: 460px;
+      line-height: 1.6;
+      font-size: 22px;
+      color: rgba(0,0,0,.75);
+      opacity: var(--infoOpacity);
+      transform: translateY(var(--infoY));
+      transition: opacity 400ms ease, transform 400ms ease;
+      white-space: pre-wrap; /* 保留换行 */
+      font-family: "instrument-serif", sans-serif;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stage" id="stage">
+    <div class="worldPlane" id="plane">
+      <div class="worldImg" id="worldImg"></div>
+    </div>
+
+    <div class="letters" id="letters"></div>
+    <div class="bigTitle" id="bigTitle">Creative Source</div>
+
+
+    <div class="info" id="info">
+      <div class="desc" id="description"></div>
+    </div>
+
+    <div class="back" id="back" title="Back to map">
+      <div class="head"></div>
+      <div class="shaft"></div>
+    </div>
+
+    <div class="rightRail">
+      <div class="modeBar" id="modeBar">
+        <div class="modeBar__track" id="track">
+          <div class="modeBar__knob" id="knob" role="slider" aria-valuemin="0" aria-valuemax="1" aria-valuenow="0"></div>
+          <div class="modeBar__label left">ON</div>
+          <div class="modeBar__label right">OFF</div>
+        </div>
+      </div>
+
+      <div class="modes" id="modes">
+        <div class="modeRow" data-mode="default">
+          <div class="modeDot"></div><div class="modeLabel">{default mode}</div>
+        </div>
+        <div class="modeRow" data-mode="transparency">
+          <div class="modeDot"></div><div class="modeLabel">{transparency}</div>
+        </div>
+        <div class="modeRow" data-mode="nc">
+          <div class="modeDot"></div><div class="modeLabel">{noise cancellation}</div>
+        </div>
+        <div class="modeRow" data-mode="off">
+          <div class="modeDot"></div><div class="modeLabel">{audio off}</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.WORLD_ID = "erin";
+  </script>
+  <script src="world.js"></script>
+</body>
+</html>

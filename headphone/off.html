@@ -6,6 +6,24 @@
   <link rel="stylesheet" href="https://use.typekit.net/fkd1thh.css">
   <title>World Gallery</title>
   <link rel="stylesheet" href="off.css">
+
+  <!-- ✅ imgB hover enlarge（不动你原 off.css，直接补一小段） -->
+  <style>
+    .imgB a{
+      display:block;
+      overflow:hidden;
+    }
+    .imgB img{
+      display:block;
+      width:100%;
+      height:auto;
+      transition: transform .35s ease;
+      transform-origin: center center;
+    }
+    .imgB a:hover img{
+      transform: scale(1.12);
+    }
+  </style>
 </head>
 
 <body>
@@ -59,9 +77,14 @@
           <!-- center/right: images -->
           <div class="imgs">
             <div class="imgA"><img id="imgA" alt="" /></div>
-            <div class="imgB"><img id="imgB" alt="" /></div>
-          </div>
 
+            <!-- ✅ imgB 加链接 -->
+            <div class="imgB">
+              <a id="linkB" href="#" aria-label="Open detail page">
+                <img id="imgB" alt="" />
+              </a>
+            </div>
+          </div>
 
         </div>
       </section>

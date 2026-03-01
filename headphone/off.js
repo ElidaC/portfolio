@@ -261,9 +261,6 @@ const DATA = [
   },
 ];
 
-// =========================
-// Utilities
-// =========================
 const stage = document.getElementById("stage");
 const map = document.getElementById("map");
 
@@ -283,6 +280,12 @@ const iMoment = document.getElementById("iMoment");
 
 const imgA = document.getElementById("imgA");
 const imgB = document.getElementById("imgB");
+
+/* ✅ 新增：imgB 的链接节点 */
+const linkB = document.getElementById("linkB");
+
+/* 你原来这里有 titleLink/titleText，但你贴的 HTML 没有它们。
+   为了不报错，这里安全处理（如果你实际 HTML 里有就照常工作） */
 const titleLink = document.getElementById("titleLink");
 const titleText = document.getElementById("titleText");
 
@@ -358,13 +361,20 @@ function openOverlay(d){
   imgA.src = d.imgA || d.thumb || "";
   imgB.src = d.imgB || d.thumb || "";
 
-  // title link
-  titleText.textContent = d.title || "Enter headphone world";
-  titleLink.href = d.link || "#";
+  // ✅ imgB link（点击 imgB 跳转到人物页面）
+  if (linkB) {
+    linkB.href = d.link || "#";
+    // 可选：你想新开标签就打开这一行
+    // linkB.target = "_blank";
+  }
 
-  // accent for title
-  titleLink.style.color = d.accent || "orangered";
-  titleLink.style.textDecorationColor = d.accent || "orangered";
+  // title link（如果你 HTML 里真有 titleLink/titleText 就会正常工作）
+  if (titleText) titleText.textContent = d.title || "Enter headphone world";
+  if (titleLink) {
+    titleLink.href = d.link || "#";
+    titleLink.style.color = d.accent || "orangered";
+    titleLink.style.textDecorationColor = d.accent || "orangered";
+  }
 }
 
 function closeOverlay(){
@@ -441,7 +451,6 @@ closeBtn.addEventListener("click", (e) => {
 });
 
 overlayBackdrop.addEventListener("click", () => {
-  // clicking outside bar closes too (optional)
   resetToGallery();
 });
 
@@ -461,3 +470,11 @@ window.addEventListener("resize", () => {
 
 // init
 render();
+
+/* ✅ 防止 linkB 是 # 时点击导致页面跳到顶部（可选但建议） */
+if (linkB) {
+  linkB.addEventListener("click", (e) => {
+    if (!linkB.href || linkB.getAttribute("href") === "#") e.preventDefault();
+    // 不阻止冒泡：这样不影响 overlay 其他区域
+  });
+}
