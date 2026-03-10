@@ -105,6 +105,7 @@
       pointer-events:none;
       filter: blur(0px);
       transition:opacity 500ms ease, transform 900ms ease;
+      font-family: "instrument-serif", sans-serif;
     }
     .phrase.show{ opacity:1; }
     .phrase.fade{ opacity:0; }
@@ -190,21 +191,93 @@
     .navBtn:not(.active):hover .dot{
       border: 1px solid rgba(0,0,0,.65);
     }
+
+
+    @media (max-width: 768px){
+    body{
+      overflow:hidden;
+    }
+
+    .stage{
+      height:100dvh;
+    }
+
+    .nav{
+      top:14px;
+      left:16px;
+      right:16px;
+      justify-content:flex-start;
+      gap:8px 14px;
+    }
+
+    .navBtn{
+      font-size:14px;
+      gap:8px;
+    }
+
+    .navBtn .dot{
+      width:12px;
+      height:12px;
+      flex-basis:12px;
+    }
+
+    .circle{
+      width:40px;
+      height:40px;
+    }
+
+    .circle:hover{
+      transform:translate(-50%,-50%) scale(1.15);
+    }
+
+    .phrase{
+      font-size:18px;
+      max-width:72vw;
+      white-space:normal;
+      line-height:1.05;
+      text-align:left;
+    }
+
+    .back{
+      left:16px;
+      bottom:18px;
+    }
+
+    .back .shaft{
+      width:36px;
+    }
+  }
+
+  @media (max-width: 480px){
+    .nav{
+      top:35px;
+      left:20px;
+      right:14px;
+      gap:6px 12px;
+    }
+
+    .navBtn{
+      font-size:13px;
+    }
+
+    .circle{
+      width:34px;
+      height:34px;
+    }
+
+    .phrase{
+      font-size:16px;
+      max-width:78vw;
+    }
+  }
   </style>
 </head>
 
 <body>
   <div class="stage" id="stage">
-    <a class="back" href="index.html" aria-label="Back to landing">
-      <div class="shaft"></div>
-    </a>
 
     <!-- ✅ NAV (replaces slider) -->
     <nav class="nav" aria-label="Site navigation">
-      <a class="navBtn" href="on.html" data-nav="intro">
-        <span class="dot" aria-hidden="true"></span>
-        <span class="label">{Intro}</span>
-      </a>
 
       <a class="navBtn active" data-nav="home" aria-current="page">
         <span class="dot" aria-hidden="true"></span>
@@ -214,6 +287,11 @@
       <a class="navBtn" href="off.html" data-nav="gallery">
         <span class="dot" aria-hidden="true"></span>
         <span class="label">{World Gallery}</span>
+      </a>
+
+      <a class="navBtn" href="on.html" data-nav="intro">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="label">{About}</span>
       </a>
     </nav>
 

@@ -259,6 +259,46 @@ const DATA = [
       moment: "when feeling down at midnight",
     },
   },
+
+  {
+    id: "p14",
+    years: 1,
+    volume: 7,
+    size: 75, 
+    thumb: "bg/nilu2.png", 
+    imgA: "bg/nilu2.png",  
+    imgB: "bg/nilu1.png",  
+    title: "Silent Immersion",
+    link: "world/nilu.html",
+    accent: "rgb(243, 82, 155)",
+    info: {
+      interviewee: "Nilu A.",
+      device: "Apple",
+      volume: "7/10",
+      experience: "1 year",
+      moment: "mediating & during school, while sewing",
+    },
+  },
+
+  {
+    id: "p15",
+    years: 9,
+    volume: 8,
+    size: 75, 
+    thumb: "bg/caleb2.png", 
+    imgA: "bg/caleb2.png",  
+    imgB: "bg/caleb1.png",  
+    title: "Pulse Zone",
+    link: "world/caleb.html",
+    accent: "rgb(255, 0, 0)",
+    info: {
+      interviewee: "Caleb W.",
+      device: "Skullcandy",
+      volume: "8/10",
+      experience: "9 years",
+      moment: "in gym & in public",
+    },
+  },
 ];
 
 const stage = document.getElementById("stage");
@@ -297,23 +337,48 @@ let hovered = null;     // index
 let selected = null;    // index
 
 // layout mapping
+function isMobile(){
+  return window.innerWidth <= 768;
+}
+
 function computeXY(years, volume){
   const w = window.innerWidth;
   const h = window.innerHeight;
 
-  const pad = 120;
-  const left = pad;
-  const right = w - pad - 260; // reserve nav area like before
-  const top = pad;
-  const bottom = h - pad;
+  const mobile = isMobile();
 
-  const tx = clamp(years / 21, 0, 1);
-  const ty = clamp(volume / 10, 0, 1);
+  const pad = mobile ? 30 : 120;
+
+  const left = pad;
+  const right = mobile ? w - pad : w - pad - 260; // desktop 预留 nav
+  const top = mobile ? 100 : pad;
+  const bottom = mobile ? h - 100 : h - pad;
+
+  let tx, ty;
+
+  if(mobile){
+    // 📱 Mobile
+    // 左右 = volume
+    // 上下 = years
+    tx = clamp(volume / 10, 0, 1);
+    ty = clamp(years / 21, 0, 1);
+  }else{
+    // 🖥 Desktop
+    // 左右 = years
+    // 上下 = volume
+    tx = clamp(years / 21, 0, 1);
+    ty = clamp(volume / 10, 0, 1);
+  }
 
   const x = lerp(left, right, tx);
-  const y = lerp(bottom, top, ty); // invert y
+  const y = lerp(bottom, top, ty); // y 反向
+
   return { x, y };
 }
+
+window.addEventListener("resize", () => {
+  render();
+});
 
 function setCrosshairAt(x, y){
   // horizontal from left -> x

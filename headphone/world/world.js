@@ -23,7 +23,7 @@ const WORLDS = [
   {
     id: "ashley",
     title: "Rhythmic Calm",
-    accent: "rgb(127, 214, 255)",
+    accent: "rgb(148, 218, 250)",
     bgImage: "../bg/ashley1.png",
     bgBackdrop: "../bg/ashley0.png",
     description:
@@ -107,7 +107,7 @@ const WORLDS = [
   {
     id: "erin",
     title: "Selective Reality",
-    accent: "red",
+    accent: "rgb(255, 247, 203)",
     bgImage: "../bg/erin1.png",
     bgBackdrop: "../bg/erin0.png",
     description:
@@ -186,6 +186,34 @@ const WORLDS = [
       default: "../audio/tara-d.mp3",
       transparency: "../audio/tara-t.mp3",
       nc: "../audio/tara-n.mp3",
+    },
+  },
+  {
+    id: "nilu",
+    title: "Silent Immersion",
+    accent: "rgb(246, 255, 0)",
+    bgImage: "../bg/nilu1.png",
+    bgBackdrop: "../bg/nilu0.png",
+    description:
+      "I would day its a peaceful meditative experience and a silent space that lets you fully emerge in the music or video that you are watching.",
+    audio: {
+      default: "../audio/nilu-d.mp3",
+      transparency: "../audio/nilu-t.mp3",
+      nc: "../audio/nilu-n.mp3",
+    },
+  },
+  {
+    id: "caleb",
+    title: "Pulse Zone",
+    accent: "rgb(255, 0, 0)",
+    bgImage: "../bg/caleb1.png",
+    bgBackdrop: "../bg/caleb0.png",
+    description:
+      "I mostly use my headphones to listen to music at the gym, or when I’m walking long distances or running. I feel like they helps me put myself away from the reality and focus on this whole new world I’m in. I usually listen to a lot of EDM, so the music is pretty loud and energetic. In general, it helps me concentrate and block out city noise or whatever sounds are around me.",
+    audio: {
+      default: "../audio/caleb-d.mp3",
+      transparency: "../audio/caleb-t.mp3",
+      nc: "../audio/caleb-n.mp3",
     },
   },
 ];
@@ -388,9 +416,9 @@ function setP(v01) {
   p = clamp(v01, 0, 1);
 
   // image morph
-  const imgScale = 1 + p * 0.76;
-  const imgBlur = p * 20;
-  const imgOpacity = 0.92 - p * 0.4;
+  const imgScale = 1 + p * 1.25;
+  const imgBlur = p * 34;
+  const imgOpacity = 0.92 - p * 0.5;
   document.documentElement.style.setProperty("--imgScale", imgScale.toFixed(3));
   document.documentElement.style.setProperty("--imgBlur", imgBlur.toFixed(2) + "px");
   document.documentElement.style.setProperty("--imgOpacity", imgOpacity.toFixed(3));

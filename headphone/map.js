@@ -15,6 +15,8 @@ const DATA = [
     { id:"p11", years:4, volume:2,  title:"Interviewee 11", preview:"bg/joe2.png", link:"world/joe.html" },
     { id:"p12", years:3, volume:4,  title:"Interviewee 12", preview:"bg/nerwen2.png", link:"world/nerwen.html" },
     { id:"p13", years:5,  volume:5,  title:"Interviewee 13", preview:"bg/tara2.png", link:"world/tara.html" },
+    { id:"p14", years:1,  volume:7,  title:"Interviewee 14", preview:"bg/nilu2.png", link:"world/nilu.html" },
+    { id:"p15", years:9,  volume:8,  title:"Interviewee 15", preview:"bg/caleb2.png", link:"world/caleb.html" },
   ];
   
   const PHRASES = [
@@ -59,18 +61,35 @@ const DATA = [
   function computeXY(years, volume){
     const w = window.innerWidth;
     const h = window.innerHeight;
-    const left = pad;
-    const right = w - pad - 260; // keep clear of slider area
-    const top = pad;
-    const bottom = h - pad;
   
-    const tx = clamp(years / 21, 0, 1);
-    const ty = clamp(volume / 10, 0, 1);
+    const mobile = w < 768;
+  
+    const left = mobile ? 30 : 120;
+    const right = mobile ? w - 30 : w - 120 - 260;
+    const top = mobile ? 120 : 120;
+    const bottom = mobile ? h - 90 : h - 120;
+  
+    let tx, ty;
+  
+    if(mobile){
+      // mobile: 左右 volume，上下 year
+      tx = clamp(volume / 10, 0, 1);
+      ty = clamp(years / 21, 0, 1);
+    }else{
+      // desktop: 左右 year，上下 volume
+      tx = clamp(years / 21, 0, 1);
+      ty = clamp(volume / 10, 0, 1);
+    }
   
     const x = lerp(left, right, tx);
-    const y = lerp(bottom, top, ty); // invert for bottom->top
-    return {x,y};
+    const y = lerp(bottom, top, ty);
+  
+    return {x, y};
   }
+
+  window.addEventListener("resize", () => {
+    render();
+  });
   
   function renderCircles(){
     circles.length = 0;

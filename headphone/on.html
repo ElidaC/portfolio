@@ -15,7 +15,7 @@
       --muted:#6b6b6b;
 
       --font-serif: "instrument-serif", sans-serif;
-      --font-weight: 400;
+      --font-weight: 200;
       --font-style: normal;
 
       --navW: 260px; /* reserve right for nav */
@@ -42,6 +42,7 @@
       letter-spacing:-0.03em;
       line-height:0.9;
       margin:0;
+      font-family: "instrument-serif", sans-serif;
     }
 
     .big2{
@@ -52,6 +53,7 @@
       letter-spacing:-0.03em;
       line-height:0.9;
       margin:0;
+      font-family: "instrument-serif", sans-serif;
     }
 
     .copy{
@@ -136,6 +138,81 @@
       z-index:999;
     }
     .fade.on{ opacity:1; }
+
+    @media (max-width: 768px){
+    body{
+      overflow:hidden;
+    }
+
+    .stage{
+      height:100dvh;
+    }
+
+    .nav{
+      top:14px;
+      left:16px;
+      right:16px;
+      justify-content:flex-start;
+      gap:8px 14px;
+    }
+
+    .navBtn{
+      font-size:14px;
+      gap:8px;
+    }
+
+    .navBtn .dot{
+      width:12px;
+      height:12px;
+      flex-basis:12px;
+    }
+
+    .circle{
+      width:40px;
+      height:40px;
+    }
+
+    .circle:hover{
+      transform:translate(-50%,-50%) scale(1.15);
+    }
+
+
+  }
+
+  @media (max-width: 480px){
+    .nav{
+      top:35px;
+      left:20px;
+      right:14px;
+      gap:6px 12px;
+    }
+
+    .navBtn{
+      font-size:13px;
+    }
+
+    .circle{
+      width:34px;
+      height:34px;
+    }
+
+    .big{
+      top: 18%;
+      left: 1%;
+      font-size: 70px;
+    }
+
+    .big2{
+      bottom: 2%;
+      right: 1%;
+      font-size: 70px;
+    }
+
+    .copy{
+    font-size: 19px;
+    margin-top: -25px;
+  }
+}
   </style>
 </head>
 <body>
@@ -155,10 +232,6 @@
     
 
     <nav class="nav" aria-label="Site navigation">
-        <a class="navBtn active" data-nav="intro" aria-current="page">
-          <span class="dot" aria-hidden="true"></span>
-          <span class="label">{Intro}</span>
-        </a>
   
         <a class="navBtn" href="map.html" data-nav="home">
           <span class="dot" aria-hidden="true"></span>
@@ -168,6 +241,11 @@
         <a class="navBtn" href="off.html" data-nav="gallery">
           <span class="dot" aria-hidden="true"></span>
           <span class="label">{World Gallery}</span>
+        </a>
+
+        <a class="navBtn active" data-nav="intro" aria-current="page">
+          <span class="dot" aria-hidden="true"></span>
+          <span class="label">{About}</span>
         </a>
       </nav>
 

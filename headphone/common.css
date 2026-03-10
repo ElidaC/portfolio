@@ -1,5 +1,5 @@
 :root{
-  --font-serif: font-family: "instrument-serif", sans-serif;
+  --font-serif: "instrument-serif", sans-serif;
   --font-weight: 400;
   --font-style: normal;
       --bg1:#f3f3f3;

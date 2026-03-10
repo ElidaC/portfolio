@@ -1,7 +1,7 @@
 :root{
     --ink:#111;
 
-    --font-serif: font-family: "instrument-serif", sans-serif;
+    --font-serif: "instrument-serif", sans-serif;
     --font-weight: 400;
     --font-style: normal;
 
@@ -132,7 +132,7 @@
   .modeBar__label{
     position:absolute;
     top:18px;
-    font-size:13px;
+    font-size:15px;
     color:var(--bar-label);
     letter-spacing:.02em;
   }
@@ -182,15 +182,31 @@ transition: opacity 180ms ease;
     left:10.5%;
     top:40%;
     display:grid;
-    grid-template-columns: 260px 260px;
-    gap:10px 34px;
+    grid-template-columns: 1fr 1fr;
+    column-gap:34px;
+    row-gap:2px;
+    align-items:start;
+  
     font-size:22px;
     color:rgba(0,0,0,.9);
     z-index:55;
-    opacity: var(--infoOpacity, 0);
-    transform: translateY(var(--infoY, 12px));
     transition: opacity 180ms ease;
   }
+
+  .desc{
+    grid-column: 1 / -1;
+    margin-top: -10px;
+    max-width: 600px;
+    line-height: 1.4;
+    font-size: 22px;
+    color: rgba(0,0,0,.75);
+    opacity: var(--infoOpacity);
+    transform: translateY(var(--infoY));
+    transition: opacity 400ms ease, transform 400ms ease;
+    white-space: pre-wrap; /* 保留换行 */
+    font-family: "instrument-serif", sans-serif;
+  }
+  
   .k{ color:rgba(0,0,0,.9); }
   .v{ color:rgba(0,0,0,.95); }
 
