@@ -263,31 +263,6 @@ transition: opacity 180ms ease;
       transform-origin: 50% 50%;
       transform: rotate(90deg);
     }
-  
-    .worldImg {
-      background-position: center;
-      transform: translateZ(0) scale(1.04);
-    }
-
-    .letter{
-      margin-top: 50px;
-    }
-
-    body.is-off .letters {
-      position: absolute;
-      top: 8%;
-      left: 8%;
-      right: 8%;
-  
-      display: flex;
-      flex-wrap: wrap;   /* ✅ 允许换行 */
-      gap: 6px;
-    }
-  
-    body.is-off .letter {
-      position: static; /* ❗取消 absolute */
-      font-size: clamp(42px, 12vw, 64px);
-    }
 
     /* 右侧区域整体再靠下一点 */
     .rightRail {

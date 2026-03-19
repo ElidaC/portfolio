@@ -218,9 +218,8 @@ const WORLDS = [
   },
 ];
 
-
 // =========================
-// Pick WORLD (URL ?id=xxx OR window.WORLD_ID OR fallback)
+// Pick WORLD
 // =========================
 const params = new URLSearchParams(location.search);
 const worldId =
@@ -248,6 +247,156 @@ addEventListener(
 );
 
 // =========================
+// Helpers
+// =========================
+function isMobileLayout() {
+  return window.matchMedia("(max-width: 768px)").matches;
+}
+
+function clamp(v, min, max) {
+  return Math.max(min, Math.min(max, v));
+}
+
+function lerp(a, b, t) {
+  return a + (b - a) * t;
+}
+
+function normalizeSpaces(str) {
+  return (str || "").replace(/\s+/g, " ").trim();
+}
+
+function getMobileOffLayoutConfig() {
+  if (!isMobileLayout()) return null;
+
+  const cfg =
+    typeof window !== "undefined" && window.MOBILE_OFF_LAYOUT
+      ? window.MOBILE_OFF_LAYOUT
+      : null;
+
+  if (!cfg || !Array.isArray(cfg.lines) || !cfg.lines.length) return null;
+
+  return {
+    lines: cfg.lines,
+    right: cfg.right ?? "24px",
+    top: cfg.top ?? "30px",
+    width: cfg.width ?? "320px",
+    fontSize: cfg.fontSize ?? "60px",
+    lineHeight: cfg.lineHeight ?? "0.92",
+    letterSpacing: cfg.letterSpacing ?? "-0.02em",
+    textAlign: cfg.textAlign ?? "right",
+    fontFamily: cfg.fontFamily ?? `"instrument-serif", sans-serif`,
+    fontStyle: cfg.fontStyle ?? "italic",
+    fontWeight: cfg.fontWeight ?? "500",
+  };
+}
+
+function measureMultiLineFinals(fullTitle, layout, chars) {
+  const finals = new Array(chars.length).fill(null);
+  const originalChars = chars.slice();
+
+  const normalizedTitle = normalizeSpaces(fullTitle);
+  const joinedLines = normalizeSpaces(layout.lines.join(" "));
+
+  if (normalizedTitle !== joinedLines) {
+    console.warn("[mobile off layout mismatch]", {
+      title: normalizedTitle,
+      lines: joinedLines,
+    });
+  }
+
+  const temp = document.createElement("div");
+  temp.style.position = "fixed";
+  temp.style.visibility = "hidden";
+  temp.style.pointerEvents = "none";
+  temp.style.overflow = "visible";
+  temp.style.zIndex = "-1";
+
+  temp.style.right = layout.right;
+  temp.style.top = layout.top;
+  temp.style.width = layout.width;
+  temp.style.textAlign = layout.textAlign;
+  temp.style.fontFamily = layout.fontFamily;
+  temp.style.fontStyle = layout.fontStyle;
+  temp.style.fontWeight = layout.fontWeight;
+  temp.style.fontSize = layout.fontSize;
+  temp.style.lineHeight = layout.lineHeight;
+  temp.style.letterSpacing = layout.letterSpacing;
+  temp.style.whiteSpace = "pre";
+  temp.style.fontKerning = "normal";
+  temp.style.fontVariantLigatures = "normal";
+
+  document.body.appendChild(temp);
+
+  let globalIndex = 0;
+
+  for (let lineIdx = 0; lineIdx < layout.lines.length; lineIdx++) {
+    const lineText = layout.lines[lineIdx];
+
+    const line = document.createElement("div");
+    line.style.display = "block";
+    line.style.margin = "0";
+    line.style.padding = "0";
+    line.style.whiteSpace = "pre";
+    line.style.textAlign = layout.textAlign;
+    line.style.lineHeight = layout.lineHeight;
+
+    const textNode = document.createTextNode(lineText);
+    line.appendChild(textNode);
+    temp.appendChild(line);
+
+    for (let i = 0; i < lineText.length && globalIndex < originalChars.length; i++) {
+      const lineChar = lineText[i];
+
+      // 跳过原标题里可能存在的空格，直到对齐到当前 lineChar
+      while (
+        globalIndex < originalChars.length &&
+        originalChars[globalIndex] === " " &&
+        lineChar !== " "
+      ) {
+        finals[globalIndex] = null;
+        globalIndex++;
+      }
+
+      if (globalIndex >= originalChars.length) break;
+
+      if (lineChar === " ") {
+        finals[globalIndex] = null;
+        globalIndex++;
+        continue;
+      }
+
+      const range = document.createRange();
+      range.setStart(textNode, i);
+      range.setEnd(textNode, i + 1);
+
+      const rects = range.getClientRects();
+      const r = rects[0] || range.getBoundingClientRect();
+
+      finals[globalIndex] = {
+        x: r.left + r.width / 2,
+        y: r.top + r.height / 2,
+      };
+
+      globalIndex++;
+    }
+
+    // 关键：如果这不是最后一行，要把原标题里“换行处那个空格”吃掉
+    if (lineIdx < layout.lines.length - 1) {
+      while (
+        globalIndex < originalChars.length &&
+        originalChars[globalIndex] === " "
+      ) {
+        finals[globalIndex] = null;
+        globalIndex++;
+      }
+    }
+  }
+
+  document.body.removeChild(temp);
+  return finals;
+}
+
+// =========================
 // Apply config to DOM
 // =========================
 document.documentElement.style.setProperty("--accent", WORLD.accent);
@@ -263,7 +412,6 @@ if (worldImg) worldImg.style.backgroundImage = `url("${WORLD.bgImage}")`;
 const bigTitle = document.getElementById("bigTitle");
 if (bigTitle) {
   bigTitle.textContent = WORLD.title;
-  // 只作为测量模板，不参与显示
   bigTitle.style.opacity = "0";
   bigTitle.style.pointerEvents = "none";
   bigTitle.style.whiteSpace = "pre";
@@ -353,7 +501,6 @@ if (lettersEl) {
     s.textContent = ch;
     s.dataset.i = String(i);
 
-    // 让单个 span 宽一点，避免斜体被切
     s.style.position = "fixed";
     s.style.left = "0px";
     s.style.top = "0px";
@@ -373,10 +520,14 @@ if (lettersEl) {
 
 // =========================
 // Final positions
-// 直接按 bigTitle 的真实样式测量最终字位
-// 并把最终字母间距压紧一点
 // =========================
 function layoutFinalPositions() {
+  const mobileLayout = getMobileOffLayoutConfig();
+
+  if (mobileLayout) {
+    return measureMultiLineFinals(TITLE, mobileLayout, chars);
+  }
+
   const temp = document.createElement("div");
 
   if (bigTitle) {
@@ -438,9 +589,7 @@ function layoutFinalPositions() {
 
   document.body.removeChild(temp);
 
-
   const tighten = 0.92;
-
   const valid = finals.filter(Boolean);
   if (!valid.length) return finals;
 
@@ -482,10 +631,6 @@ const letterMotion = chars.map((ch) => {
 const knob = document.getElementById("knob");
 const track = document.getElementById("track");
 
-function clamp(v, min, max) {
-  return Math.max(min, Math.min(max, v));
-}
-
 function setKnob(v01) {
   const v = clamp(v01, 0, 1);
   if (knob) knob.style.left = v * 100 + "%";
@@ -495,7 +640,9 @@ function setKnob(v01) {
 function setP(v01) {
   p = clamp(v01, 0, 1);
 
-  // image morph
+  document.documentElement.classList.toggle("is-off", p > 0.82);
+  document.documentElement.classList.toggle("is-on", p < 0.18);
+
   const imgScale = 1 + p * 1.25;
   const imgBlur = p * 34;
   const imgOpacity = 0.92 - p * 0.5;
@@ -503,7 +650,6 @@ function setP(v01) {
   document.documentElement.style.setProperty("--imgBlur", imgBlur.toFixed(2) + "px");
   document.documentElement.style.setProperty("--imgOpacity", imgOpacity.toFixed(3));
 
-  // description appear at OFF
   const infoOpacity = clamp((p - 0.6) / 0.32, 0, 1);
   document.documentElement.style.setProperty("--infoOpacity", infoOpacity.toFixed(3));
   document.documentElement.style.setProperty(
@@ -511,13 +657,9 @@ function setP(v01) {
     (12 * (1 - infoOpacity)).toFixed(2) + "px"
   );
 
-  // back button opacity
   document.documentElement.style.setProperty("--backOpacity", infoOpacity.toFixed(3));
-
-  // bigTitle 永远不显示，不替代 letters
   document.documentElement.style.setProperty("--bigTitleOpacity", "0");
 
-  // hide mode buttons in OFF
   const modesOpacity = clamp(1 - (p - 0.55) / 0.25, 0, 1);
   document.documentElement.style.setProperty("--modesOpacity", modesOpacity.toFixed(3));
   document.documentElement.style.setProperty("--modesPE", modesOpacity < 0.05 ? "none" : "auto");
@@ -576,7 +718,7 @@ if (knob && track) {
 }
 
 // =========================
-// Animation: plane tilt + letters
+// Animation
 // =========================
 const plane = document.getElementById("plane");
 const tilt = { rx: 0, ry: 0, tx: 0, ty: 0 };
@@ -599,10 +741,6 @@ function updatePlane(nx, ny) {
      rotateX(${tilt.rx.toFixed(2)}deg)`;
 }
 
-function lerp(a, b, t) {
-  return a + (b - a) * t;
-}
-
 function raf() {
   const w = innerWidth;
   const h = innerHeight;
@@ -618,7 +756,12 @@ function raf() {
     if (!sp) continue;
 
     const fin = finals[i];
-    if (!fin) continue;
+    if (!fin) {
+      sp.style.opacity = "0";
+      continue;
+    } else {
+      sp.style.opacity = "1";
+    }
 
     const sc = scatter[i];
     const m = letterMotion[i];
@@ -626,7 +769,6 @@ function raf() {
     const x = lerp(fin.x + sc.dx, fin.x, p);
     const y = lerp(fin.y + sc.dy, fin.y, p);
 
-    // 越接近终点，抖动越小，最后完全归零
     const wigStrength = Math.max(0, 1 - p * 1.45);
 
     const targetOx =
@@ -637,14 +779,12 @@ function raf() {
     m.ox += (targetOx - m.ox) * m.lag;
     m.oy += (targetOy - m.oy) * m.lag;
 
-    // 终点前把字母全部扶正、归一缩放
     const settleT = clamp((p - 0.45) / 0.55, 0, 1);
     const rot = lerp(sc.rot, 0, settleT);
     const sca = lerp(sc.scale, 1, settleT);
 
     sp.style.left = x + "px";
     sp.style.top = y + "px";
-    sp.style.opacity = "1";
     sp.style.transform = `translate(-50%,-50%)
       translate(${m.ox.toFixed(2)}px, ${m.oy.toFixed(2)}px)
       rotate(${rot.toFixed(2)}deg)
