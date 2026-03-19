@@ -134,7 +134,7 @@ const WORLDS = [
   },
   {
     id: "helen",
-    title: "Memory Scanctuary",
+    title: "Memory Sanctuary",
     accent: "rgb(31, 121, 255)",
     bgImage: "../bg/helen1.png",
     bgBackdrop: "../bg/helen0.png",
