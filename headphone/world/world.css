@@ -273,6 +273,21 @@ transition: opacity 180ms ease;
       margin-top: 50px;
     }
 
+    body.is-off .letters {
+      position: absolute;
+      top: 8%;
+      left: 8%;
+      right: 8%;
+  
+      display: flex;
+      flex-wrap: wrap;   /* ✅ 允许换行 */
+      gap: 6px;
+    }
+  
+    body.is-off .letter {
+      position: static; /* ❗取消 absolute */
+      font-size: clamp(42px, 12vw, 64px);
+    }
 
     /* 右侧区域整体再靠下一点 */
     .rightRail {
@@ -300,7 +315,7 @@ transition: opacity 180ms ease;
   
     /* buttons 再往下 */
     .modes {
-      margin-top: 280px;
+      margin-top: 250px;
       width: 150px;
       align-items: flex-end;
       gap: 12px;
@@ -336,9 +351,9 @@ transition: opacity 180ms ease;
   
     .desc {
       max-width: none;
-      margin-top: 0;
-      font-size: 18px;
-      line-height: 1.45;
+      margin-top: -20px;
+      font-size: 16px;
+      line-height: 1.25;
     }
   
     /* 箭头缩短，靠下 */
