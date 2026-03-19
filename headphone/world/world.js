@@ -604,6 +604,7 @@ function layoutFinalPositions() {
   });
 }
 
+
 let finals = layoutFinalPositions();
 addEventListener("resize", () => {
   finals = layoutFinalPositions();
