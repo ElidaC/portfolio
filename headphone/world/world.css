@@ -235,3 +235,129 @@ transition: opacity 180ms ease;
     border-bottom:1.5px solid rgba(0,0,0,.55);
     transform:translate(-2px,-50%) rotate(45deg);
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+  @media (max-width: 768px) {
+    .stage {
+      perspective: 900px;
+      perspective-origin: 50% 42%;
+    }
+  
+    /* 旋转后的图放左边，长边视觉上竖着 */
+    .worldPlane {
+      left: 0;
+      top: 22%;
+      width: 58vw;
+      height: 75vh;
+      transform-origin: 50% 50%;
+      transform: rotate(90deg);
+    }
+  
+    .worldImg {
+      background-position: center;
+      transform: translateZ(0) scale(1.04);
+    }
+
+    .letter{
+      margin-top: 50px;
+    }
+
+
+    /* 右侧区域整体再靠下一点 */
+    .rightRail {
+      right: 24px;
+      top: 34%;
+      width: 120px;
+      align-items: flex-end;
+      gap: 12px;
+    }
+  
+    /* bar 再短一点 */
+    .modeBar {
+      width: 120px;
+      height: 34px;
+    }
+  
+    .modeBar__track {
+      height: 1.5px;
+    }
+  
+    .modeBar__label {
+      top: 12px;
+      font-size: 14px;
+    }
+  
+    /* buttons 再往下 */
+    .modes {
+      margin-top: 280px;
+      width: 150px;
+      align-items: flex-end;
+      gap: 12px;
+      font-size: 16px;
+    }
+  
+    .modeRow {
+      width: 100%;
+      justify-content: flex-end;
+      gap: 10px;
+    }
+  
+    .modeDot {
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+    }
+  
+    .modeLabel {
+      text-align: right;
+      text-underline-offset: 4px;
+    }
+  
+    /* off 页文字再大一点 */
+    .info {
+      left: 8%;
+      right: 8%;
+      top: 56%;
+      width: auto;
+      display: block;
+      font-size: 18px;
+    }
+  
+    .desc {
+      max-width: none;
+      margin-top: 0;
+      font-size: 18px;
+      line-height: 1.45;
+    }
+  
+    /* 箭头缩短，靠下 */
+    .back {
+      left: 8%;
+      bottom: 7%;
+      width: 52px;
+      height: 28px;
+    }
+  
+    .back .shaft {
+      left: 10px;
+      width: 36px;
+      height: 1px;
+    }
+  
+    .back .head {
+      left: 10px;
+      width: 8px;
+      height: 8px;
+    }
+  }
