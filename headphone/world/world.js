@@ -218,13 +218,15 @@ const WORLDS = [
   },
 ];
 
+
 // =========================
 // Pick WORLD (URL ?id=xxx OR window.WORLD_ID OR fallback)
-/// =========================
+// =========================
 const params = new URLSearchParams(location.search);
-const worldId = (typeof window !== "undefined" && window.WORLD_ID)
-  ? window.WORLD_ID
-  : params.get("id");
+const worldId =
+  typeof window !== "undefined" && window.WORLD_ID
+    ? window.WORLD_ID
+    : params.get("id");
 
 const WORLD = WORLDS.find((w) => w.id === worldId) || WORLDS[0];
 
@@ -250,7 +252,6 @@ addEventListener(
 // =========================
 document.documentElement.style.setProperty("--accent", WORLD.accent);
 
-// body backdrop (HTML body::before uses --backdrop)
 document.documentElement.style.setProperty(
   "--backdrop",
   `url("${WORLD.bgBackdrop || WORLD.bgImage}")`
@@ -260,13 +261,24 @@ const worldImg = document.getElementById("worldImg");
 if (worldImg) worldImg.style.backgroundImage = `url("${WORLD.bgImage}")`;
 
 const bigTitle = document.getElementById("bigTitle");
-if (bigTitle) bigTitle.textContent = WORLD.title;
+if (bigTitle) {
+  bigTitle.textContent = WORLD.title;
+  // 只作为测量模板，不参与显示
+  bigTitle.style.opacity = "0";
+  bigTitle.style.pointerEvents = "none";
+  bigTitle.style.whiteSpace = "pre";
+  bigTitle.style.overflow = "visible";
+}
 
 const descEl = document.getElementById("description");
 if (descEl) descEl.textContent = WORLD.description || "";
 
 const backBtn = document.getElementById("back");
-if (backBtn) backBtn.addEventListener("click", () => (location.href = BACK_URL));
+if (backBtn) {
+  backBtn.addEventListener("click", () => {
+    location.href = BACK_URL;
+  });
+}
 
 // =========================
 // Audio + mode selection
@@ -286,6 +298,7 @@ function setActiveMode(mode) {
     audio.src = "";
     return;
   }
+
   const src = WORLD.audio?.[mode];
   if (src) {
     audio.src = src;
@@ -302,7 +315,7 @@ modeRows.forEach((r) => {
 });
 
 // =========================
-// Letters: scattered positions relative to final
+// Letters
 // =========================
 const lettersEl = document.getElementById("letters");
 const TITLE = WORLD.title;
@@ -313,7 +326,7 @@ function makeScatter(title) {
   const n = title.length;
   for (let i = 0; i < n; i++) {
     const t = i / (n - 1 || 1);
-    const dx = (t - 0.5) * 150 + (Math.random() * 80 - 415);
+    const dx = (t - 0.5) * 400 + (Math.random() * 80 - 215);
     const dy = -150 + Math.sin(t * Math.PI) * 100 + (Math.random() * 180 - 20);
     const rot = -380 + t * 60 + (Math.random() * 200 - 110);
     const scale = 1 + (Math.random() * 0.1 - 0.05);
@@ -326,39 +339,85 @@ const scatter = makeScatter(TITLE);
 const letterSpans = [];
 if (lettersEl) {
   lettersEl.innerHTML = "";
+  lettersEl.style.pointerEvents = "none";
+  lettersEl.style.overflow = "visible";
+
   chars.forEach((ch, i) => {
     if (ch === " ") {
       letterSpans.push(null);
       return;
     }
+
     const s = document.createElement("span");
     s.className = "letter";
     s.textContent = ch;
     s.dataset.i = String(i);
+
+    // 让单个 span 宽一点，避免斜体被切
+    s.style.position = "fixed";
+    s.style.left = "0px";
+    s.style.top = "0px";
+    s.style.display = "block";
+    s.style.whiteSpace = "pre";
+    s.style.overflow = "visible";
+    s.style.lineHeight = "1.25";
+    s.style.minWidth = "0.22em";
+    s.style.padding = "0.1em 0.12em 0.16em";
+    s.style.transform = "translate(-50%,-50%)";
+    s.style.transformOrigin = "50% 50%";
+
     lettersEl.appendChild(s);
     letterSpans.push(s);
   });
 }
 
+// =========================
+// Final positions
+// 直接按 bigTitle 的真实样式测量最终字位
+// 并把最终字母间距压紧一点
+// =========================
 function layoutFinalPositions() {
   const temp = document.createElement("div");
-  temp.style.position = "absolute";
-  temp.style.left = "50%";
-  temp.style.top = "12%";
-  temp.style.transform = "translateX(-2%)";
-  temp.style.fontSize = bigTitle ? getComputedStyle(bigTitle).fontSize : "64px";
-  temp.style.fontStyle = "italic";
-  temp.style.fontFamily = "var(--font-serif)";
-  temp.style.fontWeight = "500";
-  temp.style.whiteSpace = "pre";
-  temp.style.visibility = "hidden";
+
+  if (bigTitle) {
+    const cs = getComputedStyle(bigTitle);
+    const rect = bigTitle.getBoundingClientRect();
+
+    temp.style.position = "fixed";
+    temp.style.left = rect.left + "px";
+    temp.style.top = rect.top + "px";
+    temp.style.fontSize = cs.fontSize;
+    temp.style.fontStyle = cs.fontStyle;
+    temp.style.fontFamily = cs.fontFamily;
+    temp.style.fontWeight = cs.fontWeight;
+    temp.style.letterSpacing = cs.letterSpacing;
+    temp.style.lineHeight = cs.lineHeight;
+    temp.style.textTransform = cs.textTransform;
+    temp.style.whiteSpace = "pre";
+    temp.style.visibility = "hidden";
+    temp.style.pointerEvents = "none";
+    temp.style.overflow = "visible";
+  } else {
+    temp.style.position = "fixed";
+    temp.style.left = "50%";
+    temp.style.top = "12%";
+    temp.style.fontSize = "64px";
+    temp.style.fontStyle = "italic";
+    temp.style.fontFamily = "serif";
+    temp.style.fontWeight = "500";
+    temp.style.whiteSpace = "pre";
+    temp.style.visibility = "hidden";
+    temp.style.pointerEvents = "none";
+    temp.style.overflow = "visible";
+  }
+
   document.body.appendChild(temp);
 
-  temp.textContent = "";
   const spans = [];
   chars.forEach((ch) => {
     const sp = document.createElement("span");
     sp.textContent = ch;
+    sp.style.whiteSpace = "pre";
     temp.appendChild(sp);
     spans.push(sp);
   });
@@ -369,11 +428,31 @@ function layoutFinalPositions() {
       finals.push(null);
       continue;
     }
+
     const r = spans[i].getBoundingClientRect();
-    finals.push({ x: r.left + r.width / 2, y: r.top + r.height / 2 });
+    finals.push({
+      x: r.left + r.width / 2,
+      y: r.top + r.height / 2,
+    });
   }
+
   document.body.removeChild(temp);
-  return finals;
+
+
+  const tighten = 0.92;
+
+  const valid = finals.filter(Boolean);
+  if (!valid.length) return finals;
+
+  const centerX = valid.reduce((sum, pt) => sum + pt.x, 0) / valid.length;
+
+  return finals.map((pt) => {
+    if (!pt) return null;
+    return {
+      x: centerX + (pt.x - centerX) * tighten,
+      y: pt.y,
+    };
+  });
 }
 
 let finals = layoutFinalPositions();
@@ -383,6 +462,7 @@ addEventListener("resize", () => {
 
 const letterMotion = chars.map((ch) => {
   if (ch === " ") return null;
+
   const sgn = () => (Math.random() < 0.5 ? -1 : 1);
   return {
     fx: (10 + Math.random() * 26) * sgn(),
@@ -426,14 +506,16 @@ function setP(v01) {
   // description appear at OFF
   const infoOpacity = clamp((p - 0.6) / 0.32, 0, 1);
   document.documentElement.style.setProperty("--infoOpacity", infoOpacity.toFixed(3));
-  document.documentElement.style.setProperty("--infoY", (12 * (1 - infoOpacity)).toFixed(2) + "px");
+  document.documentElement.style.setProperty(
+    "--infoY",
+    (12 * (1 - infoOpacity)).toFixed(2) + "px"
+  );
 
-  // back button opacity (if your CSS uses it)
+  // back button opacity
   document.documentElement.style.setProperty("--backOpacity", infoOpacity.toFixed(3));
 
-  // big title appear at off
-  const bigOp = clamp((p - 0.7) / 0.25, 0, 1);
-  document.documentElement.style.setProperty("--bigTitleOpacity", bigOp.toFixed(3));
+  // bigTitle 永远不显示，不替代 letters
+  document.documentElement.style.setProperty("--bigTitleOpacity", "0");
 
   // hide mode buttons in OFF
   const modesOpacity = clamp(1 - (p - 0.55) / 0.25, 0, 1);
@@ -441,7 +523,6 @@ function setP(v01) {
   document.documentElement.style.setProperty("--modesPE", modesOpacity < 0.05 ? "none" : "auto");
 }
 
-// initial
 setKnob(0);
 setP(0);
 
@@ -513,8 +594,7 @@ function updatePlane(nx, ny) {
   tilt.ty += (targetTy - tilt.ty) * k;
 
   if (!plane) return;
-  plane.style.transform =
-    `translate3d(${tilt.tx.toFixed(2)}px, ${tilt.ty.toFixed(2)}px, 0)
+  plane.style.transform = `translate3d(${tilt.tx.toFixed(2)}px, ${tilt.ty.toFixed(2)}px, 0)
      rotateY(${tilt.ry.toFixed(2)}deg)
      rotateX(${tilt.rx.toFixed(2)}deg)`;
 }
@@ -524,7 +604,8 @@ function lerp(a, b, t) {
 }
 
 function raf() {
-  const w = innerWidth, h = innerHeight;
+  const w = innerWidth;
+  const h = innerHeight;
   const nx = mouse.x / w - 0.5;
   const ny = mouse.y / h - 0.5;
 
@@ -535,6 +616,7 @@ function raf() {
   for (let i = 0; i < chars.length; i++) {
     const sp = letterSpans[i];
     if (!sp) continue;
+
     const fin = finals[i];
     if (!fin) continue;
 
@@ -544,29 +626,29 @@ function raf() {
     const x = lerp(fin.x + sc.dx, fin.x, p);
     const y = lerp(fin.y + sc.dy, fin.y, p);
 
-    const wigStrength = 1 - p;
+    // 越接近终点，抖动越小，最后完全归零
+    const wigStrength = Math.max(0, 1 - p * 1.45);
 
     const targetOx =
-      nx * m.fx + Math.sin(tNow * m.wobA + m.phase) * (10 * wigStrength);
+      (nx * m.fx + Math.sin(tNow * m.wobA + m.phase) * 10) * wigStrength;
     const targetOy =
-      ny * m.fy + Math.cos(tNow * m.wobB + m.phase) * (9 * wigStrength);
+      (ny * m.fy + Math.cos(tNow * m.wobB + m.phase) * 9) * wigStrength;
 
     m.ox += (targetOx - m.ox) * m.lag;
     m.oy += (targetOy - m.oy) * m.lag;
 
-    const rot = lerp(sc.rot, 0, p) + m.ox * 0.15 + m.oy * -0.1;
-    const sca = lerp(sc.scale, 1, p);
-
-    const letterOpacity = clamp(1 - (p - 0.72) / 0.2, 0, 1);
+    // 终点前把字母全部扶正、归一缩放
+    const settleT = clamp((p - 0.45) / 0.55, 0, 1);
+    const rot = lerp(sc.rot, 0, settleT);
+    const sca = lerp(sc.scale, 1, settleT);
 
     sp.style.left = x + "px";
     sp.style.top = y + "px";
-    sp.style.opacity = letterOpacity.toFixed(3);
-    sp.style.transform =
-      `translate(-50%,-50%)
-       translate(${m.ox.toFixed(2)}px, ${m.oy.toFixed(2)}px)
-       rotate(${rot.toFixed(2)}deg)
-       scale(${sca.toFixed(3)})`;
+    sp.style.opacity = "1";
+    sp.style.transform = `translate(-50%,-50%)
+      translate(${m.ox.toFixed(2)}px, ${m.oy.toFixed(2)}px)
+      rotate(${rot.toFixed(2)}deg)
+      scale(${sca.toFixed(3)})`;
   }
 
   requestAnimationFrame(raf);
