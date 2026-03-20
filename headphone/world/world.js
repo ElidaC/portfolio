@@ -1,7 +1,7 @@
 // =========================
 // CONFIG
 // =========================
-const BACK_URL = "../map.html";
+const BACK_URL = "../off.html";
 
 // =========================
 // WORLDS DATA
