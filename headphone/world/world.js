@@ -423,9 +423,17 @@ if (descEl) descEl.textContent = WORLD.description || "";
 
 const backBtn = document.getElementById("back");
 if (backBtn) {
-  backBtn.addEventListener("click", () => {
-    location.href = BACK_URL;
-  });
+  const backBtn = document.getElementById("back");
+if (backBtn) {
+  const goBack = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    window.location.href = BACK_URL;
+  };
+
+  backBtn.addEventListener("click", goBack);
+  backBtn.addEventListener("touchend", goBack, { passive: false });
+}
 }
 
 // =========================
