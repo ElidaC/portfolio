@@ -23,7 +23,7 @@ const WORLDS = [
   {
     id: "ashley",
     title: "Rhythmic Calm",
-    accent: "rgb(148, 218, 250)",
+    accent: "#98f2f9",
     bgImage: "../bg/ashley1.png",
     bgBackdrop: "../bg/ashley0.png",
     description:
@@ -65,7 +65,7 @@ const WORLDS = [
   {
     id: "demi",
     title: "Gentle Companion",
-    accent: "rgb(221, 255, 190)",
+    accent: "#dfcdfd",
     bgImage: "../bg/demi1.png",
     bgBackdrop: "../bg/demi0.png",
     description:
@@ -79,7 +79,7 @@ const WORLDS = [
   {
     id: "di",
     title: "Emotional Orchestra",
-    accent: "rgb(255, 0, 183)",
+    accent: "#ee6291",
     bgImage: "../bg/di1.png",
     bgBackdrop: "../bg/di0.png",
     description:
@@ -121,11 +121,11 @@ const WORLDS = [
   {
     id: "gang",
     title: "Creative Source",
-    accent: "rgb(255, 136, 0)",
+    accent: "#ff7220",
     bgImage: "../bg/gang1.png",
     bgBackdrop: "../bg/gang0.png",
     description:
-      "I like to put on my headphones whenever I work on design. The space they create becomes a source of inspiration for me. As the music slowly begins, ideas start to flow. My designs often develop unique perspectives, ways of thinking, and colors. The feeling is special, and over time it has become a habit. Wearing headphones helps me immerse myself in a different world where I can find inspiration and create.",
+      "I like to put on my headphones whenever I work on design. The space they create becomes a source of inspiration for me. As the music slowly begins, ideas start to flow. My designs often develop unique perspectives, ways of thinking, and colors. The feeling is special, and over time it has become a habit. Wearing headphones helps me immerse myself in a different world where I can find inspiration and create something that carries meaning and beauty.",
     audio: {
       default: "../audio/gang-d.mp3",
       transparency: "../audio/gang-t.mp3",
@@ -135,7 +135,7 @@ const WORLDS = [
   {
     id: "helen",
     title: "Memory Sanctuary",
-    accent: "rgb(31, 121, 255)",
+    accent: "#2b8aff",
     bgImage: "../bg/helen1.png",
     bgBackdrop: "../bg/helen0.png",
     description:
@@ -149,7 +149,7 @@ const WORLDS = [
   {
     id: "joe",
     title: "Soul Listener",
-    accent: "cyan",
+    accent: "#7c5e52",
     bgImage: "../bg/joe1.png",
     bgBackdrop: "../bg/joe0.png",
     description:
@@ -163,7 +163,7 @@ const WORLDS = [
   {
     id: "nerwen",
     title: "Listening Ritual",
-    accent: "rgb(139, 12, 5)",
+    accent: "#b20002",
     bgImage: "../bg/nerwen1.png",
     bgBackdrop: "../bg/nerwen0.png",
     description:
@@ -177,7 +177,7 @@ const WORLDS = [
   {
     id: "tara",
     title: "Emotional Recharge",
-    accent: "rgb(34, 24, 170)",
+    accent: "#2838b3",
     bgImage: "../bg/tara1.png",
     bgBackdrop: "../bg/tara0.png",
     description:
@@ -191,7 +191,7 @@ const WORLDS = [
   {
     id: "nilu",
     title: "Silent Immersion",
-    accent: "rgb(246, 255, 0)",
+    accent: "rgb(255, 252, 59)",
     bgImage: "../bg/nilu1.png",
     bgBackdrop: "../bg/nilu0.png",
     description:
@@ -205,7 +205,7 @@ const WORLDS = [
   {
     id: "caleb",
     title: "Pulse Zone",
-    accent: "rgb(255, 0, 0)",
+    accent: "black",
     bgImage: "../bg/caleb1.png",
     bgBackdrop: "../bg/caleb0.png",
     description:
