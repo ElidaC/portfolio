@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link rel="stylesheet" href="https://use.typekit.net/fkd1thh.css">
+  <title>World Gallery</title>
+  <link rel="stylesheet" href="off.css">
+
+  <!-- ✅ imgB hover enlarge（不动你原 off.css，直接补一小段） -->
+  <style>
+    .imgB a{
+      display:block;
+      overflow:hidden;
+    }
+    .imgB img{
+      display:block;
+      width:100%;
+      height:auto;
+      transition: transform .35s ease;
+      transform-origin: center center;
+    }
+    .imgB a:hover img{
+      transform: scale(1.12);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="stage" id="stage">
+
+    <!-- top-right nav -->
+    <nav class="nav" aria-label="Site navigation">
+
+      <a class="navBtn" href="map.html" data-nav="home">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="label">{Listening In Between}</span>
+      </a>
+
+      <a class="navBtn active" data-nav="gallery" aria-current="page">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="label">{World Gallery}</span>
+      </a>
+
+      <a class="navBtn" href="on.html" data-nav="intro">
+        <span class="dot" aria-hidden="true"></span>
+        <span class="label">{About}</span>
+      </a>
+    </nav>
+
+    <!-- crosshair lines (shown on hover/selected) -->
+    <div class="crosshair" id="crosshair" aria-hidden="true">
+      <div class="h" id="lineH"></div>
+      <div class="v" id="lineV"></div>
+    </div>
+
+    <!-- circles mount -->
+    <div class="map" id="map" aria-label="World Gallery map"></div>
+
+    <!-- overlay detail -->
+    <div class="overlay" id="overlay" aria-hidden="true">
+      <div class="overlayBackdrop" id="overlayBackdrop"></div>
+
+      <!-- bar slides up -->
+      <section class="bar" role="dialog" aria-modal="true" aria-label="World detail">
+        <button class="close" id="closeBtn" aria-label="Close detail">—</button>
+
+        <div class="barGrid">
+          <!-- left: info -->
+          <div class="info" id="info">
+            <div class="row"><div class="k">{Interviewee}</div><div class="v" id="iName"></div></div>
+            <div class="row"><div class="k">{Device}</div><div class="v" id="iDevice"></div></div>
+            <div class="row"><div class="k">{Volume}</div><div class="v" id="iVolume"></div></div>
+            <div class="row"><div class="k">{Listening Experience}</div><div class="v" id="iYears"></div></div>
+            <div class="row"><div class="k">{Listening Moment}</div><div class="v" id="iMoment"></div></div>
+          </div>
+
+          <!-- center/right: images -->
+          <div class="imgs">
+            <div class="imgA"><img id="imgA" alt="" /></div>
+
+            <!-- ✅ imgB 加链接 -->
+            <div class="imgB">
+              <a id="linkB" href="#" aria-label="Open detail page">
+                <img id="imgB" alt="" />
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+    <div class="fade" id="fade"></div>
+  </div>
+
+  <script src="off.js"></script>
+</body>
+</html>
